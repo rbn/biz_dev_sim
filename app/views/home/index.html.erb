@@ -1,3 +1,45 @@
-<h1>welcome to the biz dev sim app!</h1>
+<style>
+  .box {
+    border:1px dashed black;
+    width:100px;
+    height:100px;
+    float:right;
+  }
 
-<p>Lorem ipsum sudo facto. iindeedo contacto Identito yo cama sa.indeedo contacto Identito yo cama sa.indeedo contacto Identito yo cama sa.indeedo contacto Identito yo cama sa.indeedo contacto Identito yo cama sa.indeedo contacto Identito yo cama sa.indeedo contacto Identito yo cama sa.indeedo contacto Identito yo cama sa.indeedo contacto Identito yo cama sa.indeedo contacto Identito yo cama sa.indeedo contacto Identito yo cama sa.indeedo contacto Identito yo cama sa.indeedo contacto Identito yo cama sa.indeedo contacto Identito yo cama sa.indeedo contacto Identito yo cama sa.indeedo contacto Identito yo cama sa.indeedo contacto Identito yo cama sa.indeedo contacto Identito yo cama sa.indeedo contacto Identito yo cama sa.indeedo contacto Identito yo cama sa.indeedo contacto Identito yo cama sa.indeedo contacto Identito yo cama sa.indeedo contacto Identito yo cama sa.indeedo contacto Identito yo cama sa.indeedo contacto Identito yo cama sa.indeedo contacto Identito yo cama sa.indeedo contacto Identito yo cama sa.indeedo contacto Identito yo cama sa.ndeedo contacto Identito yo cama sa.</p>
+</style>
+
+<script>
+ $(function() {
+  $('.box').on('click', function() {
+    var next_id= $(this).attr('data-next_id');
+    $("#box_" + next_id)
+      .css('background-color', 'black')
+      .css('color', 'white');
+      return false;
+  });
+
+  $(".info_button").each(function() {
+    $(this).on('click', function() {
+      alert('hello!');
+      return false;
+    });
+  });
+ });
+</script>
+
+<div id="gameboard">
+  <% @pieces.each do |p| %>
+
+    <div class="box" data-next_id="<%= p.next.id %>"
+        id="box_<%= p.id %>"
+        style="background-color:#33fea<%= p.id %>;">
+        <span style="font-weight:bold"> <%= "#{p.id} :  #{p.title}" %> </span>
+      <br />
+      I point to <%= p.next.id %>
+      <br />
+      <input class="info_button" type="button" value="info" />
+
+    </div>
+
+  <% end %>
+</div>

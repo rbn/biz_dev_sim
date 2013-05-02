@@ -1,5 +1,6 @@
 BizDevSim::Application.routes.draw do
-  get "home/index"
+  resources :home
+  match 'yahoo' => 'home#yahoo'
 
   # The priority is based upon order of creation:
   # first created -> highest priority.

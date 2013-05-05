@@ -1,0 +1,101 @@
+<style>
+  .svg_contain {
+    display:inline-block;
+    float:right;
+  }
+  svg {
+    border: 1px solid black;
+  }
+
+  svg .circ {
+    fill: rgba(10, 111, 112, .5);
+    stroke: #aedec6;
+    stroke-width: 10;
+  }
+
+  svg .rect {
+    opacity: .5;
+  }
+</style>
+
+<div id="svg_container" class="svg_contain">
+<!-- 
+  <svg width="1400" height="700">
+    <rect x="0" y="0" width="100" height="50" class="rect" />
+    <line x1="20" y1="20" x2="250" y2="300" stroke="black" stroke-width="30" />
+    <circle cx="250" cy="300" r="50" class="circ" />
+    <text x="80" y="48">yahoo!</text>
+  <svg>
+-->
+</div>
+
+<script>
+// circles
+var w = 500,
+    h = 400,
+    dataset = [5,10,15,20,25]
+    ;
+
+var svg = d3.select("#svg_container")
+            .append('svg')
+            .attr('width', w)
+            .attr('height', h);
+
+var circles = svg.selectAll('circle')
+                 .data(dataset)
+                 .enter()
+                 .append('circle');
+
+circles.attr('cx', function(d, i) {
+          return (i * 50) + 25;
+        })
+        .attr('cy', h/2)
+        .attr('r', function(d) {
+          return d*9;
+        })
+        .attr('class', 'circ')
+        .style('stroke-width', function(d) {
+          return d/2;
+        })
+        ;
+</script>
+
+<div id="svg_container_2" class="svg_contain">
+</div>
+
+<script>
+var w = 500, h = 400, bar_padding = 2;
+    dataset = [1,2,3,4,5,6,7,8,9,10];
+
+var svg = d3.select("#svg_container_2")
+            .append('svg')
+            .attr('width', w)
+            .attr('height', h);
+
+svg.selectAll('rect')
+   .data(dataset)
+   .enter()
+   .append('rect')
+   .attr('x', function(d, i) {
+      return i * (w / dataset.length);  
+   })
+   .attr('y', function(d) {
+      return h - d*10;
+   })
+   .attr('width', function(d, i) {
+      return w / dataset.length - bar_padding;  
+   })
+   .attr('height', function(d) {
+      return d*10;
+   })
+   .attr('fill', function(d) {
+      return 'rgb(0, 0, ' + (d * 30) + ')';
+   })
+   ;
+</script>
+
+<div id="svg_container_3" class="svg_contain">
+</div>
+
+
+

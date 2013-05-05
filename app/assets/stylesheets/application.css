@@ -9,34 +9,19 @@
  * compiled file, but it's generally better to create a new file per style scope.
  *
  *= require_self
+ *= require_tree ../../../vendor/assets/stylesheets
  *= require_tree .
  */
 
 body {
-  background-color:#afec3e;
+  padding:0;
+  margin:0;
 }
 
 #container {
-  width:900px;
+  width:100%
+  padding-left:80px;
+  margin-left:80px;
+  margin-top:80px;
 }
 
-#header {
-  width:100%;
-}
-
-#main {
-  width:100%; 
-}
-
-#left {
-  width:400px;  
-  height:100%;
-  background-color:white;
-}
-
-#right {
-  float:right;
-  margin-left:200px;
-  width:700px;
-  background-color:white;
-}

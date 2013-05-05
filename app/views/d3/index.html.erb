@@ -1,0 +1,43 @@
+<style>
+div#d3canvas {
+background-color:#333;
+padding:0;
+margin:0;
+}
+
+div.bar {
+display:inline-block;
+width:30px;
+height:75px;
+background-color:teal;
+margin-bottom:-4px;
+padding:0;
+}
+</style>
+
+<div id="d3canvas">
+</div>
+
+<script>
+  // d3
+
+  var dataset = [5,10,15,20,25];
+
+  d3.select("#d3canvas").selectAll('div')
+    .data(dataset)
+    .enter()
+    .append('div')
+    .attr('class', 'bar')
+    .style('height', function(d) {
+      return d*10 + 'px';
+    })
+    .style('margin-right', '2px')
+    ;
+
+  $(function() {
+    $('div.bar').on('click', function() {
+      alert($(this).css('height'));
+    });
+  });
+    
+</script>

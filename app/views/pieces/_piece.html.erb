@@ -1,0 +1,44 @@
+<%= content_tag "div", 
+  id: "box_" + piece.id.to_s, 
+  class: "box",
+  data: {test: "yahoo!" }  do %>
+    <span style="font-weight:bold"> <%= "#{piece.id} :  #{piece.title}" %> </span>
+  <br />
+  I point to <%= piece.next ? piece.next.id : "noone" %>
+  <br />
+  <div class="info_button"> 
+  activity
+  </div>
+
+  <div class="modal" style="display:none">
+    <%= piece.caption ||= "i have no caption" %>
+  </div>
+
+<% end %>
+
+
+<script>
+  $(function() {
+    var $dialog;
+    $('#box_<%= piece.id %>').find('.modal').each(function() {
+      $dialog = $(this).dialog({ autoOpen: false, title: 'Modal!' });
+    });
+
+    $('#box_<%= piece.id %> .info_button').on('click', function() {
+      $dialog.dialog('open');
+      return false;
+    });
+    
+   // TODO: poodr - duck types
+   $('#box_<%= piece.id %>').on('click', function() {
+     <% if piece.next %>
+      var next_color = '<%= piece.next.next ? "yellow" : "red" %>';
+      $(this).css('background-color', 'blue');
+      $("#box_<%= piece.next.id %>")
+        .css('background-color', next_color)
+        .css('color', 'black');
+        return false;
+    <% end %>
+    });
+  });
+</script>

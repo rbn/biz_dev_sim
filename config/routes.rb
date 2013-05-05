@@ -1,6 +1,10 @@
 BizDevSim::Application.routes.draw do
+  match 'd3/svg' => 'd3#svg'
+  match 'bubbles' => 'd3#bubbles'
+  match 'flare' => 'd3#flare'
+  match 'data' => 'home#data'
   resources :home
-  match 'yahoo' => 'home#yahoo'
+  resources :d3
 
   # The priority is based upon order of creation:
   # first created -> highest priority.

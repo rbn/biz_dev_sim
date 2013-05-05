@@ -15,6 +15,7 @@ ActiveRecord::Schema.define(:version => 20130501010626) do
 
   create_table "games", :force => true do |t|
     t.string   "title"
+    t.string   "path"
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
   end

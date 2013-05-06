@@ -5,8 +5,20 @@ gem 'rails', '3.2.12'
 # Bundle edge Rails instead:
 # gem 'rails', :git => 'git://github.com/rails/rails.git'
 
-# gem 'sqlite3'
-gem 'pg'
+group :development, :test do
+  gem 'pg', '0.12.2'
+  gem 'rspec-rails', '2.11.0'
+end
+
+gem 'annotate', '2.5.0', group: :development
+group :production do
+  gem 'pg', '0.12.2'
+end
+
+group :test do
+  gem 'capybara', '1.1.2'
+  gem 'factory_girl_rails', '1.4.0'
+end
 
 gem 'annotate', '2.5.0', group: :development
 

@@ -4,7 +4,10 @@ BizDevSim::Application.routes.draw do
   match 'd3/svg' => 'd3#svg'
   match 'bubbles' => 'd3#bubbles'
   match 'flare' => 'd3#flare'
+  match 'board_data' => 'd3#board_data'
+  match 'board' => 'd3#board'
   match 'data' => 'home#data'
+
   resources :home
   resources :d3
 

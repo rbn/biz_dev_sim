@@ -7,20 +7,20 @@
     {
      "name": "Marketing Call",
      "children": [
-      {"name": "Call CEO", "size": 2000},
-      {"name": "Call line staff", "size": 3812},
-      {"name": "Call Bill Gates", "size": 6714},
-      {"name": "Call colleague", "size": 743}
+      {"name": "Qualify an opportunity", "size": 2000},
+      {"name": "First in-person meeting", "size": 3812},
+      {"name": "Attend an industry event", "size": 6714},
+      {"name": "Id the Opp", "size": 743}
      ]
     },
     {
      "name": "Slide Deck",
      "children": [
-      {"name": "PowerPoint", "size": 3534},
-      {"name": "Prezi", "size": 5731},
-      {"name": "Handouts", "size": 7840},
-      {"name": "Paperback", "size": 5914},
-      {"name": "Napkins", "size": 3416}
+      {"name": "Marketing Call", "size": 3534},
+      {"name": "Conference speaker engagement", "size": 5731},
+      {"name": "''So tell me what your firm does''", "size": 7840},
+      {"name": "Assessing the competition", "size": 5914},
+      {"name": "Contracting vehicles", "size": 3416}
      ]
     }
    ]

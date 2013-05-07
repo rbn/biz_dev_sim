@@ -12,7 +12,15 @@ text {
 <div id="dbg"></div>
 
 <script>
+d3.selection.prototype.moveToFront = function() {
+  return this.each(function(){
+    this.parentNode.appendChild(this);
+  });
+};
+
 var $dbg = $('#dbg');
+
+var freeze = false;
 
 var diameter = 960,
     format = d3.format(",d"),
@@ -30,7 +38,7 @@ var svg = d3.select("#svg_container").append("svg")
 
 d3.json("/board_data", function(error, root) {
   var node = svg.selectAll(".node")
-      .data(bubble.nodes(classes(root))
+      .data(bubble.nodes(classes(root), function(d) { return d.name; })
       .filter(function(d) { return !d.children; }))
       .enter().append("g")
       .attr("class", "node")
@@ -43,22 +51,57 @@ d3.json("/board_data", function(error, root) {
 
   node.append("circle")
       .attr("r", function(d) { return d.r; })
-      .style("fill", function(d) { 
-        var factor = Math.round(d.x) % 255,
-            h1 = Math.round(factor * 10 % 220),
-            h2 = Math.round(factor * 10 % 110),
-            h3 = factor
-        return 'rgb(' + h1 + ',' + h2 + ',' + h3 + ')'; 
-      }) //color(d.packageName); });
-
+      .style("fill", function(d) { return fill_circ(d); });
+        
   node.append("text")
       .attr("dy", ".3em")
       .style("text-anchor", "middle")
       .text(function(d) { return d.className.substring(0, d.r / 3); });
 
-  node.on('click', function(d) { 
+  node.on('mouseover', function() { 
+        if (freeze) return;
+        d3.select(this).moveToFront(); 
     });
+
+  node.selectAll('circle')
+  .on('mouseover', function(d) {
+    if (freeze) return;
+
+     node.selectAll('circle')
+      .attr("r", function(d) { return d.r; })
+      .style("fill", function(d) { return fill_circ(d); });
+
+     d3.select(this)
+     .attr('r', function(d) { return 1.5*d.r; });
+     })
+     .on('click', function(d) {
+       if (!freeze) {
+         freeze = true;
+       }
+       else {
+         freeze = false;
+         node.selectAll('circle')
+          .attr("r", function(d) { return d.r; })
+          .style("fill", function(d) { return fill_circ(d); });
+
+         d3.select(this)
+         .attr('r', function(d) { return 1.5*d.r; });
+
+        d3.select(this.parentNode).moveToFront();
+       }
+     });
+     
+
 });
+
+function fill_circ(d) { 
+  var factor = Math.round(d.x) % 255,
+      h1 = Math.round(factor * 10 % 220),
+      h2 = Math.round(factor * 10 % 110),
+      h3 = factor
+  return 'rgb(' + h1 + ',' + h2 + ',' + h3 + ')'; 
+}
+
 
 // Returns a flattened hierarchy containing all leaf nodes under the root.
 function classes(root) {

@@ -1,8 +1,8 @@
-<h2><%= @game.title %></h2>
-
-<div id="gameboard">
-  <% @pieces.each do |p| %>
-    <%= render p %>
-  <% end %>
-</div>
+<h2> links </h2>
+<p>
+  <ul>
+    <li><%= link_to "boxes", boxes_path %></li>
+    <li><%= link_to "board", board_path %></li>
+  </ul>
+</p>
 

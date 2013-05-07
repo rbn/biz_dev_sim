@@ -1,0 +1,8 @@
+<h2><%= @game.title %></h2>
+
+<div id="gameboard">
+  <% @pieces.each do |p| %>
+    <%= render p %>
+  <% end %>
+</div>
+

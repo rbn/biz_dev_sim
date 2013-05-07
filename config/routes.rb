@@ -7,6 +7,7 @@ BizDevSim::Application.routes.draw do
   match 'board_data' => 'd3#board_data'
   match 'board' => 'd3#board'
   match 'data' => 'home#data'
+  match 'boxes' => 'home#boxes'
 
   resources :home
   resources :d3

@@ -1,5 +1,8 @@
 class HomeController < ApplicationController
   def index
+  end
+
+  def boxes
     @game = Game.all.first
     @pieces = @game.pieces
   end

@@ -6,6 +6,8 @@ text {
 }
 
 </style>
+<div id="modal_content" style="display:none">ksaljdasdas</div>
+
 
 <div id="svg_container">
 </div>
@@ -51,7 +53,7 @@ d3.json("/board_data", function(error, root) {
 
   node.append("circle")
       .attr("r", function(d) { return d.r; })
-      .style("fill", function(d) { return fill_circ(d); });
+      .style("fill", function(d) { return 'black'; fill_circ(d); });
         
   node.append("text")
       .attr("dy", ".3em")
@@ -63,11 +65,19 @@ d3.json("/board_data", function(error, root) {
         d3.select(this).moveToFront(); 
     });
 
+  node.append("div")
+      .attr('class', 'modal_content')
+      .text(function(d) {
+        var msg = "(eventually get data from server)</br>"
+        msg += d.className + ": " + format(d.value);
+        return msg;
+      });
+
   node.selectAll('circle')
   .on('mouseover', function(d) {
     if (freeze) return;
 
-     node.selectAll('circle')
+   node.selectAll('circle')
       .attr("r", function(d) { return d.r; })
       .style("fill", function(d) { return fill_circ(d); });
 
@@ -89,8 +99,29 @@ d3.json("/board_data", function(error, root) {
 
         d3.select(this.parentNode).moveToFront();
        }
-     });
-     
+
+      var modal_message = node.selectAll('div').text();
+      var $modal = $('#modal_content');
+      $modal.load('board_data');
+      $modal.modal({
+        onClose: function(dialog) {
+          freeze = false; 
+          $.modal.close();
+        }
+      });
+    });
+
+  node.selectAll('text').on('click', function(d) {
+      var modal_message = node.selectAll('div').text();
+      var $modal = $('#modal_content');
+      $modal.load('board_data');
+      $modal.modal({
+        onClose: function(dialog) {
+          freeze = false; 
+          $.modal.close();
+        }
+      });
+  });
 
 });
 

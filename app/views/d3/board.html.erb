@@ -53,7 +53,7 @@ d3.json("/board_data", function(error, root) {
 
   node.append("circle")
       .attr("r", function(d) { return d.r; })
-      .style("fill", function(d) { return 'black'; fill_circ(d); });
+      .style("fill", function(d) { return fill_circ(d); });
         
   node.append("text")
       .attr("dy", ".3em")

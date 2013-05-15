@@ -6,6 +6,10 @@ class D3Controller < ApplicationController
     render layout: 'bare' 
   end
 
+  def svg2
+    render layout: 'bare' 
+  end
+
   def bubbles
     render layout: 'bare' 
   end

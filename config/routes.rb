@@ -8,6 +8,8 @@ BizDevSim::Application.routes.draw do
   match 'board' => 'd3#board'
   match 'data' => 'home#data'
   match 'boxes' => 'home#boxes'
+  match 'svg' => 'd3#svg'
+  match 'svg2' => 'd3#svg2'
 
   resources :home
   resources :d3

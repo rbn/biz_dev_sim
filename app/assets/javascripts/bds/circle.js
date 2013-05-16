@@ -1,4 +1,4 @@
-function Circle(elem) {
+bds.make_circle = function(elem) {
   var self = {}, 
       $elem = $(elem),
       _d3o = d3.select(elem),

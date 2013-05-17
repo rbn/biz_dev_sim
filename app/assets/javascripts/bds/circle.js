@@ -10,19 +10,30 @@ bds.circle_tracker = (function() {
      }
   };
 
-  var move = function(n) {
-    var starting = self.current;
-    for(i = 0; i < n; i ++) {
+  var wire = function() {
+    $.subscribe('bds_start', on_start);
+    $.subscribe('bds_move', on_move);
+  };
+
+  var on_start = function(e) {
+    self.start.click(); 
+  };
+
+  var on_move = function(e) {
+    var orig = self.current;
+
+    for(i = 0; i < bds.dice.current; i ++) {
       var next_id = self.current.next()[0];
       self.current = self[next_id];
     }
-    
-    starting.click();
+
     self.current.click();
   };
   
   self.add = add;
-  self.move = move;
+
+  // init
+  wire();
 
   return self;
 })();
@@ -59,22 +70,16 @@ bds.make_circle = function(elem) {
       enlarge();
       self.sticky = !self.sticky;
     }
-    else
+    else {
       shrink();
-
+    }
   };
 
-  var apply_behavior = function() {
+  var wire = function() {
     // behaviour
     $elem.hover(function() {
-      if (!self.sticky)
-        enlarge();
-      return false;
     },
     function() {
-      if (!self.sticky)
-        shrink();
-      return false;
     });
     
     $elem.on('click', click);
@@ -97,7 +102,7 @@ bds.make_circle = function(elem) {
   self.next = next;
 
   // init
-  apply_behavior();
+  wire();
   bds.circle_tracker.add($elem.attr('id'), self); 
 
   return self;

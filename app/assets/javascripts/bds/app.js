@@ -82,21 +82,36 @@ bds.make_app = function(svg, json, options) {
   };
 
   var draw_die = function($die_container) {
-    bds.dice = bds.make_dice($die_container);
+    bds.dice = bds.make_dice($die_container, self);
     return this;
   };
   
   var draw_start = function($start_container) {
-    bds.start = bds.make_start($start_container);
+    bds.start = bds.make_start($start_container, self);
     return this;
   };
 
   var draw_move = function($move_container) {
-    bds.move = bds.make_move($move_container);
+    bds.move = bds.make_move($move_container, self);
   };
 
-  var apply_behavior = function() {
-    // add behaviour
+  var on_start = function() {
+    self.started = true;
+  };
+
+  var on_move = function() {
+    self.moveable = false;
+  };
+
+  var on_stage_complete = function() {
+    self.moveable = true;
+  };
+
+  var wire = function() {
+    $.subscribe('bds_start', on_start);
+    $.subscribe('bds_move', on_move);
+    $.subscribe('bds_stage_complete', on_stage_complete);
+
     $('.' + circle_class).each(function() {
        bds.make_circle(this);  
     });
@@ -110,7 +125,7 @@ bds.make_app = function(svg, json, options) {
   // initialization
   draw_circles_path();
   draw_circles();
-  apply_behavior();
+  wire();
 
   return self;
 };

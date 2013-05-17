@@ -1,46 +1,55 @@
 // //////////////////
 // dice constructor
 //
-bds.make_dice = function($container) {
+bds.make_dice = function($container, app) {
   var self = {},
-      $die = $('<a href="#"></a>')
+      $die = $('<a href="#"></a>'),
+      app = app
       ;
 
   var roll = function() {
     if (!self.ready) return;
+    $.publish('bds_roll');
     var rand = Math.floor((Math.random()*3) + 1);
-    self.current = rand;
-    place(self.current);
+    $die.fadeOut('slow', function() {
+      place(rand);
+      $die.fadeIn();
+    })
   };
 
+
+
+  var make_frozen = function() {
+    self.ready = false;
+    place();
+  };
+
+  var place = function(n) {
+    
   var set = function(i) {
-    if ( self.ready )
-      $die.html('').append('<img src="/assets/dice/Blue_' + i + '.png" /></a>');
-    else
-      $die.html('').append('<img src="/assets/dice/Blue_' + i + '_frozen.png" /></a>');
+      if ( self.ready )
+        $die.html('').append('<img src="/assets/dice/Blue_' + i + '.png" /></a>');
+      else
+        $die.html('').append('<img src="/assets/dice/Blue_' + i + '_frozen.png" /></a>');
+    };
+    self.current = n || self.current;
+    set(self.current);
+    $container.html('').append($die); 
+    wire();
   };
 
-  var make_ready = function() {
+  var on_move = function() {
+    make_frozen();
+  };
+
+  var on_stage_complete = function() {
     self.ready = true;
     place(self.current);
   };
 
-  var make_frozen = function() {
-    self.ready = false;
-    place(self.current);
-  };
-
-  var place = function(n) {
-    var n = n || self.current;
-    $die.fadeOut('slow', function() {
-      set(n);
-      $container.html('').append($die); 
-      apply_behavior();
-      $die.fadeIn();
-    });
-  };
-
-  var apply_behavior = function() {
+  var wire = function() {
+    $.subscribe('bds_move', on_move);
+    $.subscribe('bds_stage_complete', on_stage_complete);
 
     $die
       .on('click', roll)
@@ -50,17 +59,15 @@ bds.make_dice = function($container) {
       function() {
 
       });
-
   };
 
   // API
   self.roll = roll;
-  self.make_ready = make_ready;
   self.current = 1;
-  self.make_frozen = make_frozen;
   self.place = place;
 
   // init
+  wire();
   place(1); // init die to 1
   
   return self;
@@ -69,18 +76,18 @@ bds.make_dice = function($container) {
 ///////////////////////////
 // start button constructor
 // 
-bds.make_start = function($container) {
+bds.make_start = function($container, app) {
   var self = {},
-      $start = $('<div>START</div>');
+      $start = $('<div>START</div>')
+      app = app
+      ;
 
   var start = function() {
-    bds.circle_tracker.start.click();
-    self.started = true; 
-    bds.dice.make_ready(); // this should be changed by the die, by responding to an event that this control raises!
+    $.publish('bds_start');
     disable();
   };
 
-  var apply_styles = function() {
+  var style = function() {
     $start.css('width', '100px')
           .css('height', '50px')
           .css('background-color', '#33efe4')
@@ -88,9 +95,8 @@ bds.make_start = function($container) {
     return this;
   };
 
-  var apply_behavior = function() {
+  var wire = function() {
     $start.on('click', start);
-    return this;
   };
 
   var disable = function() {
@@ -103,8 +109,8 @@ bds.make_start = function($container) {
   self.start = start;
 
   // init
-  apply_styles();
-  apply_behavior();
+  style();
+  wire();
   $start.appendTo($container);
 
   return self;
@@ -113,21 +119,15 @@ bds.make_start = function($container) {
 // ///////////////////
 // move button ctr
 // 
-bds.make_move = function($container) {
+bds.make_move = function($container, app) {
   var self = {},
-      $move = $('<div>MOVE</div>');
+      $move = $('<div>MOVE</div>')
+      app = app;
 
   var move = function() {
-    if ( !bds.start.started )
-      return false;
-
-    if ( !bds.dice.ready )
-      return false;
-
-    bds.circle_tracker.move(bds.dice.current);
-    // TODO: again, raise a 'move' event here so that the die can respond
-    bds.dice.ready = false;
-    bds.dice.place();
+    if (! app.started) return;
+    if (! app.moveable) return;
+    $.publish('bds_move'); 
   };
 
   var wire = function() {
@@ -142,8 +142,6 @@ bds.make_move = function($container) {
          .css('color', 'white')
          .css('padding', '4px');
   };
-
-  self.move = move;
 
   // init
   wire();

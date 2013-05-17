@@ -10,6 +10,14 @@ class D3Controller < ApplicationController
     render layout: 'bare' 
   end
 
+  def svg3
+    render layout: 'bare' 
+  end
+
+  def veroni
+    render layout: 'bare'
+  end
+
   def bubbles
     render layout: 'bare' 
   end

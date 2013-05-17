@@ -1,0 +1,80 @@
+<style>
+div#thediv {
+  width:63.2%;
+  margin:auto;
+}
+div#controls {
+  width:20%;
+  margin:auto;
+  height:80px;
+}
+svg {
+  border:1px solid black;
+  background-color:#c4cee9;
+  padding:50px;
+}
+
+</style>
+
+<script>
+$(function() {
+
+  // ----------------------------------
+  // data -----------------------------
+
+
+  // ----------------------------------
+  // surface --------------------------
+
+  var svg =  d3.select('#thediv')
+                .append('svg')
+                .attr('width', 900)
+                .attr('height', 900);
+
+  var json = [
+      { id: 1, next: [2], start: true, "x": 130,  "y": 60,  "r": 40, "color" : "yellow" },
+      { id: 2, next: [3], "x": 330,  "y": 60,  "r": 40, "color" : "blue" },
+      { id: 3, next: [4], "x": 530,  "y": 60,  "r": 40, "color" : "green" },
+      { id: 4, next: [5], "x": 730,  "y": 120,  "r": 40, "color" : "green" },
+      { id: 5, next: [6], "x": 730,  "y": 270,  "r": 40, "color" : "red" },
+      { id: 6, next: [7], "x": 530,  "y": 330,  "r": 40, "color" : "pink" },
+      { id: 7, next: [8], "x": 330,  "y": 330,  "r": 40, "color" : "black" },
+      { id: 8, next: [9], "x": 130,  "y": 390,  "r": 40, "color" : "green" },
+      { id: 9, next: [10], "x": 130,  "y": 540,  "r": 40, "color" : "green" },
+      { id: 10,next: [11],  "x": 330,  "y": 600,  "r": 40, "color" : "blue" },
+      { id: 11,next: [12],  "x": 530,  "y": 600,  "r": 40, "color" : "red" },
+      { id: 12,next: [13],  "x": 730,  "y": 600,  "r": 40, "color" : "magenta" },
+      { id: 13,next: [14],  "x": 730,  "y": 600,  "r": 40, "color" : "green" },
+      { id: 14,next: [],  "x": 530,  "y": 600,  "r": 40, "color" : "red" }
+      ];
+
+      var app = bds.make_app(svg, json, { all_at_once: true }) 
+              .draw_die( $('#die') )
+              .draw_start( $('#start') )
+              .draw_move( $('#move') );
+});
+
+
+</script>
+
+<p>
+<div id="controls" >
+  <table>
+    <tr>
+      <td>
+        <div id="die" />
+      </td>
+      <td>
+        <div id="start" />
+      </td>
+      <td>
+        <div id="move" />
+      </td>
+    </tr>
+  </table>
+</div>
+</p>
+<p>
+<div id="thediv">
+</div>
+</p>

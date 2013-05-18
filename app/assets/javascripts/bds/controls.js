@@ -1,116 +1,108 @@
 // //////////////////
 // dice constructor
 //
-bds.make_dice = function($container, app) {
+// TODO: change container param to options hash, so we can use same variable name
+// inside method w.o fear of name confusion (contain/container problem)
+bds.make_dice = function($container) {
   var self = {},
-      $die = $('<a href="#"></a>'),
-      app = app
+      $die = $('<a href="#"></a>')
       ;
 
   var roll = function() {
-    if (!self.ready) return;
-    $.publish('bds_roll');
-    var rand = Math.floor((Math.random()*3) + 1);
-    $die.fadeOut('slow', function() {
-      place(rand);
-      $die.fadeIn();
-    })
+    self.current_face =  Math.floor((Math.random()*3) + 1);
+    on();
+    $.publish('bds_rolled');
   };
 
-
-
-  var make_frozen = function() {
-    self.ready = false;
-    place();
+  var on = function() {
+    var img = '<img src="/assets/dice/Blue_';
+    img += self.current_face;
+    img += '.png" />';
+    $die.html('').append(img);
   };
 
-  var place = function(n) {
-    
-  var set = function(i) {
-      if ( self.ready )
-        $die.html('').append('<img src="/assets/dice/Blue_' + i + '.png" /></a>');
-      else
-        $die.html('').append('<img src="/assets/dice/Blue_' + i + '_frozen.png" /></a>');
-    };
-    self.current = n || self.current;
-    set(self.current);
-    $container.html('').append($die); 
-    wire();
-  };
-
-  var on_move = function() {
-    make_frozen();
-  };
-
-  var on_stage_complete = function() {
-    self.ready = true;
-    place(self.current);
-  };
-
-  var wire = function() {
-    $.subscribe('bds_move', on_move);
-    $.subscribe('bds_stage_complete', on_stage_complete);
-
-    $die
-      .on('click', roll)
-      .hover(function() {
-
-      },
-      function() {
-
-      });
+  var off = function() {
+    var img = '<img src="/assets/dice/Blue_';
+    img += self.current_face;
+    img += '_frozen';
+    img += '.png" />';
+    $die.html('').append(img);
   };
 
   // API
   self.roll = roll;
-  self.current = 1;
-  self.place = place;
+  self.on = on;
+  self.off = off;
 
-  // init
-  wire();
-  place(1); // init die to 1
-  
+  $die.appendTo($container);
   return self;
 }
 
 ///////////////////////////
-// start button constructor
-// 
-bds.make_start = function($container, app) {
+// roller button ctr
+//
+// TODO: can these control elems user a factory?
+bds.make_roller = function($container) {
   var self = {},
-      $start = $('<div>START</div>')
-      app = app
+      $contain = $container,
+      $roller = $('<a href="#"></a>')
       ;
 
-  var start = function() {
-    $.publish('bds_start');
-    disable();
-  };
-
-  var style = function() {
-    $start.css('width', '100px')
-          .css('height', '50px')
-          .css('background-color', '#33efe4')
-          .css('padding', '4px');
-    return this;
-  };
-
   var wire = function() {
-    $start.on('click', start);
+    $roller.on('click', function() {
+      $.publish('bds_rolling'); 
+    });
+  };
+  
+  var on = function() {
+    $roller.html('').append('<img src="/assets/controls/roller1.jpg" />');
   };
 
-  var disable = function() {
-    $start.css('background-color', 'silver')
-          .css('border', '1px dashed black')
-          .off('click');
+  var off = function() {
+    $roller.html('').append('<img src="/assets/controls/roller1_gray.jpg" />');
   };
 
   // API
-  self.start = start;
+  self.on = on;
+  self.off = off;
 
   // init
-  style();
   wire();
+  off();
+  $roller.appendTo($container);
+
+  return self;
+};
+
+///////////////////////////
+// start button constructor
+// 
+bds.make_start = function($container) {
+  var self = {},
+      $start = $('<div class="bds_button">START</div>')
+      ;
+
+  var on = function() {
+    $start.removeClass('off').addClass('on');
+  };
+
+  var off = function() {
+    $start.removeClass('on').addClass('off');
+  };
+
+  var wire = function() {
+    $start.on('click',function() {
+      $.publish('bds_start');
+    });
+  };
+
+  // API
+  self.on = on;
+  self.off = off;
+
+  // init
+  wire();
+  on();
   $start.appendTo($container);
 
   return self;
@@ -119,32 +111,34 @@ bds.make_start = function($container, app) {
 // ///////////////////
 // move button ctr
 // 
-bds.make_move = function($container, app) {
+bds.make_move = function($container) {
   var self = {},
-      $move = $('<div>MOVE</div>')
-      app = app;
+      $move = $('<a href="#"></a>');
 
   var move = function() {
-    if (! app.started) return;
-    if (! app.moveable) return;
-    $.publish('bds_move'); 
+    $.publish('bds_moving'); 
+  };
+
+  var on = function() {
+    $move.html('').append('<img src="/assets/controls/go.png" />');
+  };
+
+  var off = function() {
+    $move.html('').append('<img src="/assets/controls/go_gray.png" />');
   };
 
   var wire = function() {
     $move.on('click', move);
-    $move.appendTo($container);
   };
 
-  var style = function() {
-    $move.css('width', '100px')
-         .css('height', '50px')
-         .css('background-color', '#543be3')
-         .css('color', 'white')
-         .css('padding', '4px');
-  };
+  // API
+  self.on = on;
+  self.off = off;
 
   // init
   wire();
-  style();
+  off();
+  $move.appendTo($container);
+
   return self;
 };

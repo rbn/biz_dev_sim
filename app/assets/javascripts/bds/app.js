@@ -81,36 +81,60 @@ bds.make_app = function(svg, json, options) {
                        .style('fill', 'none');
   };
 
-  var draw_die = function($die_container) {
-    bds.dice = bds.make_dice($die_container, self);
-    return this;
-  };
-  
-  var draw_start = function($start_container) {
-    bds.start = bds.make_start($start_container, self);
-    return this;
-  };
-
-  var draw_move = function($move_container) {
-    bds.move = bds.make_move($move_container, self);
+  var draw_game = function () {
+    bds.dice = bds.make_dice( $(options.die) );
+    bds.start = bds.make_start( $(options.start) );
+    bds.move = bds.make_move( $(options.move) );
+    bds.roller = bds.make_roller( $(options.roller) );
   };
 
   var on_start = function() {
+    if ( self.started ) return;
     self.started = true;
+    bds.circles.first();
+    bds.start.off(); 
   };
 
-  var on_move = function() {
+  var on_moving = function() {
+    if (! self.started) return;
+    if (! self.moveable) return;
+    bds.circles.leave_and_land(bds.dice.current_face);
     self.moveable = false;
+    bds.move.off();
+    self.playable = true;
   };
 
   var on_stage_complete = function() {
+    self.rollable = true;
+    bds.circles.complete_stage();
+    bds.roller.on();
+  };
+
+  var on_rolling = function() {
+    if (! self.rollable ) return;
+    bds.dice.roll();
+    self.rollable = false
     self.moveable = true;
+  };
+
+  var on_rolled = function() {
+    self.rollable = false;
+    bds.roller.off();
+    bds.move.on();
+  };
+
+  var on_circle_click = function() {
+    if (! self.playable ) return;
+    alert('get data from db now!');
   };
 
   var wire = function() {
     $.subscribe('bds_start', on_start);
-    $.subscribe('bds_move', on_move);
+    $.subscribe('bds_moving', on_moving);
     $.subscribe('bds_stage_complete', on_stage_complete);
+    $.subscribe('bds_rolled', on_rolled);
+    $.subscribe('bds_rolling', on_rolling);
+    $.subscribe('bds_circle_click', on_circle_click);
 
     $('.' + circle_class).each(function() {
        bds.make_circle(this);  
@@ -118,14 +142,23 @@ bds.make_app = function(svg, json, options) {
   };
 
   // API
-  self.draw_die = draw_die;
-  self.draw_start = draw_start;
-  self.draw_move = draw_move;
+  bds.app = self;
 
   // initialization
+  draw_game();
   draw_circles_path();
   draw_circles();
   wire();
+
+  self.started = false;
+  self.moveable = false;
+  self.rollable = false;
+  
+
+  // TODO: temporary
+  $('a#mock_stage_complete').on('click', function() {
+    $.publish('bds_stage_complete');
+  });
 
   return self;
 };

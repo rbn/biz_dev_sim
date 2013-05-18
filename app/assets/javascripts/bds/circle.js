@@ -1,5 +1,5 @@
 // track circles out in the field
-bds.circle_tracker = (function() {
+bds.circles = (function() {
   var self = {};
 
   var add = function(id, circle) {
@@ -10,30 +10,45 @@ bds.circle_tracker = (function() {
      }
   };
 
-  var wire = function() {
-    $.subscribe('bds_start', on_start);
-    $.subscribe('bds_move', on_move);
+  var first = function() {
+    land(); 
   };
 
-  var on_start = function(e) {
-    self.start.click(); 
+  var leave = function() {
+    self.current.drop(500);
   };
 
-  var on_move = function(e) {
-    var orig = self.current;
-
-    for(i = 0; i < bds.dice.current; i ++) {
-      var next_id = self.current.next()[0];
-      self.current = self[next_id];
+  var land = function(n) {
+    // handle start
+    if (! n) {
+      self.start.pop();
+      return;
     }
 
-    self.current.click();
+    for(i = 0; i < n; i ++) {
+      var isDest = ( i == n - 1 );
+      var next_id = self.current.next()[0]; // TODO: temporary - only looking at "first" next
+      self.current = self[next_id];
+      if (! isDest ) self.current.hop(i*250);
+    }
+
+    // TODO: code smell - find out the way to do this - queing with callbacks?
+    self.current.pop({delay: n * 250});
   };
   
-  self.add = add;
+  var leave_and_land = function(n) {
+    leave();
+    land(n);
+  };
 
-  // init
-  wire();
+  var complete_stage = function() {
+    self.current.complete();
+  };
+
+  self.add = add;
+  self.first = first;
+  self.leave_and_land = leave_and_land;
+  self.complete_stage = complete_stage;
 
   return self;
 })();
@@ -44,45 +59,45 @@ bds.make_circle = function(elem) {
       $elem = $(elem),
       d3o = d3.select(elem),
       starting_radius = d3o.attr('r'),
-      id = 1,
-      name = "my first circle",
       isBig = false
       ;
 
-  var name = function() {
-    return _name;
-  };
-    
-  var enlarge = function() {
-    d3o.transition()
-       .attr('r', starting_radius * 4);
-    isBig = true;
+  var pop = function(options) {
+    var options = options || {},
+        duration = options.duration || 500,
+        delay = options.delay || 0;
+
+    setTimeout(function() {
+      d3o.transition()
+         .duration(duration)
+         .attr('r', starting_radius * 4);
+      isBig = true;
+     }, delay);
+
+    return self;
   };
 
-  var shrink = function() {
-    d3o.transition()
-       .attr('r', starting_radius);
-    isBig = false;
+  var drop = function(options) {
+    var options = options || {},
+        duration = options.duration || 500,
+        delay = options.delay || 0;
+
+    setTimeout(function() {
+      d3o.transition()
+         .duration(duration)
+         .attr('r', starting_radius);
+      isBig = true;
+     }, delay);
+
+    return self;
   };
 
-  var click = function() {
-    if ( !isBig ) {
-      enlarge();
-      self.sticky = !self.sticky;
-    }
-    else {
-      shrink();
-    }
-  };
-
-  var wire = function() {
-    // behaviour
-    $elem.hover(function() {
-    },
-    function() {
-    });
-    
-    $elem.on('click', click);
+  var hop = function(delay) {
+    var delay = delay;
+    setTimeout(function() {
+      pop();
+      setTimeout(drop, 500);
+    }, delay);
   };
 
   var is_start = function() {
@@ -93,17 +108,30 @@ bds.make_circle = function(elem) {
     return $elem.data('next');
   };
 
+  var complete = function() {
+    d3o.style('fill', 'silver')
+       .style('stroke', 'black');
+  };
+
+  var wire = function() {
+    $elem.on('click', function() {
+      $.publish('bds_circle_click', self.id)
+    });
+  };
+
   self.name = name;
-  self.enlarge = enlarge;
-  self.shrink = shrink;
+  self.pop = pop;
+  self.drop = drop;
+  self.hop = hop;
   self.sticky = false;
-  self.click = click;
   self.is_start = is_start;
   self.next = next;
+  self.complete = complete;
+  self.id = $elem.attr('id');
 
   // init
   wire();
-  bds.circle_tracker.add($elem.attr('id'), self); 
+  bds.circles.add(self.id, self); 
 
   return self;
 }

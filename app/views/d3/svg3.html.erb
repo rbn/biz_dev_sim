@@ -2,6 +2,7 @@
 div#thediv {
   width:63.2%;
   margin:auto;
+  margin-top:30px;
 }
 div#controls {
   width:20%;
@@ -14,6 +15,25 @@ svg {
   padding:50px;
 }
 
+#die, #roller, #start, #move {
+  width:120px;
+  height:80px;
+}
+
+div.bds_button {
+  width: 100px;
+  height: 75px;
+  padding: 4px;
+}
+
+div.bds_button.on {
+  background-color: yellow;
+  border: none;
+}
+
+div.bds_button.off {
+  background-color:silver;
+}
 </style>
 
 <script>
@@ -48,10 +68,13 @@ $(function() {
       { id: 14,next: [],  "x": 530,  "y": 600,  "r": 40, "color" : "red" }
       ];
 
-      var app = bds.make_app(svg, json, { all_at_once: true }) 
-              .draw_die( $('#die') )
-              .draw_start( $('#start') )
-              .draw_move( $('#move') );
+      // TODO: just pass in the ids of the control containers in the optoin hash
+      var app = bds.make_app(svg, json, { 
+                die: '#die',
+                start: '#start',
+                move: '#move',
+                roller: '#roller'
+              });
 });
 
 
@@ -59,16 +82,22 @@ $(function() {
 
 <p>
 <div id="controls" >
-  <table>
+  <table id="main">
     <tr>
-      <td>
-        <div id="die" />
-      </td>
       <td>
         <div id="start" />
       </td>
       <td>
+        <div id="roller" />
+      </td>
+      <td>
+        <div id="die" />
+      </td>
+      <td>
         <div id="move" />
+      </td>
+      <td>
+        <a href="#" id="mock_stage_complete">mock stage complete</a>
       </td>
     </tr>
   </table>

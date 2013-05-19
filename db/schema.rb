@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130506004748) do
+ActiveRecord::Schema.define(:version => 20130519160035) do
 
   create_table "flares", :force => true do |t|
     t.string   "name"
@@ -31,6 +31,14 @@ ActiveRecord::Schema.define(:version => 20130506004748) do
     t.string   "caption"
     t.integer  "next_id"
     t.integer  "game_id"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
+  create_table "stages", :force => true do |t|
+    t.string   "title"
+    t.string   "content"
+    t.string   "text"
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
   end

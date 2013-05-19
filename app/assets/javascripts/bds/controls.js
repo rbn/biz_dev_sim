@@ -34,7 +34,7 @@ bds.make_dice = function($container) {
   self.on = on;
   self.off = off;
 
-  $die.appendTo($container);
+  $container.html('').append($die);
   return self;
 }
 
@@ -44,7 +44,6 @@ bds.make_dice = function($container) {
 // TODO: can these control elems user a factory?
 bds.make_roller = function($container) {
   var self = {},
-      $contain = $container,
       $roller = $('<a href="#"></a>')
       ;
 
@@ -69,7 +68,7 @@ bds.make_roller = function($container) {
   // init
   wire();
   off();
-  $roller.appendTo($container);
+  $container.html('').append($roller);
 
   return self;
 };
@@ -79,15 +78,15 @@ bds.make_roller = function($container) {
 // 
 bds.make_start = function($container) {
   var self = {},
-      $start = $('<div class="bds_button">START</div>')
+      $start = $('<a href="#"></a>')
       ;
 
   var on = function() {
-    $start.removeClass('off').addClass('on');
+    $start.html('').append('<img src="/assets/controls/start.jpg" />');
   };
 
   var off = function() {
-    $start.removeClass('on').addClass('off');
+    $start.html('').append('<img src="/assets/controls/start_gray.jpg" />');
   };
 
   var wire = function() {
@@ -103,8 +102,7 @@ bds.make_start = function($container) {
   // init
   wire();
   on();
-  $start.appendTo($container);
-
+  $container.html('').append($start);
   return self;
 };
 
@@ -138,7 +136,7 @@ bds.make_move = function($container) {
   // init
   wire();
   off();
-  $move.appendTo($container);
+  $container.html('').append($move);
 
   return self;
 };

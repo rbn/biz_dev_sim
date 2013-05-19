@@ -1,0 +1,78 @@
+<script>
+  
+    $('#thediv').html('');
+setTimeout(function() {
+  $('#stage').fadeOut(2000, function() {
+
+    
+    var svg =  d3.select('#thediv')
+                  .append('svg')
+                  .attr('width', 900)
+                  .attr('height', 900);
+
+    var json = [
+        { id: 1, next: [2], start: true, "x": 130,  "y": 60,  "r": 40, "color" : "yellow" },
+        { id: 2, next: [3], "x": 330,  "y": 60,  "r": 40, "color" : "blue" },
+        { id: 3, next: [4], "x": 530,  "y": 60,  "r": 40, "color" : "green" },
+        { id: 4, next: [5], "x": 730,  "y": 120,  "r": 40, "color" : "green" },
+        { id: 5, next: [6], "x": 730,  "y": 270,  "r": 40, "color" : "red" },
+        { id: 6, next: [7], "x": 530,  "y": 330,  "r": 40, "color" : "pink" },
+        { id: 7, next: [8], "x": 330,  "y": 330,  "r": 40, "color" : "black" },
+        { id: 8, next: [9], "x": 130,  "y": 390,  "r": 40, "color" : "green" },
+        { id: 9, next: [10], "x": 130,  "y": 540,  "r": 40, "color" : "green" },
+        { id: 10,next: [11],  "x": 330,  "y": 600,  "r": 40, "color" : "blue" },
+        { id: 11,next: [12],  "x": 530,  "y": 600,  "r": 40, "color" : "red" },
+        { id: 12,next: [13],  "x": 730,  "y": 660,  "r": 40, "color" : "magenta" },
+        { id: 13,next: [14],  "x": 730,  "y": 810,  "r": 40, "color" : "green" },
+        { id: 14,next: [],  "x": 530,  "y": 870,  "r": 40, "color" : "red" }
+        ];
+
+        // TODO: just pass in the ids of the control containers in the optoin hash
+        bds.app = bds.make_app(svg, json, { 
+                die: '#die',
+                start: '#start',
+                move: '#move',
+                roller: '#roller'
+              });
+
+        if (typeof(Storage) === 'undefined')
+          alert('This application requires HTML5 support.  Please use a different browser.');
+
+      $('#thediv').fadeIn(4000);
+
+      // TODO: temporary
+      $('#start').find('a').click();
+      setTimeout(function() {
+        bds.app.hydrate([3,4,5]);
+      }, 500);
+    });
+
+});
+</script>
+<h1>Listing stages</h1>
+
+<table>
+  <tr>
+    <th>Title</th>
+    <th>Content</th>
+    <th>Text</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @stages.each do |stage| %>
+  <tr>
+    <td><%= stage.title %></td>
+    <td><%= stage.content %></td>
+    <td><%= stage.text %></td>
+    <td><%= link_to 'Show', stage %></td>
+    <td><%= link_to 'Edit', edit_stage_path(stage) %></td>
+    <td><%= link_to 'Destroy', stage, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New Stage', new_stage_path %>

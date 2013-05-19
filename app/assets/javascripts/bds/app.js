@@ -2,8 +2,8 @@ bds.make_app = function(svg, json, options) {
   var self = {},
       svg = svg,
       jsonCircles = json,
-      options = options || {},
-      circle_class = 'bdsCircle';
+      circle_class = 'bdsCircle',
+      completed = [];
 
   var draw_circles = function () {
 
@@ -43,7 +43,7 @@ bds.make_app = function(svg, json, options) {
                             .attr('class', circle_class)
                             .attr('id', function(d) { return d.id; })
                             .attr('data-next', function(d) { return JSON.stringify(d.next); })
-                            .attr('data-start', function(d) { return d.start !== undefined })
+                            .attr('data-start', function(d) { return d.start !== undefined; })
                             .style('fill', function(d) { return d.color; })
                             ;
 
@@ -88,9 +88,15 @@ bds.make_app = function(svg, json, options) {
     bds.roller = bds.make_roller( $(options.roller) );
   };
 
+  // TODO: secure this method
+  var complete_stage = function() {
+    $.publish('bds_stage_complete');
+  };
+
   var on_start = function() {
     if ( self.started ) return;
     self.started = true;
+    self.playable = true;
     bds.circles.first();
     bds.start.off(); 
   };
@@ -101,13 +107,16 @@ bds.make_app = function(svg, json, options) {
     bds.circles.leave_and_land(bds.dice.current_face);
     self.moveable = false;
     bds.move.off();
+    bds.dice.off();
     self.playable = true;
   };
 
   var on_stage_complete = function() {
     self.rollable = true;
-    bds.circles.complete_stage();
-    bds.roller.on();
+    self.playable = false;
+    bds.circles.complete_stage(function() {
+      bds.roller.on(); 
+    });
   };
 
   var on_rolling = function() {
@@ -123,9 +132,17 @@ bds.make_app = function(svg, json, options) {
     bds.move.on();
   };
 
-  var on_circle_click = function() {
+  var on_circle_click = function(e, id) {
     if (! self.playable ) return;
-    alert('get data from db now!');
+    if (! bds.circles.is_current(id) )  return;
+    bds.circles.current.play();
+  };
+
+  var hydrate = function(arr) {
+    completed = arr || completed;
+    $.each(completed, function(k, v) {
+      bds.circles.get(v).complete();  
+    });
   };
 
   var wire = function() {
@@ -142,7 +159,8 @@ bds.make_app = function(svg, json, options) {
   };
 
   // API
-  bds.app = self;
+  self.complete_stage = complete_stage;
+  self.hydrate = hydrate;
 
   // initialization
   draw_game();
@@ -154,11 +172,5 @@ bds.make_app = function(svg, json, options) {
   self.moveable = false;
   self.rollable = false;
   
-
-  // TODO: temporary
-  $('a#mock_stage_complete').on('click', function() {
-    $.publish('bds_stage_complete');
-  });
-
   return self;
 };

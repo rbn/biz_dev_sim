@@ -1,4 +1,7 @@
 BizDevSim::Application.routes.draw do
+  resources :stages
+
+
   devise_for :users
 
   match 'd3/svg' => 'd3#svg'

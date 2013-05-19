@@ -10,12 +10,20 @@ bds.circles = (function() {
      }
   };
 
+  var get = function(id) {
+    return self[id];
+  };
+
   var first = function() {
     land(); 
   };
 
   var leave = function() {
     self.current.drop(500);
+  };
+
+  var is_current = function(id) {
+    return self.current.id == id;
   };
 
   var land = function(n) {
@@ -41,12 +49,16 @@ bds.circles = (function() {
     land(n);
   };
 
-  var complete_stage = function() {
-    self.current.complete();
+  var complete_stage = function(callback) {
+    self.current.complete(callback);
   };
 
   self.add = add;
+  self.get = get;
+
+  // TODO: this method looks like something other than it is - fix!
   self.first = first;
+  self.is_current = is_current;
   self.leave_and_land = leave_and_land;
   self.complete_stage = complete_stage;
 
@@ -108,9 +120,24 @@ bds.make_circle = function(elem) {
     return $elem.data('next');
   };
 
-  var complete = function() {
-    d3o.style('fill', 'silver')
-       .style('stroke', 'black');
+  var play = function() {
+      // TODO: get these elements from the app (e.g. $thediv)
+      localStorage.app = JSON.stringify(bds.app);
+      $('#thediv').fadeOut(2000, function() {
+        $('#stage').load('stages', function() {
+         $(this).fadeIn(2000);
+        });
+      });
+  };
+
+  var complete = function(callback) {
+    var callback = callback || bds.noop;
+
+    d3o.transition()
+        .duration(2500)
+        .style('fill', 'silver')
+        .style('stroke', 'black')
+        .each('end', callback);
   };
 
   var wire = function() {
@@ -126,6 +153,7 @@ bds.make_circle = function(elem) {
   self.sticky = false;
   self.is_start = is_start;
   self.next = next;
+  self.play = play;
   self.complete = complete;
   self.id = $elem.attr('id');
 

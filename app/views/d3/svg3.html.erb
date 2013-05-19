@@ -4,6 +4,14 @@ div#thediv {
   margin:auto;
   margin-top:30px;
 }
+
+div#stage {
+  display:none;
+  width:63.2%;
+  margin:auto;
+  margin-top:30px;
+}
+
 div#controls {
   width:20%;
   margin:auto;
@@ -39,13 +47,6 @@ div.bds_button.off {
 <script>
 $(function() {
 
-  // ----------------------------------
-  // data -----------------------------
-
-
-  // ----------------------------------
-  // surface --------------------------
-
   var svg =  d3.select('#thediv')
                 .append('svg')
                 .attr('width', 900)
@@ -63,18 +64,22 @@ $(function() {
       { id: 9, next: [10], "x": 130,  "y": 540,  "r": 40, "color" : "green" },
       { id: 10,next: [11],  "x": 330,  "y": 600,  "r": 40, "color" : "blue" },
       { id: 11,next: [12],  "x": 530,  "y": 600,  "r": 40, "color" : "red" },
-      { id: 12,next: [13],  "x": 730,  "y": 600,  "r": 40, "color" : "magenta" },
-      { id: 13,next: [14],  "x": 730,  "y": 600,  "r": 40, "color" : "green" },
-      { id: 14,next: [],  "x": 530,  "y": 600,  "r": 40, "color" : "red" }
+      { id: 12,next: [13],  "x": 730,  "y": 660,  "r": 40, "color" : "magenta" },
+      { id: 13,next: [14],  "x": 730,  "y": 810,  "r": 40, "color" : "green" },
+      { id: 14,next: [],  "x": 530,  "y": 870,  "r": 40, "color" : "red" }
       ];
 
       // TODO: just pass in the ids of the control containers in the optoin hash
-      var app = bds.make_app(svg, json, { 
+      bds.app = bds.make_app(svg, json, { 
                 die: '#die',
                 start: '#start',
                 move: '#move',
                 roller: '#roller'
               });
+
+      if (typeof(Storage) === 'undefined')
+        alert('This application requires HTML5 support.  Please use a different browser.');
+
 });
 
 
@@ -96,14 +101,13 @@ $(function() {
       <td>
         <div id="move" />
       </td>
-      <td>
-        <a href="#" id="mock_stage_complete">mock stage complete</a>
-      </td>
     </tr>
   </table>
 </div>
 </p>
 <p>
 <div id="thediv">
+</div>
+<div id="stage">
 </div>
 </p>

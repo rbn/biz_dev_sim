@@ -1,7 +1,7 @@
 BizDevSim::Application.routes.draw do
   resources :stages
-
-
+  resources :home
+  resources :d3
   devise_for :users
 
   match 'd3/svg' => 'd3#svg'
@@ -16,9 +16,6 @@ BizDevSim::Application.routes.draw do
   match 'svg3' => 'd3#svg3'
   match 'veroni' => 'd3#veroni'
   match 'samplestage' => 'stages#samplestage'
-
-  resources :home
-  resources :d3
 
   # The priority is based upon order of creation:
   # first created -> highest priority.
@@ -70,7 +67,7 @@ BizDevSim::Application.routes.draw do
   # You can have the root of your site routed with "root"
   # just remember to delete public/index.html.
   # root :to => 'welcome#index'
-  root :to => "home#index"
+  root :to => "d3#svg3"
 
   # See how all your routes lay out with "rake routes"
 

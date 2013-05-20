@@ -102,7 +102,8 @@ bds.make_circle = function(elem, label) {
 
     label.transition()
           .attr('font-size', 10)
-          .attr('dx', function(d){return d.x - 5})
+          .attr('dx', function(d){return d.x - 10;})
+          .attr('dy', function(d){return d.y + 5; })
           .text('MC');
     return self;
   };
@@ -142,7 +143,8 @@ bds.make_circle = function(elem, label) {
 
           if (short_label)
             label.text('MC')
-                 .attr('dx', function(d) { return d.x; });
+                 .attr('dx', function(d) { return d.x - 10; })
+                 .attr('dy', function(d) { return d.y + 5; });
           else
             label.text('Marketing Call');
         });
@@ -150,7 +152,7 @@ bds.make_circle = function(elem, label) {
 
   var wire = function() {
     $elem.on('click', function() {
-      $.publish('bds_circle_click', self.id)
+      // $.publish('bds_circle_click', self.id)
     });
   };
 

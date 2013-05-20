@@ -109,6 +109,7 @@ bds.make_app = function(svg, json, options) {
     self.playable = true;
     bds.circles.first();
     bds.start.off(); 
+    $.publish('bds_play', [null, 3000]);
   };
 
   var on_moving = function() {
@@ -119,6 +120,7 @@ bds.make_app = function(svg, json, options) {
     bds.move.off();
     bds.dice.off();
     self.playable = true;
+    $.publish('bds_play', [null, 3000]);
   };
 
   var on_stage_complete = function(e) {
@@ -143,10 +145,18 @@ bds.make_app = function(svg, json, options) {
     bds.move.on();
   };
 
-  var on_circle_click = function(e, id) {
+  var on_play = function(e, id, delay) {
     if (! self.playable ) return;
-    if (! bds.circles.is_current(id) )  return;
-    bds.circles.current.play();
+
+    if (id) {
+      if (! bds.circles.is_current(id) )  
+        return;
+    }
+
+    var delay = delay || 0;
+    setTimeout(function() {
+      bds.circles.current.play();
+    }, delay);
   };
 
   // change params to option hash
@@ -174,7 +184,7 @@ bds.make_app = function(svg, json, options) {
     $.subscribe('bds_stage_complete', on_stage_complete);
     $.subscribe('bds_rolled', on_rolled);
     $.subscribe('bds_rolling', on_rolling);
-    $.subscribe('bds_circle_click', on_circle_click);
+    $.subscribe('bds_play', on_play);
 
     $('.' + circle_class).each(function() {
        var label;

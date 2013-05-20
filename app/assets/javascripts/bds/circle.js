@@ -19,7 +19,7 @@ bds.circles = (function() {
   };
 
   var leave = function() {
-    self.current.drop(500);
+    self.current.drop();
   };
 
   var is_current = function(id) {
@@ -37,11 +37,12 @@ bds.circles = (function() {
       var isDest = ( i == n - 1 );
       var next_id = self.current.next()[0]; // TODO: temporary - only looking at "first" next
       self.current = self[next_id];
-      if (! isDest ) self.current.hop(i*250);
+      if (! isDest ) {
+        setTimeout(self.current.hop, i*250);
+      }
     }
 
-    // TODO: code smell - find out the way to do this - queing with callbacks?
-    self.current.pop({delay: n * 250});
+    setTimeout(self.current.pop, n*250);
   };
   
   var leave_and_land = function(n) {
@@ -66,50 +67,48 @@ bds.circles = (function() {
 })();
 
 // circle constructor
-bds.make_circle = function(elem) {
+bds.make_circle = function(elem, label) {
   var self = {}, 
       $elem = $(elem),
       d3o = d3.select(elem),
       starting_radius = d3o.attr('r'),
-      isBig = false
+      isBig = false,
+      label = d3.select(label)
       ;
 
-  var pop = function(options) {
-    var options = options || {},
-        duration = options.duration || 500,
-        delay = options.delay || 0;
+  var pop = function(callback, hide_label) {
+    var callback = callback || bds.noop;
 
-    setTimeout(function() {
-      d3o.transition()
-         .duration(duration)
-         .attr('r', starting_radius * 4);
-      isBig = true;
-     }, delay);
+    d3o.transition()
+       .duration(1000)
+       .attr('r', starting_radius * 4)
+       .each('end', function() {
+         callback();
+         if ( hide_label ) return;
+         label
+            .attr('font-size', 20)
+            .style('fill', 'black');
+       });
 
+    isBig = true;
     return self;
   };
 
-  var drop = function(options) {
-    var options = options || {},
-        duration = options.duration || 500,
-        delay = options.delay || 0;
+  var drop = function() {
+    d3o.transition()
+       .duration(500)
+       .attr('r', starting_radius);
+    isBig = false;
 
-    setTimeout(function() {
-      d3o.transition()
-         .duration(duration)
-         .attr('r', starting_radius);
-      isBig = true;
-     }, delay);
-
+    label.transition()
+          .attr('font-size', 10)
+          .attr('dx', function(d){return d.x - 5})
+          .text('MC');
     return self;
   };
 
-  var hop = function(delay) {
-    var delay = delay;
-    setTimeout(function() {
-      pop();
-      setTimeout(drop, 500);
-    }, delay);
+  var hop = function() {
+      pop(drop, true);
   };
 
   var is_start = function() {
@@ -122,22 +121,31 @@ bds.make_circle = function(elem) {
 
   var play = function() {
       // TODO: get these elements from the app (e.g. $thediv)
-      localStorage.app = JSON.stringify(bds.app);
-      $('#thediv').fadeOut(2000, function() {
-        $('#stage').load('stages', function() {
-         $(this).fadeIn(2000);
+      $('#thediv').fadeOut(1200, function() {
+        $('#stage').load('samplestage', function() {
+          $(this).fadeIn(1200);
+          $(this).append('<input type="hidden" id="stage_id" value="' + self.id + '" />');
         });
       });
   };
 
-  var complete = function(callback) {
+  var complete = function(callback, short_label) {
     var callback = callback || bds.noop;
 
     d3o.transition()
         .duration(2500)
         .style('fill', 'silver')
         .style('stroke', 'black')
-        .each('end', callback);
+        .each('end', function() {
+          callback();
+          label.style('fill', 'black');
+
+          if (short_label)
+            label.text('MC')
+                 .attr('dx', function(d) { return d.x; });
+          else
+            label.text('Marketing Call');
+        });
   };
 
   var wire = function() {

@@ -80,4 +80,8 @@ class StagesController < ApplicationController
       format.json { head :no_content }
     end
   end
+
+  def samplestage
+    render layout: 'bare'
+  end
 end

@@ -38,13 +38,11 @@ setTimeout(function() {
         if (typeof(Storage) === 'undefined')
           alert('This application requires HTML5 support.  Please use a different browser.');
 
-      $('#thediv').fadeIn(4000);
+
 
       // TODO: temporary
-      $('#start').find('a').click();
-      setTimeout(function() {
-        bds.app.hydrate([3,4,5]);
-      }, 500);
+      bds.app.hydrate([3,4,5], 6, true);
+      $('#thediv').fadeIn(4000);
     });
 
 });

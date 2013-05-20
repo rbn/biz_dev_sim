@@ -15,6 +15,7 @@ BizDevSim::Application.routes.draw do
   match 'svg2' => 'd3#svg2'
   match 'svg3' => 'd3#svg3'
   match 'veroni' => 'd3#veroni'
+  match 'samplestage' => 'stages#samplestage'
 
   resources :home
   resources :d3

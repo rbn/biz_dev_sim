@@ -55,7 +55,7 @@ bds.make_app = function(svg, json, options) {
   var on_play = function(e, id, delay) {
     if (! is_playable() ) return;
 
-    if (id) {
+    if ( id ) {
       if (! bds.circles.is_current(id) )  
         return;
     }

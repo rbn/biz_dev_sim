@@ -61,16 +61,36 @@ bds.make_board = function(svg, json, options) {
   //                   { "x": 70,  "y": 70}, { "x": 110,  "y": 110}];
   var draw_path = function () {
 
+    // TODO: clean this up - fake memo - puts all circle data in 
+    // an object referencable by id - as of now has to be done
+    // prior to creating bds.circles
+    var memo = (function() {
+      var obj = {};
+      $.each(json, function() {
+        obj[this.id] = this;
+      });
+      return obj;
+    })();
+
     var transform_circles_to_path = function(json) {
       var arr = [];
       $.each(json, function(i, v) {
-        var next = json[i + 1];
+        var that = this;
+        $.each(this.next, function() {
+          var next = memo[this];
+          if (next !== undefined) {
+            arr.push({ "x": that.x, "y": that.y});
+            arr.push({ "x": next.x, "y": next.y});
+          }
 
-        if ( next !== undefined ) {
-          arr.push({ "x": this.x, "y": this.y});
-          arr.push({ "x": next.x, "y": next.y});
-        }
+          if ( that.id === 114 ) {
+            var fake_next = memo[119];
+            arr.push({ "x": fake_next.x, "y": fake_next.y});
+          }
+        });
+
       });
+      
       return arr;
     };
 
@@ -81,8 +101,8 @@ bds.make_board = function(svg, json, options) {
 
     var lineGraph = svg.append('path')
                        .attr('d', lineFunction(transform_circles_to_path(json)))
-                       .attr('stroke', 'blue')
-                       .attr('stroke-width', 4)
+                       .attr('stroke', bds.path_color)
+                       .attr('stroke-width', bds.path_width)
                        .style('fill', 'none');
   };
 

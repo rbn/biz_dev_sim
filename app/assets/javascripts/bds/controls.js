@@ -156,9 +156,9 @@ bds.make_score = function($container) {
   };
 
   var update = function() {
-    $value.fadeOut('slow', function() {
+    $value.slideUp('slow', function() {
       on();
-      $value.fadeIn('slow');
+      $value.slideDown('slow');
     });
   };
 
@@ -168,6 +168,7 @@ bds.make_score = function($container) {
 
   on();
   $div.append($label).append('<br />').append($value);
+  $div.css('height', '100%');
   $label.css('font-size', '14px').css('padding', '4px');
   $value.css('font-size', '36px').css('margin', 'auto').css('text-align', 'center');
   $container.html('').append($div);

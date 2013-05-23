@@ -1,4 +1,5 @@
 //= require ./namespace.js
+//= require ./config.js
 //= require ./db.js
 //= require ./common.js
 //= require ./pubsub.js

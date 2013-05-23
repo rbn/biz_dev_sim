@@ -52,6 +52,18 @@ bds.circles = (function() {
 
   var complete_stage = function(callback) {
     self.current.complete(callback);
+    bds.keeper.add(10);
+    track(self.current.id);
+  };
+
+  var track = function(id) {
+    var arr = bds.db.get('completed');
+    var serialized_id = bds.db.get(id);
+
+    if (! ($.inArray(serialized_id, arr)  > -1 ) )
+      arr.push(id);
+
+    bds.db.save('completed', arr);
   };
 
   self.add = add;

@@ -7,6 +7,4 @@ class Piece < ActiveRecord::Base
   def blank?
     title
   end
-
 end
-

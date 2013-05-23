@@ -1,3 +1,4 @@
 class Stage < ActiveRecord::Base
-  attr_accessible :content, :text, :title
+  serialize :next, Array
+  attr_accessible :label, :next, :start, :x, :y, :r, :color, :content
 end

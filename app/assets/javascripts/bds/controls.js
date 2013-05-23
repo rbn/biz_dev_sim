@@ -140,3 +140,37 @@ bds.make_move = function($container) {
 
   return self;
 };
+
+//////////////////////////
+// score ctr
+//
+bds.make_score = function($container) {
+  var self = {},
+      $div = $('<div>'),
+      $label = $('<div>Score</div>'),
+      $value = $('<div>');
+
+  var on = function() {
+    var current_score = bds.db.get('score') || 0;
+    $value.text( current_score );
+  };
+
+  var update = function() {
+    $value.fadeOut('slow', function() {
+      on();
+      $value.fadeIn('slow');
+    });
+  };
+
+  // API
+  self.on = on;
+  self.update = update;
+
+  on();
+  $div.append($label).append('<br />').append($value);
+  $label.css('font-size', '14px').css('padding', '4px');
+  $value.css('font-size', '36px').css('margin', 'auto').css('text-align', 'center');
+  $container.html('').append($div);
+
+  return self;
+};

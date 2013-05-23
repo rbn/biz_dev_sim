@@ -16,6 +16,7 @@ BizDevSim::Application.routes.draw do
   match 'svg3' => 'd3#svg3'
   match 'veroni' => 'd3#veroni'
   match 'samplestage' => 'stages#samplestage'
+  match 'stage_data' => 'stages#stage_data'
 
   # The priority is based upon order of creation:
   # first created -> highest priority.

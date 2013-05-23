@@ -37,5 +37,4 @@ class D3Controller < ApplicationController
       :content_type => 'application/json',
       :layout => false
   end
-
 end

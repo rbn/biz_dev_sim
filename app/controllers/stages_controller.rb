@@ -84,4 +84,8 @@ class StagesController < ApplicationController
   def samplestage
     render layout: 'bare'
   end
+
+  def stage_data
+    render :json => Stage.order('id ASC')
+  end
 end

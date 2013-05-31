@@ -34,15 +34,23 @@ bds.circles = (function() {
     }
 
     for(i = 0; i < n; i ++) {
-      var isDest = ( i == n - 1 );
+      var is_dest = ( i == n - 1 );
       var next_id = self.current.next()[0]; // TODO: temporary - only looking at "first" next
       self.current = self[next_id];
-      if (! isDest ) {
+      if (! is_dest ) {
         setTimeout(self.current.hop, i*250);
       }
     }
 
     setTimeout(self.current.pop, n*250);
+  };
+
+  // TODO: come back here - need to recurse/find paths (binary tree?)
+  var show_potentials = function(n) {
+    var nexts = self.current.next();
+    $.each(nexts, function() {
+      get(this).pop();  
+    });
   };
   
   var leave_and_land = function(n) {
@@ -74,6 +82,7 @@ bds.circles = (function() {
   self.is_current = is_current;
   self.leave_and_land = leave_and_land;
   self.complete_stage = complete_stage;
+  self.show_potentials = show_potentials;
 
   return self;
 })();

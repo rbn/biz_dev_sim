@@ -86,7 +86,9 @@ stages.each do |s|
 end
 
 Stage.all.each do |s|
-  s.next = [ s.id + 1 ]
+  s.next = [ s.id + 1 ] 
+  s.next.push(4) if s.id == 1
+  s.next.push(10) if s.id == 5
   s.save
 end
 

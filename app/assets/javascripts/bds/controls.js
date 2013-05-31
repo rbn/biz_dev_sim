@@ -34,7 +34,7 @@ bds.make_dice = function($container) {
   self.on = on;
   self.off = off;
 
-  $container.html('').append($die);
+  $container.html($die);
   return self;
 }
 
@@ -68,7 +68,7 @@ bds.make_roller = function($container) {
   // init
   wire();
   off();
-  $container.html('').append($roller);
+  $container.html($roller);
 
   return self;
 };
@@ -102,7 +102,7 @@ bds.make_start = function($container) {
   // init
   wire();
   on();
-  $container.html('').append($start);
+  $container.html($start);
   return self;
 };
 
@@ -136,7 +136,7 @@ bds.make_move = function($container) {
   // init
   wire();
   off();
-  $container.html('').append($move);
+  $container.html($move);
 
   return self;
 };
@@ -171,7 +171,46 @@ bds.make_score = function($container) {
   $div.css('height', '100%');
   $label.css('font-size', '14px').css('padding', '4px');
   $value.css('font-size', '36px').css('margin', 'auto').css('text-align', 'center');
-  $container.html('').append($div);
+  $container.html($div);
 
   return self;
 };
+
+
+//////////////////////////////
+//  start over
+//
+bds.make_start_over = function($container) {
+  var self = {},
+      $div = $('<div>');
+
+  // init
+  $div.css('padding', '10px').css('background-color', 'silver');
+  $div.append('start over!');
+  $container.html($div);
+
+  return self;
+};
+
+
+//////////////////////////////
+//  start over
+//
+bds.make_show_potentials = function($container) {
+  var self = {},
+      $div = $('<div>');
+
+
+
+  // init
+  $div.on('click', function() {
+    $.publish('bds_show_potentials');
+  });
+
+  $div.css('padding', '10px').css('background-color', 'silver');
+  $div.append('show potential next moves');
+  $container.html($div);
+
+  return self;
+};
+

@@ -72,38 +72,50 @@ bds.make_board = function(svg, json, options) {
       return obj;
     })();
 
-    var transform_circles_to_path = function(json) {
-      var arr = [];
-      $.each(json, function(i, v) {
-        var that = this;
-        $.each(this.next, function() {
-          var next = memo[this];
-          if (next !== undefined) {
-            arr.push({ "x": that.x, "y": that.y});
-            arr.push({ "x": next.x, "y": next.y});
-          }
-
-          if ( that.id === 114 ) {
-            var fake_next = memo[119];
-            arr.push({ "x": fake_next.x, "y": fake_next.y});
-          }
-        });
-
-      });
-      
-      return arr;
-    };
-
     var lineFunction = d3.svg.line()
                               .x(function(d) { return d.x; })
                               .y(function(d) { return d.y; })
-                              .interpolate("linear");
+                              .interpolate('linear');         //.interpolate("linear");
 
+    // from/to => { x:x, y:y}
+    var draw_path = function(from, to) {
+      return [ from, to ];
+    };
+
+    // for each "circle" object, draw all of its connections
+    $.each(json, function() {
+      var from = { 'x' : this.x, 'y': this.y };
+      $.each(this.next, function() {
+        var next = memo[this];
+        if (! next ) return; // TODO: this has a code smell - figure out better way
+        var to = { 'x' : next.x, 'y': next.y };
+        var lineGraph = svg.append('path')
+                           .attr('d', lineFunction(draw_path(from, to)))
+                           .attr('stroke', bds.path_color)
+                           .attr('stroke-width', bds.path_width)
+                           .style('fill', 'none');
+      });
+     });
+
+    return;
+    
     var lineGraph = svg.append('path')
                        .attr('d', lineFunction(transform_circles_to_path(json)))
                        .attr('stroke', bds.path_color)
                        .attr('stroke-width', bds.path_width)
                        .style('fill', 'none');
+
+
+    // var pi = Math.PI;
+    // var arc = d3.svg.arc()
+    //             .innerRadius(20)
+    //             .outerRadius(70)
+    //             .startAngle(0)
+    //             .endAngle(100);
+
+    // var arcGraph = svg.append('path')
+    //                   .attr('d', arc(transform_circles_to_path(json)))
+    //                   .attr('transform', 'translate(130,60)'); 
   };
 
   var draw_game = function () {
@@ -112,6 +124,8 @@ bds.make_board = function(svg, json, options) {
     bds.move = bds.make_move( $(options.move) );
     bds.roller = bds.make_roller( $(options.roller) );
     bds.score = bds.make_score( $(options.score) );
+    bds.start_over = bds.make_start_over( $(options.start_over) );
+    bds.show_potentials = bds.make_show_potentials( $(options.show_potentials) );
   };
 
   // initialization

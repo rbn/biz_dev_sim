@@ -1,4 +1,5 @@
 // config
 
-bds.path_width = 8;
-bds.path_color = '#f4e3da';
+bds.path_width = 15;
+bds.path_color = 'blue';
+bds.dash_array = '1, 30';

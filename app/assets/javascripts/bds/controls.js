@@ -107,26 +107,26 @@ bds.make_start = function($container) {
 };
 
 // ///////////////////
-// move button ctr
+// go button ctr
 // 
-bds.make_move = function($container) {
+bds.make_go = function($container) {
   var self = {},
-      $move = $('<a href="#"></a>');
+      $go = $('<a href="#"></a>');
 
-  var move = function() {
-    $.publish('bds_moving'); 
+  var go = function() {
+    $.publish('bds_go'); 
   };
 
   var on = function() {
-    $move.html('').append('<img src="/assets/controls/go.png" />');
+    $go.html('').append('<img src="/assets/controls/go.png" />');
   };
 
   var off = function() {
-    $move.html('').append('<img src="/assets/controls/go_gray.png" />');
+    $go.html('').append('<img src="/assets/controls/go_gray.png" />');
   };
 
   var wire = function() {
-    $move.on('click', move);
+    $go.on('click', go);
   };
 
   // API
@@ -136,7 +136,7 @@ bds.make_move = function($container) {
   // init
   wire();
   off();
-  $container.html($move);
+  $container.html($go);
 
   return self;
 };

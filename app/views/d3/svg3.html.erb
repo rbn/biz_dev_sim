@@ -24,7 +24,7 @@ svg {
   padding:50px;
 }
 
-#die, #roller, #start, #move {
+#die, #roller, #start, #go {
   width:120px;
   height:80px;
 }
@@ -60,7 +60,7 @@ function start_bds(first_time, callback) {
                 fresh: first_time,
                 die: '#die',
                 start: '#start',
-                move: '#move',
+                go: '#go',
                 roller: '#roller',
                 score: '#score', 
                 start_over: '#start_over',
@@ -95,7 +95,7 @@ $(function() {
         <div id="die" />
       </td>
       <td>
-        <div id="move" />
+        <div id="go" />
       </td>
       <td>
         <div id="score" />

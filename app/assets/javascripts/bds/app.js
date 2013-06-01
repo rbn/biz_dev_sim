@@ -20,15 +20,31 @@ bds.make_app = function(svg, json, options) {
     $.publish('bds_play', [null, 3000]);
   };
 
-  var on_moving = function() {
+  var on_go = function() {
+    // guards
     if (! self.started) return;
     if (! self.moveable) return;
-    bds.circles.leave_and_land(bds.dice.current_face);
+
+    // set settings
     self.moveable = false;
-    bds.move.off();
-    bds.dice.off();
     playable(true);
-    $.publish('bds_play', [null, 3000]);
+
+    // get a list of potential next moves
+    var potents = bds.circles.get_potentials(bds.dice.current_face);
+
+    // if only one option, play it
+    if ( potents.length === 1 ) {
+      bds.circles.leave_and_land(bds.dice.current_face);
+      $.publish('bds_play', [null, 3000]);
+    }
+    // else let the user decide
+    else {
+      $.each(potents, function() { this.potentialize(); });
+    }
+    
+    // controls
+    bds.go.off();
+    bds.dice.off();
   };
 
   var on_stage_complete = function(e) {
@@ -49,7 +65,7 @@ bds.make_app = function(svg, json, options) {
   var on_rolled = function() {
     self.rollable = false;
     bds.roller.off();
-    bds.move.on();
+    bds.go.on();
   };
 
   var on_play = function(e, id, delay) {
@@ -90,12 +106,12 @@ bds.make_app = function(svg, json, options) {
   };
 
   var on_show_potentials = function() {
-    bds.circles.show_potentials(bds.dice_current_face);
+    var potents = bds.circles.get_potentials(bds.dice.current_face);
   };
 
   var wire = function() {
     $.subscribe('bds_start', on_start);
-    $.subscribe('bds_moving', on_moving);
+    $.subscribe('bds_go', on_go);
     $.subscribe('bds_stage_complete', on_stage_complete);
     $.subscribe('bds_rolled', on_rolled);
     $.subscribe('bds_rolling', on_rolling);

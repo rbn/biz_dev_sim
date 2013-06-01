@@ -42,6 +42,8 @@ bds.make_board = function(svg, json, options) {
                             .attr('data-next', function(d) { return JSON.stringify(d.next); })
                             .attr('data-start', function(d) { return d.start; })
                             .style('fill', function(d) { return d.color; })
+                            .style('stroke', 'black')
+                            .style('stroke-width', '5')
                             ;
 
     elemEnter.append('text')
@@ -93,7 +95,10 @@ bds.make_board = function(svg, json, options) {
                            .attr('d', lineFunction(draw_path(from, to)))
                            .attr('stroke', bds.path_color)
                            .attr('stroke-width', bds.path_width)
-                           .style('fill', 'none');
+                           .attr('stroke-dasharray', bds.dash_array)
+                           .attr('stroke-linecap', 'round')
+                           .style('fill', 'red')
+                           ;
       });
      });
 
@@ -121,7 +126,7 @@ bds.make_board = function(svg, json, options) {
   var draw_game = function () {
     bds.dice = bds.make_dice( $(options.die) );
     bds.start = bds.make_start( $(options.start) );
-    bds.move = bds.make_move( $(options.move) );
+    bds.go = bds.make_go( $(options.go) );
     bds.roller = bds.make_roller( $(options.roller) );
     bds.score = bds.make_score( $(options.score) );
     bds.start_over = bds.make_start_over( $(options.start_over) );

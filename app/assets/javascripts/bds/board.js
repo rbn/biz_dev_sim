@@ -130,7 +130,6 @@ bds.make_board = function(svg, json, options) {
     bds.roller = bds.make_roller( $(options.roller) );
     bds.score = bds.make_score( $(options.score) );
     bds.start_over = bds.make_start_over( $(options.start_over) );
-    bds.show_potentials = bds.make_show_potentials( $(options.show_potentials) );
   };
 
   // initialization

@@ -26,7 +26,6 @@ bds.circles = (function() {
     return self.current.id == id;
   };
 
-  // TODO: revisit this - I think this method is too smart/aware of start etc.
   var land = function(n) {
     // handle start
     if (! n) {
@@ -48,15 +47,12 @@ bds.circles = (function() {
 
   // get list of potential next moves
   var get_potentials = function(n, circle, potentials) {
-    if ( n === undefined ) return [];
-
     var circle = circle || self.current,
         potentials = potentials || [];
 
     // check for recursive end
     if (! n ) {
       potentials.push(circle); 
-      return false;
     }
 
     // recurse
@@ -159,32 +155,11 @@ bds.make_circle = function(elem, label) {
   var play = function() {
       // TODO: get these elements from the app (e.g. $thediv)
       $('#thediv').fadeOut(1200, function() {
-        $('#stage').load('samplestage', function() {
+        $('#stage').load('/stages/1', function() {
           $(this).fadeIn(1200);
           $(this).append('<input type="hidden" id="stage_id" value="' + self.id + '" />');
         });
       });
-  };
-
-  var potentialize = function() {
-   pop();
-   $elem.on('click', function() {
-      // TODO: should id be private, getter/setter?
-      // TODO: also should we be able to set circles.current like this? getter/setter?
-      $.publish('bds_depotentialize', [ self.id ]);
-      bds.circles.current = self; 
-      $.publish('bds_play', [null, 3000]);
-   });
-  };
-
-  var depotentialize = function() {
-    drop();
-    $elem.off();
-  };
-
-  var on_depotentialize = function(e, caller_id) {
-    if ( self.id == caller_id ) return;
-    depotentialize();
   };
 
   var complete = function(callback, short_label) {
@@ -208,7 +183,9 @@ bds.make_circle = function(elem, label) {
   };
 
   var wire = function() {
-    $.subscribe('bds_depotentialize', on_depotentialize);
+    $elem.on('click', function() {
+      // $.publish('bds_circle_click', self.id)
+    });
   };
 
   self.name = name;
@@ -219,7 +196,6 @@ bds.make_circle = function(elem, label) {
   self.is_start = is_start;
   self.next = next;
   self.play = play;
-  self.potentialize = potentialize;
   self.complete = complete;
   self.id = $elem.attr('id');
 

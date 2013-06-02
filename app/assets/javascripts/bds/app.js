@@ -20,31 +20,22 @@ bds.make_app = function(svg, json, options) {
     $.publish('bds_play', [null, 3000]);
   };
 
-  var on_go = function() {
+  var on_moving = function() {
     // guards
     if (! self.started) return;
     if (! self.moveable) return;
 
-    // set settings
+    // action
+    bds.circles.leave_and_land(bds.dice.current_face);
+
+    // settings
     self.moveable = false;
-    playable(true);
-
-    // get a list of potential next moves
-    var potents = bds.circles.get_potentials(bds.dice.current_face);
-
-    // if only one option, play it
-    if ( potents.length === 1 ) {
-      bds.circles.leave_and_land(bds.dice.current_face);
-      $.publish('bds_play', [null, 3000]);
-    }
-    // else let the user decide
-    else {
-      $.each(potents, function() { this.potentialize(); });
-    }
-    
-    // controls
     bds.go.off();
     bds.dice.off();
+    playable(true);
+
+    // cause the move to automatically play the round
+    $.publish('bds_play', [null, 3000]);
   };
 
   var on_stage_complete = function(e) {
@@ -105,19 +96,14 @@ bds.make_app = function(svg, json, options) {
     bds.score.update();      
   };
 
-  var on_show_potentials = function() {
-    var potents = bds.circles.get_potentials(bds.dice.current_face);
-  };
-
   var wire = function() {
     $.subscribe('bds_start', on_start);
-    $.subscribe('bds_go', on_go);
+    $.subscribe('bds_go', on_moving);
     $.subscribe('bds_stage_complete', on_stage_complete);
     $.subscribe('bds_rolled', on_rolled);
     $.subscribe('bds_rolling', on_rolling);
     $.subscribe('bds_play', on_play);
     $.subscribe('bds_score_change', on_score_change);
-    $.subscribe('bds_show_potentials', on_show_potentials);
   };
 
   // API

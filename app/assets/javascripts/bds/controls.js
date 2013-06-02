@@ -118,11 +118,11 @@ bds.make_go = function($container) {
   };
 
   var on = function() {
-    $go.html('').append('<img src="/assets/controls/go.png" />');
+    $go.html('<img src="/assets/controls/go.png" />');
   };
 
   var off = function() {
-    $go.html('').append('<img src="/assets/controls/go_gray.png" />');
+    $go.html('<img src="/assets/controls/go_gray.png" />');
   };
 
   var wire = function() {
@@ -182,35 +182,30 @@ bds.make_score = function($container) {
 //
 bds.make_start_over = function($container) {
   var self = {},
-      $div = $('<div>');
+      $start_over = $('<div>');
 
+  var on = function() {
+    $start_over.html('<img src="/assets/controls/start-over.jpg" />');
+  };
+
+  var off = function() {
+  };
+
+  var wire = function() {
+    $start_over.on('click', function() {
+      alert('not working yet');
+    });
+  };
+ 
   // init
-  $div.css('padding', '10px').css('background-color', 'silver');
-  $div.append('start over!');
-  $container.html($div);
+  on();
+  wire();
+  $container.html($start_over);
+
+  self.on = on;
+  self.off = off;
 
   return self;
 };
 
-
-//////////////////////////////
-//  start over
-//
-bds.make_show_potentials = function($container) {
-  var self = {},
-      $div = $('<div>');
-
-
-
-  // init
-  $div.on('click', function() {
-    $.publish('bds_show_potentials');
-  });
-
-  $div.css('padding', '10px').css('background-color', 'silver');
-  $div.append('show potential next moves');
-  $container.html($div);
-
-  return self;
-};
 

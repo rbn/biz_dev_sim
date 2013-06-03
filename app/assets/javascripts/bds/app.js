@@ -96,6 +96,11 @@ bds.make_app = function(svg, json, options) {
     bds.score.update();      
   };
 
+  var on_show_potentials = function() {
+    var potents = bds.circles.get_potentials(bds.dice.current_face);
+    alert(potents.length);
+  };
+
   var wire = function() {
     $.subscribe('bds_start', on_start);
     $.subscribe('bds_go', on_moving);
@@ -104,6 +109,7 @@ bds.make_app = function(svg, json, options) {
     $.subscribe('bds_rolling', on_rolling);
     $.subscribe('bds_play', on_play);
     $.subscribe('bds_score_change', on_score_change);
+    $.subscribe('bds_show_potentials', on_show_potentials);
   };
 
   // API

@@ -39,7 +39,7 @@ bds.make_board = function(svg, json, options) {
                             .attr('r', function(d) { return d.r; })
                             .attr('class', circle_class)
                             .attr('id', function(d) { return d.id; })
-                            .attr('data-next', function(d) { return JSON.stringify(d.next); })
+                            .attr('data-next', function(d) { return JSON.stringify(d.nexts); })
                             .attr('data-start', function(d) { return d.start; })
                             .style('fill', function(d) { return d.color; })
                             .style('stroke', 'black')
@@ -80,19 +80,19 @@ bds.make_board = function(svg, json, options) {
                               .interpolate('linear');         //.interpolate("linear");
 
     // from/to => { x:x, y:y}
-    var draw_path = function(from, to) {
+    var get_path_array = function(from, to) {
       return [ from, to ];
     };
 
     // for each "circle" object, draw all of its connections
     $.each(json, function() {
       var from = { 'x' : this.x, 'y': this.y };
-      $.each(this.next, function() {
+      $.each(this.nexts, function() {
         var next = memo[this];
         if (! next ) return; // TODO: this has a code smell - figure out better way
         var to = { 'x' : next.x, 'y': next.y };
         var lineGraph = svg.append('path')
-                           .attr('d', lineFunction(draw_path(from, to)))
+                           .attr('d', lineFunction(get_path_array(from, to)))
                            .attr('stroke', bds.path_color)
                            .attr('stroke-width', bds.path_width)
                            .attr('stroke-dasharray', bds.dash_array)

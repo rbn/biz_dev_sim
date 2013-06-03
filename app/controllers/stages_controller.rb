@@ -14,11 +14,9 @@ class StagesController < ApplicationController
   # GET /stages/1.json
   def show
     @stage = Stage.find( params[:id] )
-    @template = "stages/page_layout_standard" if @stage.id % 2 == 0
-    @template = "stages/page_layout_video" if @stage.id % 2 != 0 
 
     respond_to do |format|
-      format.html { render template: @template, layout: 'bare' } 
+      format.html { render template: @stage.template, layout: 'bare' } 
       format.json { render json: @stage }
     end
   end
@@ -37,8 +35,6 @@ class StagesController < ApplicationController
   # GET /stages/1/edit
   def edit
     @stage = Stage.find(params[:id])
-    @specific_form = 'form_video'
-    @specific_form = 'form' if @stage.id % 2 == 0
   end
 
   # POST /stages

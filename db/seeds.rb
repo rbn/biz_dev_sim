@@ -51,8 +51,10 @@ end
 # find a way to put it in original JSON file
 
 Stage.all.each do |s|
-  s.next = [ s.id + 1 ] 
-  s.next.push(4) if s.id == 1
-  s.next.push(10) if s.id == 5
+  s.nexts = [ s.id + 1 ] 
+  s.nexts.push(4) if s.id == 1
+  s.nexts.push(10) if s.id == 5
   s.save
 end
+
+eval( IO.read( Rails.root.join('db', 'seed_create_first.rb') ) )

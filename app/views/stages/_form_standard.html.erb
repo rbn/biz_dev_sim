@@ -11,7 +11,7 @@
     </div>
   <% end %>
 
-  <h3>I am the form for Videos</h3>
+  <h3> Standard page layout </h3>
 
   <div class="field">
     <%= f.label :label %><br />
@@ -21,10 +21,10 @@
     <%= f.label :content %><br />
     <%= f.text_field :content %>
   </div>
-  <!-- <div class="field">
+  <div class="field">
     <%= f.label :nexts %><br />
     <%= f.text_field :nexts %>
-  </div> -->
+  </div>
   <div class="field">
     <%= f.label :start %><br />
     <%= f.check_box :start %>
@@ -32,6 +32,10 @@
   <div class="field">
     <%= f.label :x %><br />
     <%= f.text_field :x %>
+  </div>
+  <div class="field">
+    <%= f.label :y %><br />
+    <%= f.text_field :y %>
   </div>
   <div class="actions">
     <%= f.submit %>

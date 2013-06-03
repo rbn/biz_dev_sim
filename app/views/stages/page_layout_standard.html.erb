@@ -1,2 +1,54 @@
-<h2>Page Layout Standard</h2>
+<style>
+  h { 
+    font-family:helvetica, verdana;
+  }
 
+  p {
+    font-family: helvetica, verdana;
+    font-size:14px;
+  }
+
+  div.answer {
+    display:none;
+    padding:20px;
+    width:600px;
+    border:1px dashed black;
+    background-color:#0099ff;
+  }
+
+  img.featured {
+    float:right;
+    clear:right;
+    padding:20px;
+  }
+
+</style>
+
+<script>
+$(function() {
+  $('input#pass_button').bind('click', function() {
+    var hardcoded = $('#stage_id').val();
+    var arr = JSON.parse(localStorage.completed);
+    arr.push( hardcoded ); 
+    localStorage.completed = JSON.stringify(arr);
+
+    $('#stage').fadeOut(1200, function() {
+      $('#thediv').html('');
+      start_bds(false, function() {
+        bds.app.hydrate(hardcoded, true);
+        $('#thediv').fadeIn(4000);
+      });
+    });
+  });
+
+  $('input#answer_submit').on('click', function() {
+    $('.answer').slideDown('slow');
+  });
+});
+</script>
+
+<h2><%= @stage.label %></h2>
+
+<%= image_tag @stage.featured_image_url, class: :featured_image %>
+
+<%= raw @stage.featured_text %>

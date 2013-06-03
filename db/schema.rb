@@ -38,15 +38,18 @@ ActiveRecord::Schema.define(:version => 20130519160035) do
   create_table "stages", :force => true do |t|
     t.string   "title"
     t.string   "label"
-    t.string   "next"
-    t.boolean  "start",      :default => false
+    t.string   "nexts"
+    t.boolean  "start",              :default => false
     t.integer  "x"
     t.integer  "y"
     t.integer  "r"
     t.string   "color"
     t.string   "content"
-    t.datetime "created_at",                    :null => false
-    t.datetime "updated_at",                    :null => false
+    t.string   "page_layout"
+    t.string   "featured_image_url"
+    t.text     "featured_text"
+    t.datetime "created_at",                            :null => false
+    t.datetime "updated_at",                            :null => false
   end
 
   create_table "users", :force => true do |t|

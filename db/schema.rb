@@ -47,6 +47,7 @@ ActiveRecord::Schema.define(:version => 20130519160035) do
     t.string   "content"
     t.string   "page_layout"
     t.string   "featured_image_url"
+    t.text     "featured_video_url"
     t.text     "featured_text"
     t.datetime "created_at",                            :null => false
     t.datetime "updated_at",                            :null => false

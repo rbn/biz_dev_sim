@@ -12,28 +12,7 @@ require 'yaml'
 
 g = Game.create( { title: 'DH Sim' } )
 
-
-# TODO: YAML-ify pieces
-titles = 
-  [
-    "White Paper",
-    "Marketing Call (db)",
-    "Capture Meeting",
-    "Proposal Meeting",
-    "MSR",
-    "Industry Conference",
-    "Pitch deck",
-    "Meet and greet",
-    "White Paper",
-    "Marketing Call (db)",
-    "Capture Meeting",
-    "Proposal Meeting",
-    "MSR",
-    "Industry Conference",
-    "Pitch deck",
-    "Meet and greet"
-  ]
-
+User.create(email: "admin@admin.com", password: "password123", password_confirmation: "password123")
 
 # remove all stages
 Stage.all.each { |s| s.destroy }
@@ -50,11 +29,5 @@ end
 # TODO: add "nexts" here - but return to 
 # find a way to put it in original JSON file
 
-Stage.all.each do |s|
-  s.nexts = [ s.id + 1 ] 
-  s.nexts.push(4) if s.id == 1
-  s.nexts.push(10) if s.id == 5
-  s.save
-end
-
 eval( IO.read( Rails.root.join('db', 'seed_create_first.rb') ) )
+

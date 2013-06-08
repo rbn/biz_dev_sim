@@ -155,9 +155,9 @@ bds.make_circle = function(elem, label) {
   var play = function() {
       // TODO: get these elements from the app (e.g. $thediv)
       $('#thediv').fadeOut(1200, function() {
-        $('#stage').load('/stages/1', function() {
+        var url = '/stages/' + self.id;
+        $('#stage').load(url, function() {
           $(this).fadeIn(1200);
-          $(this).append('<input type="hidden" id="stage_id" value="' + self.id + '" />');
         });
       });
   };

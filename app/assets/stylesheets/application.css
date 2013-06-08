@@ -25,3 +25,36 @@ body {
   margin-top:80px;
 }
 
+
+/* game board elements */
+
+div.back_to_board.hidden {
+  display:none;
+}
+
+div.back_to_board.visible {
+  display:block;
+}
+
+h { 
+  font-family:helvetica, verdana;
+}
+
+p {
+  font-family: helvetica, verdana;
+  font-size:14px;
+}
+
+div.answer {
+  display:none;
+  padding:20px;
+  width:600px;
+  border:1px dashed black;
+  background-color:#0099ff;
+}
+
+img.featured {
+  float:right;
+  clear:right;
+  padding:20px;
+}

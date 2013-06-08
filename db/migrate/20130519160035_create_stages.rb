@@ -12,6 +12,7 @@ class CreateStages < ActiveRecord::Migration
       t.string :content
       t.string :page_layout
       t.string :featured_image_url
+      t.text :featured_video_url, limit: nil
       t.text :featured_text, limit: nil
 
       t.timestamps

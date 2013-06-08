@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130519160035) do
+ActiveRecord::Schema.define(:version => 20130608162413) do
 
   create_table "flares", :force => true do |t|
     t.string   "name"
@@ -33,6 +33,15 @@ ActiveRecord::Schema.define(:version => 20130519160035) do
     t.integer  "game_id"
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
+  end
+
+  create_table "questions", :force => true do |t|
+    t.string   "text"
+    t.text     "answers"
+    t.string   "html_style", :default => "radio"
+    t.integer  "stage_id"
+    t.datetime "created_at",                      :null => false
+    t.datetime "updated_at",                      :null => false
   end
 
   create_table "stages", :force => true do |t|

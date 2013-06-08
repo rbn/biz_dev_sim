@@ -57,8 +57,10 @@ class StagesController < ApplicationController
   # PUT /stages/1.json
   def update
     @stage = Stage.find(params[:id])
+    answered_correctly = false
 
     respond_to do |format|
+      format.json { render json: { message: answered_correctly } }
       if @stage.update_attributes(params[:stage])
         format.html { redirect_to @stage, notice: 'Stage was successfully updated.' }
         format.json { head :no_content }

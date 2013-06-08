@@ -1,0 +1,52 @@
+<% @stage.questions.each do |question| %>
+  <%= form_for question,
+                url: url_for(controller: :questions, action: :check),
+                remote: true,
+                method: :put,
+                html: { id: :stage, 'data-format' => :json } do |f| %>
+    <div class='validation-error'>
+    </div>
+
+    <b>QUESTION</b>   
+    <p class="answers">
+      <%= question.text %><br />
+    </p>
+
+    <input type="submit" name="submit" value="submit" />
+    <input id="hidden_stage_id" type="hidden" value="<%= @stage.id %>" />
+
+    <!-- TODO: put this in the data attribut of the 
+         answers tag and have unobtrustive JS handle -->
+
+    <script>
+      $(function() {
+        var answers = JSON.parse('<%= raw question.answers %>'),
+            $answers = $('p.answers');
+
+        for(a in answers) {
+          var elem = '<input type="radio" name="answer_group"';
+          elem += ' value="' + a + '" />';
+          $answers.append(elem);
+          $answers.append(answers[a] + '<br />');
+        }
+      });
+    </script>
+
+  <% end %>
+<% end %>
+
+    <!--  Since this is your first meeting with this prospective client, what should be themost important objective of the meeting? 
+    </p>
+    <p class="answers">
+    <input type="radio" name="answer_group" value="" /> Determining whether or not the client has money for this worki<br />
+    <input type="radio" name="answer_group" value="" /> Making sure the client knows what particular products and services your firm offers<br />
+    <input type="radio" name="answer_group" value="" /> Finding out who and how decisions are made by the client’s Division at his/her Agency<br />
+    <input type="radio" name="answer_group" value="" /> Establishing a rapport with the client to facilitate future contact<br />
+    <input type="radio" name="answer_group" value="" /> Gaining a thorough understanding of the client’s requirements<br />
+  </p> -->
+
+<!-- <div class="answer">
+      <p>
+    The best answer is 4, “establishing a rapport.”  While all of these answers have merit, remember this is your “first” in-person meeting with a prospective client.   What you’re really after in this meeting is a mutual sense that you and the your prospective client can establish a productive, downstream working relationship.  Remember, this business is not a “quick sale and a walk-away.”  You’re trying a to establish a long-term, mutually beneficial relationship.  Your potential client is also sizing you up during the meeting:  “Can I work with this person?  Are they really making an effort to understand my requirement? …Etc.”    The other possible answers are also very important, but this kind of information will likely evolve from future contact with your prospective client.  If you don’t establish a reasonable rapport with the client in the first meeting (“first base” if you will), it’s unlikely you’ll ever make it to “second base.”
+    </p>
+  </div> -->

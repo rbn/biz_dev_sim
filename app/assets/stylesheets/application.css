@@ -25,6 +25,10 @@ body {
   margin-top:80px;
 }
 
+/* form elements */
+div.validation-error {
+  color: red;
+}
 
 /* game board elements */
 

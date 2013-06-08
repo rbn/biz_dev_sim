@@ -1,4 +1,7 @@
 BizDevSim::Application.routes.draw do
+  resources :questions
+
+
   resources :stages
   resources :home
   resources :d3
@@ -17,6 +20,7 @@ BizDevSim::Application.routes.draw do
   match 'veroni' => 'd3#veroni'
   match 'samplestage' => 'stages#samplestage'
   match 'stage_data' => 'stages#stage_data'
+  match 'check' => 'questions#check'
 
   # The priority is based upon order of creation:
   # first created -> highest priority.

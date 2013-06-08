@@ -15,7 +15,9 @@ g = Game.create( { title: 'DH Sim' } )
 User.create(email: "admin@admin.com", password: "password123", password_confirmation: "password123")
 
 # remove all stages
+Question.all.each { |q| q.destroy } # TODO: use dependent keyword in models for this
 Stage.all.each { |s| s.destroy }
+
 
 # stages = YAML.load_file(Rails.root.join('db', 'stages.json'))
 stages = JSON.parse( IO.read(Rails.root.join('db', 'stages.json')) )
@@ -31,3 +33,11 @@ end
 
 eval( IO.read( Rails.root.join('db', 'seed_create_first.rb') ) )
 
+# sample questions
+Stage.all.each do |s| 
+  q = Question.new
+  q.text = "How do you know the sky is blue?"
+  q.answers = '{"1":"I just do", "2":"Instinct", "3":"Not Sure"}'
+  s.questions.push(q)
+  s.save
+end

@@ -31,7 +31,10 @@ end
 # TODO: add "nexts" here - but return to 
 # find a way to put it in original JSON file
 
+puts "reading create_first ..."
 eval( IO.read( Rails.root.join('db', 'seed_create_first.rb') ) )
+
+puts "creating questions ... "
 
 # sample questions
 Stage.all.each do |s| 

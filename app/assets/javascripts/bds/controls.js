@@ -44,8 +44,24 @@ bds.make_dice = function($container) {
 // TODO: can these control elems user a factory?
 bds.make_roller = function($container) {
   var self = {},
-      $roller = $('<a href="#"></a>')
+      $roller = $('<a href="#"></a>'),
+      $div = $('<div>'), 
+      $div_gray = $('<div>') 
       ;
+
+  // set w/h same as background image
+  $div.css('width', '75px').css('height', '75px')
+      .css('background-image', 'url("/assets/controls/roller1.jpg")')
+      .css('background-repeat', 'no-repeat')
+      .css('display', 'none');
+
+  $div_gray.css('width', '75px').css('height', '75px')
+      .css('background-image', 'url("/assets/controls/roller1_gray.jpg")')
+      .css('background-repeat', 'no-repeat');
+
+  // stack divs on top of each other
+  $div_gray.append($div);
+  $roller.append($div_gray);
 
   var wire = function() {
     $roller.on('click', function() {
@@ -54,11 +70,11 @@ bds.make_roller = function($container) {
   };
   
   var on = function() {
-    $roller.html('').append('<img src="/assets/controls/roller1.jpg" />');
+    $div.fadeIn('slow');
   };
 
   var off = function() {
-    $roller.html('').append('<img src="/assets/controls/roller1_gray.jpg" />');
+    $div.fadeOut('slow');
   };
 
   // API
@@ -156,21 +172,21 @@ bds.make_score = function($container) {
   };
 
   var update = function() {
-    $value.slideUp('slow', function() {
       on();
-      $value.slideDown('slow');
-    });
   };
 
   // API
   self.on = on;
   self.update = update;
 
+  // init
   on();
   $div.append($label).append('<br />').append($value);
   $div.css('height', '100%');
   $label.css('font-size', '14px').css('padding', '4px');
-  $value.css('font-size', '36px').css('margin', 'auto').css('text-align', 'center');
+  $value.css('font-size', '36px')
+        .css('margin', 'auto')
+        .css('text-align', 'center');
   $container.html($div);
 
   return self;

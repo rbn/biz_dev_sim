@@ -7,7 +7,7 @@ bds.db = (function() {
   };
    
   var get = function(key) {
-    if ( ls[key] === undefined) return;
+    if ( ls[key] === undefined ) return;
     return JSON.parse( ls[key] );
   };
 

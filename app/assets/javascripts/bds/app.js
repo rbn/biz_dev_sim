@@ -127,12 +127,13 @@ bds.make_app = function(svg, json, options) {
 
   // init
   wire();
-  bds.make_board(svg, json, options);
 
   if ( options.fresh ) {
     bds.db.wipe()
           .save('completed', []);
   }
+
+  bds.make_board(svg, json, options);
 
   self.started = false;
   self.moveable = false;

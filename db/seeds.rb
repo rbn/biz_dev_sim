@@ -37,10 +37,3 @@ eval( IO.read( Rails.root.join('db', 'seed_create_first.rb') ) )
 puts "creating questions ... "
 
 # sample questions
-Stage.all.each do |s| 
-  q = Question.new
-  q.text = "How do you know the sky is blue?"
-  q.answers = '{"1":{"text":"I just do"}, "2":{"text":"Instinct", "correct":"true"}, "3":{"text":"Not Sure"}}'
-  s.questions.push(q)
-  s.save
-end

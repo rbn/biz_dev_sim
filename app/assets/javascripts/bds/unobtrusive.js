@@ -1,31 +1,23 @@
 $(function() {
 
   // stage button - back to board
+  var stage_id = $('input#stage_id').val();
   $('input#back_to_board').on('click', function() {
-    alert('test!!!');
-    
     // handle this through bds
-    var arr = JSON.parse(localStorage.completed);
-    // arr.push( <%= @stage.id %> ); 
+   var arr = JSON.parse(localStorage.completed);
+   arr.push( stage_id ); 
    localStorage.completed = JSON.stringify(arr);
 
     $('#stage').fadeOut(1200, function() {
       $('#thediv').html('');
       start_bds(false, function() {
         // get from hidden input? or url?
-        // bds.app.hydrate(<%= @stage.id %>, true);
+        bds.app.hydrate(stage_id, true);
         $('#thediv').fadeIn(4000);
       });
     });
   });
 
-  // stage button - submit answer
-  $('input#answer_submit').on('click', function() {
-    $('.answer').slideDown('slow');
-    setTimeout(function() {
-      $('div.back_to_board').slideDown('slow');
-    }, 3000);
-  });
 
   $('form#stage')
     .on('ajax:beforeSend', function(e, xhr, settings) {
@@ -35,11 +27,31 @@ $(function() {
     })
     
     .on('ajax:success', function(e, data, status, xhr) {
-      var $form = $(this);
+      var $form = $(this),
+          $result = $form.find('div.stage_result'),
+          $explanation = $form.find('div.explanation'),
+          result = data.result;
 
-      alert(JSON.stringify(data));
-      $(this).find('input:text,textarea').val('');
-      $(this).find('validation-error').empty();
+      // $(this).find('input:text,textarea').val('');
+      // $(this).find('validation-error').empty();
+
+        var $msg = $('<p>' + result.message + '</p>');
+
+        $result
+          .html('')
+          .append($msg);
+
+        if ( result.explanation ) {
+          $explanation
+            .prepend('<p>' + result.explanation + '</p>')
+            .slideDown('slow');
+        }
+
+    setTimeout(function() {
+      $('div.back_to_board').slideDown('slow');
+    }, 3000);
+
+
 
       // $form.find('textarea,input[type="text"],input[type="file"]').val('');
       // $form.find('div.validation-error').empty();

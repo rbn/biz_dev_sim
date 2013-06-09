@@ -1,38 +1,5 @@
 <% @stage.questions.each do |question| %>
-  <%= form_for question,
-                url: url_for(controller: :questions, action: :check),
-                remote: true,
-                method: :put,
-                html: { id: :stage, 'data-format' => :json } do |f| %>
-    <div class='validation-error'>
-    </div>
-
-    <b>QUESTION</b>   
-    <p class="answers">
-      <%= question.text %><br />
-    </p>
-
-    <input type="submit" name="submit" value="submit" />
-    <input id="hidden_stage_id" type="hidden" value="<%= @stage.id %>" />
-
-    <!-- TODO: put this in the data attribut of the 
-         answers tag and have unobtrustive JS handle -->
-
-    <script>
-      $(function() {
-        var answers = JSON.parse('<%= raw question.answers %>'),
-            $answers = $('p.answers');
-
-        for(a in answers) {
-          var elem = '<input type="radio" name="answer_group"';
-          elem += ' value="' + a + '" />';
-          $answers.append(elem);
-          $answers.append(answers[a] + '<br />');
-        }
-      });
-    </script>
-
-  <% end %>
+  <%= render template: 'questions/show', locals: {question: question} %>
 <% end %>
 
     <!--  Since this is your first meeting with this prospective client, what should be themost important objective of the meeting? 

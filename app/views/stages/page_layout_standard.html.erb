@@ -4,4 +4,8 @@
 
 <%= raw @stage.featured_text %>
 
-<%= render 'question' %>
+<% @stage.questions.each do |q| %>
+  <%= render partial: 'questions/q_and_a', locals: {question: q} %>
+<% end %>
+
+<%= hidden_field :stage, :id %>

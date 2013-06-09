@@ -37,7 +37,7 @@ eval( IO.read( Rails.root.join('db', 'seed_create_first.rb') ) )
 Stage.all.each do |s| 
   q = Question.new
   q.text = "How do you know the sky is blue?"
-  q.answers = '{"1":"I just do", "2":"Instinct", "3":"Not Sure"}'
+  q.answers = '{"1":{"text":"I just do"}, "2":{"text":"Instinct", "correct":"true"}, "3":{"text":"Not Sure"}}'
   s.questions.push(q)
   s.save
 end

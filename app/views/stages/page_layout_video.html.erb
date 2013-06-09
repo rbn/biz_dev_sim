@@ -2,6 +2,8 @@
   
 <%= raw @stage.featured_text %>
 
-<p>
-  <input id="back_to_board" type="button" value="back to the board" />
-</p>
+<% @stage.questions.each do |q| %>
+  <%= render partial: 'questions/q_and_a', locals: {question: q} %>
+<% end %>
+
+<%= hidden_field :stage, :id %>

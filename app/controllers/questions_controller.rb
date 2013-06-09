@@ -1,6 +1,23 @@
 class QuestionsController < ApplicationController
   def check
-    render json: { message: "implement me!" } 
+    id = params[:question][:question_id]
+    given_answer_id = params[:question][:answer_set]
+    question = Question.find(id)
+    given_answer = question.answer_set.answers[given_answer_id]
+    result = { message: "please make a selection", explanation: "" } # default
+
+    # TODO: move this to some sort of viewmodel/helper
+    if ( given_answer )
+      if ( given_answer.correct? )
+        result["correct"] = true;
+        result["message"] = "That is correct!"
+        result["explanation"] =  "The reason why is ... (explanation here)"
+      else
+        result["message"] = "That is not correct."
+      end
+    end
+
+    render json: { result: result } 
   end
 
   # GET /questions

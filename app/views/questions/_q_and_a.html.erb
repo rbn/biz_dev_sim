@@ -1,0 +1,30 @@
+<%= form_for question,
+             url: url_for(controller: :questions, action: :check),
+             remote: true,
+             method: :put,
+             html: { id: :stage, 'data-format' => :json } do |f| %>
+  <div class='validation-error'>
+  </div>
+
+  <b>QUESTION</b>   
+  <p class="question">
+    <%= question.text %>
+  </p>
+
+  <p class="answers">
+  <% question.answer_set.answers.each_pair do |label, answer| %>
+    <%= f.radio_button :answer_set, label %>
+    <%= f.label :answer_set, answer.text %><br />
+  <% end %>
+  </p>
+
+  <%= f.hidden_field :question_id, value: question.id %>
+  <%= f.submit 'submit' %>
+
+  <div class="stage_result">
+  </div>
+  <div class="explanation">
+    <input type="button" id="back_to_board" value="back to the board" />
+  </div>
+<% end %>
+

@@ -11,7 +11,7 @@ class QuestionsController < ApplicationController
       if ( given_answer.correct? )
         result["correct"] = true;
         result["message"] = "That is correct!"
-        result["explanation"] =  "The reason why is ... (explanation here)"
+        result["explanation"] =  question.explanation
       else
         result["message"] = "That is not correct."
       end

@@ -7,4 +7,3 @@
 //= require ./controls.js
 //= require ./keeper.js
 //= require ./app.js
-//= require ./unobtrusive.js

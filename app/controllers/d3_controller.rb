@@ -11,7 +11,7 @@ class D3Controller < ApplicationController
   end
 
   def svg3
-    render layout: 'bare' 
+    render layout: 'bare' #'board' 
   end
 
   def veroni

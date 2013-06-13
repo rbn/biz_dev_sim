@@ -1,4 +1,48 @@
 // //////////////////
+// control container
+//
+bds.make_actions = function( $content ) {
+  var self = {},
+      $actions = $('<div id="actions">'),
+      $table = $('<table><tbody></tbody></table>'),
+      $tr = $('<tr>');
+
+  $table.find('tbody').append($tr);
+  $actions.append($table);
+  
+  $.each(['start', 'roller', 'dice', 'go', 
+            'score', 'start_over'], function() {
+
+    var $td = $('<td>'),
+        $div = $('<div id=' + this + '>');
+    
+    // create the control and expose it in bds namespace
+    bds[this] = bds['make_' + this]($div);
+
+    $td.append($div);
+    $tr.append($td);
+  });
+
+  $actions.prependTo($content);
+  return self;
+};
+
+bds.make_page = function( $content, svg_container_id ) {
+  var self = {},
+      $board = $content.find(svg_container_id),
+      $stage = $('<div id="stage">');
+
+  $stage.hide();
+  
+  self.$board = $board;
+  self.$stage = $stage;
+
+  $content.append($stage);
+
+  return self;
+};
+
+// //////////////////
 // dice constructor
 //
 // TODO: change container param to options hash, so we can use same variable name
@@ -224,4 +268,17 @@ bds.make_start_over = function($container) {
   return self;
 };
 
+////////////////////////////////
+// banner
+//
+bds.make_banner = function($container) {
+  var self = {},
+      $content = $('<div id="top_banner">');
 
+  $content.prepend("This is a test only; info about scores, players, other game metadata can go here. i'm thinking about putting this as a sidebar rather than a horizontal black bar. might change, open to suggestions on this one.");
+  $content.css('padding', '6px');
+
+  $content.prependTo($container);
+
+  return self;
+}

@@ -18,6 +18,22 @@ body {
   margin:0;
 }
 
+/* board layout */
+
+div#top_banner {
+  position: fixed;
+  height:50px;
+  width:100%;
+  background-color:black;
+  color:white;
+}
+
+div#content {
+  padding:50px;
+}
+
+/* end board layout */
+
 #container {
   width:100%
   padding-left:80px;

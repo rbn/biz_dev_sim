@@ -1,5 +1,5 @@
 <style>
-div#thediv {
+div#svg_container {
   width:63.2%;
   margin:auto;
   margin-top:30px;
@@ -12,7 +12,7 @@ div#stage {
   margin-top:30px;
 }
 
-div#controls {
+div#actions {
   width:40%;
   margin:auto;
   height:80px;
@@ -24,7 +24,7 @@ svg {
   padding:50px;
 }
 
-#die, #roller, #start, #go {
+#dice, #roller, #start, #go {
   width:120px;
   height:80px;
 }
@@ -46,10 +46,9 @@ div.bds_button.off {
 </style>
 
 <script>
-function start_bds(first_time, callback) {
-  var callback = callback || bds.noop;
+function start_bds() {
 
-  var svg =  d3.select('#thediv')
+  var svg =  d3.select('#svg_container')
                 .append('svg')
                 .attr('width', 900)
                 .attr('height', 900);
@@ -57,59 +56,37 @@ function start_bds(first_time, callback) {
     // TODO: just have the bds javascript generate all of the controls dynamically - don't pass the divs
     d3.json('/stage_data', function(error, root) {
       // TODO: just pass in the ids of the control containers in the optoin hash
-      bds.app = bds.make_app(svg, root, { 
-                fresh: first_time,
-                die: '#die',
-                start: '#start',
-                go: '#go',
-                roller: '#roller',
-                score: '#score', 
-                start_over: '#start_over'
-              });
+      // TODO: make this a jQuery plugin
 
       if (typeof(Storage) === 'undefined')
         alert('This application requires HTML5 support.  Please use a different browser.');
 
-      callback();
+        resume_bds( svg, root, {fresh: true});
+
     });
 
 }
 
+function resume_bds( svg, json, options, callback ) {
+  var callback = callback || bds.noop,
+      options = options || {};
+
+  bds.app = bds.make_app(svg, json, { 
+            content: '#content',
+            svg_container: '#svg_container',
+            fresh: options.fresh,
+            stage: options.stage
+          });
+
+  callback();
+}
+
 $(function() {
-  start_bds(true);  
+  start_bds();  
 });
 
 </script>
 
-<p>
-<div id="controls" >
-  <table id="main">
-    <tr>
-      <td>
-        <div id="start" />
-      </td>
-      <td>
-        <div id="roller" />
-      </td>
-      <td>
-        <div id="die" />
-      </td>
-      <td>
-        <div id="go" />
-      </td>
-      <td>
-        <div id="score" />
-      </td>
-      <td>
-        <div id="start_over" />
-      </td>
-    </tr>
-  </table>
+<div id="content">
+  <div id="svg_container"></div>
 </div>
-</p>
-<p>
-<div id="thediv">
-</div>
-<div id="stage">
-</div>
-</p>

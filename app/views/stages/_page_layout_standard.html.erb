@@ -1,3 +1,16 @@
+<h2><%= @stage.label %></h2>
+
+<%= image_tag @stage.featured_image_url, class: :featured %>
+
+<%= raw @stage.featured_text %>
+
+<% @stage.questions.each do |q| %>
+  <%= render partial: 'questions/q_and_a', locals: {question: q} %>
+<% end %>
+
+<%= hidden_field :stage, :id %>
+
+<script>
 $(function() {
 
   // stage button - back to board
@@ -8,13 +21,9 @@ $(function() {
    arr.push( stage_id ); 
    localStorage.completed = JSON.stringify(arr);
 
-    $('#stage').fadeOut(1200, function() {
-      $('#thediv').html('');
-      start_bds(false, function() {
-        // get from hidden input? or url?
-        bds.app.hydrate(stage_id, true);
-        $('#thediv').fadeIn(4000);
-      });
+    bds.page.$stage.fadeOut(1200, function() {
+      bds.page.$board.fadeIn(4000);
+      bds.page.$stage.html('');
     });
   });
 
@@ -86,7 +95,7 @@ $(function() {
 
       // $form.find('div.validation-error').html(errorText);
     })
-    
     ;
 
 });
+</script>

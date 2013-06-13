@@ -14,11 +14,7 @@ class StagesController < ApplicationController
   # GET /stages/1.json
   def show
     @stage = Stage.find( params[:id] )
-
-    respond_to do |format|
-      format.html { render template: @stage.template, layout: 'bare' } 
-      format.json { render json: @stage }
-    end
+    render partial: @stage.template 
   end
 
   # GET /stages/new

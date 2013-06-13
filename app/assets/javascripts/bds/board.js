@@ -123,17 +123,7 @@ bds.make_board = function(svg, json, options) {
     //                   .attr('transform', 'translate(130,60)'); 
   };
 
-  var draw_game = function () {
-    bds.dice = bds.make_dice( $(options.die) );
-    bds.start = bds.make_start( $(options.start) );
-    bds.go = bds.make_go( $(options.go) );
-    bds.roller = bds.make_roller( $(options.roller) );
-    bds.score = bds.make_score( $(options.score) );
-    bds.start_over = bds.make_start_over( $(options.start_over) );
-  };
-
   // initialization
-  draw_game();
   draw_path();
   draw_circles();
 

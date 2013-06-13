@@ -154,11 +154,14 @@ bds.make_circle = function(elem, label) {
     return $elem.data('next');
   };
 
+  // TODO: should this raise an event that the page object can respond to?
+  // rather than having the circle fading the board?
   var play = function() {
       // TODO: get these elements from the app (e.g. $thediv)
-      $('#thediv').fadeOut(1200, function() {
+      bds.page.$board.fadeOut(1200, function() {
+        // TODO: get the url fragment from bds.config
         var url = '/stages/' + self.id;
-        $('#stage').load(url, function() {
+        bds.page.$stage.load(url, function() {
           $(this).fadeIn(1200);
         });
       });

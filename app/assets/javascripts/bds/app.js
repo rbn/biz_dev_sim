@@ -84,6 +84,7 @@ bds.make_app = function(svg, json, options) {
 
   // change params to option hash
   var hydrate = function(id, passed) {
+    alert('are we still calling hydrate??');
     self.started = true;
     completed = bds.db.get( 'completed' );
     bds.circles.current = bds.circles.get(id);
@@ -111,6 +112,12 @@ bds.make_app = function(svg, json, options) {
     alert(potents.length);
   };
 
+  var draw_controls = function () {
+    bds.controls = bds.make_actions( $(options.content) );
+    bds.page = bds.make_page( $(options.content), options.svg_container );
+    // bds.banner = bds.make_banner( $(options.container) );
+  };
+
   var wire = function() {
     $.subscribe('bds_start', on_start);
     $.subscribe('bds_go', on_go);
@@ -131,6 +138,7 @@ bds.make_app = function(svg, json, options) {
   if ( options.fresh ) {
     bds.db.wipe()
           .save('completed', []);
+    draw_controls();
   }
 
   bds.make_board(svg, json, options);

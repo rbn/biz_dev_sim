@@ -11,6 +11,7 @@
 <%= hidden_field :stage, :id %>
 
 <script>
+// move this to bds - have it be a callable function (right? ...)
 $(function() {
 
   // stage button - back to board
@@ -22,11 +23,13 @@ $(function() {
    localStorage.completed = JSON.stringify(arr);
 
     bds.page.$stage.fadeOut(1200, function() {
-      bds.page.$board.fadeIn(4000);
-      bds.page.$stage.html('');
+      bds.page.$board.fadeIn(3000, function() {
+        bds.page.$stage.html('');
+        bds.circles.get(stage_id).complete(null, true);
+        $.publish('bds_stage_complete');
+      });
     });
   });
-
 
   $('form#stage')
     .on('ajax:beforeSend', function(e, xhr, settings) {

@@ -84,7 +84,6 @@ bds.make_app = function(svg, json, options) {
 
   // change params to option hash
   var hydrate = function(id, passed) {
-    alert('are we still calling hydrate??');
     self.started = true;
     completed = bds.db.get( 'completed' );
     bds.circles.current = bds.circles.get(id);

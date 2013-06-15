@@ -302,7 +302,9 @@ bds.make_banner = function($container) {
             .css('height', '300px')
             .css('color', 'white')
             .css('background-color', 'rgba(20,10,75,0.9)')
-            .css('border', '1px dotted black')
+            .css('border-left', '2px dotted white')
+            .css('border-right', '2px dotted white')
+            .css('border-bottom', '2px dotted white')
             .css('display', 'none');
 
   $dashboard.append('<h1>Dashboard</h1>');

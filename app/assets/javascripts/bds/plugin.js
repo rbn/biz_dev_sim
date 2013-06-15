@@ -22,7 +22,7 @@
 
             bds.make_app(svg, root, { 
                   content: '#' + $elem.attr('id'),
-                  svg_container: '#' + $elem.attr('id')
+                  svg_container: '#' + $svg_elem.attr('id')
                 });
 
           });

@@ -298,10 +298,10 @@ bds.make_banner = function($container) {
             .css('left', '50%')
             .css('margin-left', '-300px')
             .css('margin-top', '50px')
-            .css('padding', '8px')
+            .css('padding', '12px')
             .css('height', '300px')
             .css('color', 'white')
-            .css('background-color', 'rgba(20,133,75,0.85)')
+            .css('background-color', 'rgba(20,10,75,0.9)')
             .css('border', '1px dotted black')
             .css('display', 'none');
 

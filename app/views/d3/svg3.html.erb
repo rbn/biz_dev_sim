@@ -7,7 +7,7 @@ div#svg_container {
 
 div#stage {
   display:none;
-  width:63.2%;
+  width:50%;
   margin:auto;
   margin-top:30px;
 }
@@ -46,27 +46,11 @@ div.bds_button.off {
 </style>
 
 <script>
+
   $(function() {
-    var svg =  d3.select('#svg_container')
-                  .append('svg')
-                  .attr('width', 900)
-                  .attr('height', 900);
-
-      // TODO: just have the bds javascript generate all of the controls dynamically - don't pass the divs
-      d3.json('/stage_data', function(error, root) {
-        // TODO: just pass in the ids of the control containers in the optoin hash
-        // TODO: make this a jQuery plugin
-
-        if (typeof(Storage) === 'undefined')
-          alert('This application requires HTML5 support. Please use a different browser.');
-
-      bds.app = bds.make_app(svg, root, { 
-              content: '#content',
-              svg_container: '#svg_container'
-            });
-
-      });
+    $('#content').bds();
   });
+
 </script>
 
 <div id="content">

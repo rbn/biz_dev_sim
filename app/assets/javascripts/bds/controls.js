@@ -273,12 +273,48 @@ bds.make_start_over = function($container) {
 //
 bds.make_banner = function($container) {
   var self = {},
-      $content = $('<div id="top_banner">');
+      $top_banner = $('<div id="top_banner">'),
+      $info = $('<div>'),
+      $dashboard = $('<div>');
 
-  $content.prepend("This is a test only; info about scores, players, other game metadata can go here. i'm thinking about putting this as a sidebar rather than a horizontal black bar. might change, open to suggestions on this one.");
-  $content.css('padding', '6px');
+  var wire = function() {
+    $info.on('click', function() {
+      $dashboard.fadeIn('slow');
+    });
+    
+    $dashboard.on('click', function() {
+      $(this).fadeOut();
+      return false;
+    });
+  };
 
-  $content.prependTo($container);
+  $info.append('click this bar');
+
+  // TODO: a lot of things in the app are based on the banner being a height of 50px
+  // try to make that figure a variable component
+
+  $dashboard.css('width', '600px')
+            .css('position', 'absolute')
+            .css('left', '50%')
+            .css('margin-left', '-300px')
+            .css('margin-top', '50px')
+            .css('padding', '8px')
+            .css('height', '300px')
+            .css('color', 'white')
+            .css('background-color', 'rgba(20,133,75,0.85)')
+            .css('border', '1px dotted black')
+            .css('display', 'none');
+
+  $dashboard.append('<h1>Dashboard</h1>');
+  $dashboard.append('<p>get from server? ... </p>');
+  $info.css('padding', '6px');
+
+  $top_banner.append($info);
+  $dashboard.prependTo($container);
+  $top_banner.prependTo($container);
+
+  // init
+  wire();
 
   return self;
 }

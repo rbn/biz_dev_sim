@@ -114,7 +114,7 @@ bds.make_app = function(svg, json, options) {
   var draw_controls = function () {
     bds.controls = bds.make_actions( $(options.content) );
     bds.page = bds.make_page( $(options.content), options.svg_container );
-    // bds.banner = bds.make_banner( $(options.container) );
+    bds.banner = bds.make_banner( $(options.content) );
   };
 
   var wire = function() {
@@ -134,11 +134,9 @@ bds.make_app = function(svg, json, options) {
   // init
   wire();
 
-  if ( options.fresh ) {
-    bds.db.wipe()
-          .save('completed', []);
-    draw_controls();
-  }
+  bds.db.wipe()
+        .save('completed', []);
+  draw_controls();
 
   bds.make_board(svg, json, options);
 

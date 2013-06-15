@@ -29,7 +29,10 @@ div#top_banner {
 }
 
 div#content {
-  padding:50px;
+}
+
+div#actions {
+  padding-top:80px;
 }
 
 /* end board layout */

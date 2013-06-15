@@ -1,8 +1,8 @@
 <style>
 div#svg_container {
-  width:63.2%;
+  width:50%;
   margin:auto;
-  margin-top:30px;
+  padding-top:50px;
 }
 
 div#stage {
@@ -46,45 +46,27 @@ div.bds_button.off {
 </style>
 
 <script>
-function start_bds() {
+  $(function() {
+    var svg =  d3.select('#svg_container')
+                  .append('svg')
+                  .attr('width', 900)
+                  .attr('height', 900);
 
-  var svg =  d3.select('#svg_container')
-                .append('svg')
-                .attr('width', 900)
-                .attr('height', 900);
+      // TODO: just have the bds javascript generate all of the controls dynamically - don't pass the divs
+      d3.json('/stage_data', function(error, root) {
+        // TODO: just pass in the ids of the control containers in the optoin hash
+        // TODO: make this a jQuery plugin
 
-    // TODO: just have the bds javascript generate all of the controls dynamically - don't pass the divs
-    d3.json('/stage_data', function(error, root) {
-      // TODO: just pass in the ids of the control containers in the optoin hash
-      // TODO: make this a jQuery plugin
+        if (typeof(Storage) === 'undefined')
+          alert('This application requires HTML5 support. Please use a different browser.');
 
-      if (typeof(Storage) === 'undefined')
-        alert('This application requires HTML5 support.  Please use a different browser.');
+      bds.app = bds.make_app(svg, root, { 
+              content: '#content',
+              svg_container: '#svg_container'
+            });
 
-        resume_bds( svg, root, {fresh: true});
-
-    });
-
-}
-
-function resume_bds( svg, json, options, callback ) {
-  var callback = callback || bds.noop,
-      options = options || {};
-
-  bds.app = bds.make_app(svg, json, { 
-            content: '#content',
-            svg_container: '#svg_container',
-            fresh: options.fresh,
-            stage: options.stage
-          });
-
-  callback();
-}
-
-$(function() {
-  start_bds();  
-});
-
+      });
+  });
 </script>
 
 <div id="content">

@@ -1,3 +1,4 @@
+// TODO: fix this so its a bit cleaner (ids, etc), and that the stage_data url is pulled from a bds config var
 (function($){
   $.fn.bds = function(options) {
     

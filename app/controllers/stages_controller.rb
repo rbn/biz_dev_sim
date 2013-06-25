@@ -84,4 +84,12 @@ class StagesController < ApplicationController
   def stage_data
     render :json => Stage.order('id ASC')
   end
+
+  def dashboard
+    render partial: 'dashboard'
+  end
+
+  def left
+    render partial: 'left'
+  end
 end

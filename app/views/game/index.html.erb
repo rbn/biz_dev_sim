@@ -1,0 +1,53 @@
+<style>
+  div#game_start_container {
+    width:100%;
+    padding-top:300px;
+    text-align:center;
+  }
+
+  div#game_start_container input {
+    width:250px;
+    height:75px;
+    font-size:2.4em;
+    font-family:consolas helvetica;
+    font-variant:small-caps;
+    background-color:#3efef3;
+    margin:auto;
+    border-bottom:3px solid black;
+    border-right:3px solid black;
+    border-top:2px solid silver;
+    border-left:2px solid silver;
+  }
+
+div#game_start_container input#instructions {
+  background-color:rgb(10,255,1);
+}
+
+</style>
+
+<div id="game_start_container">
+  <input type="button" id="game_start" value="start game" />
+  <input type="button" id="instructions" value="instructions" />
+</div>
+
+<script>
+  $(function() {
+    var $container = $('#game_start_container'),
+        $start = $('#game_start'),
+        $instructions = $('#instructions');
+
+    $start.on('click', function() {
+      $container.fadeOut('slow', function() {
+        setTimeout(function() {
+          window.location = 'bds';
+        }, 2000);
+      });
+    });
+    
+    $instructions.on('click', function() {
+      $modal = $('<div>');
+      $modal.append('<span>instructions!</span>');
+      $modal.dialog();
+    });
+  });
+</script>

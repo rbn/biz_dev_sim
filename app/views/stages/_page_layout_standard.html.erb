@@ -26,7 +26,7 @@ $(function() {
       bds.page.$board.fadeIn(3000, function() {
         bds.page.$stage.html('');
         bds.circles.get(stage_id).complete(null, true);
-        $.publish('bds_stage_complete');
+        $.publish('bdsStageComplete');
       });
     });
   });

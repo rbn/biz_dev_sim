@@ -15,5 +15,5 @@
 //= require jquery-ui
 //= require d3.v3
 //= require jquery.simplemodal-1.4.4
-//= require bds
+//= require jquery-bds
 //= require_tree .

@@ -1,0 +1,15 @@
+<!-- TODO: this either needs to be wired up to pub/sub events, or leverage a binding framework like knockout.js -->
+<p>
+  Player 1 : <span class="left_score"></span>
+</p>
+<p>
+  Player 2 : <span class="left_score"></span>
+</p>
+
+<div id="left_score"></div>
+
+<script>
+$(function() {
+  $('span.left_score').html( bds.db.get('score') || 0 );
+});
+</script>

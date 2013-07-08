@@ -46,6 +46,8 @@ stage_data.stages.each do |d|
   # omit the questions collection.  what's the better way to do 
   # this with ruby/yaml?
 
+  puts d.y
+
   stage = Stage.new
   stage.internal_name = d.internal_name
   stage.label = d.label

@@ -2,6 +2,7 @@ class CreateStages < ActiveRecord::Migration
   def change
     create_table :stages do |t|
       t.string :title
+      t.string :internal_name
       t.string :label
       t.string :nexts
       t.boolean :start, :default => 0

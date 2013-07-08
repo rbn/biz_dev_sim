@@ -47,6 +47,7 @@ ActiveRecord::Schema.define(:version => 20130608162413) do
 
   create_table "stages", :force => true do |t|
     t.string   "title"
+    t.string   "internal_name"
     t.string   "label"
     t.string   "nexts"
     t.boolean  "start",              :default => false

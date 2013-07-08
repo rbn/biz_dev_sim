@@ -1,8 +1,8 @@
 class Stage < ActiveRecord::Base
   serialize :nexts, Array
-  attr_accessible :label, :nexts, :start, :x, :y, :r, :color, :content, 
-                    :page_layout, :featured_image_url, :featured_text,
-                    :featured_video_url
+  attr_accessible :internal_name, :label, :nexts, :start, :x, :y, :r, :color, :content, 
+                  :page_layout, :featured_image_url, :featured_text,
+                  :featured_video_url
   has_many :questions
 
   def form

@@ -1,0 +1,339 @@
+# TODO: video stages - need to handle hidden field linking to stage
+# ok to hard-code here, but should be handled through form/creation
+# in app.
+
+# TODO: for the "answers" text, change to standard YAML.  serialize
+# as YAML in the seed script.
+:stages:
+  - :internal_name: "marketing_call"
+    :label: "Marketing Call"
+    :start: true
+    :x: 130
+    :y: 60
+    :r: 40
+    :nexts: 
+      - "strategic_hire" 
+      - "__7__"
+    :color: "yellow"
+    :page_layout: "standard"
+    :featured_text: |
+      <p>
+      Your prospective client has agreed to see you to discuss her requirements.  
+      While the prospective client, Gail Smith, has not worked with your firm, she believes 
+      your firm may have some of the experience and skills she needs.  
+      </p>
+      <p>
+      To help you prepare for your first in-person meeting with her, please read the 
+      “best-practices in conducting marketing calls.” To access this material, go to 
+      the “Intellectual Capital” drop down list on the Dashboard, and click on the 
+      “Marketing Calls” item on the list.  Please read the material and then answer
+      the five (multiple choice) questions that appear in the “Questions” drop-down list on the Dashboard. 
+      </p>
+      <p> 
+      When you click on “Marketing Call Questions” you will see a series of five questions.
+      For each question, click on the box that you believe provides the best answer.  You 
+      get one point for each correct answer (five points total).  Note that you cannot access
+      the questions until after first accessing the appropriate intellectual capital. 
+      </p>
+    :featured_image_url: "swag/phone1.jpg"
+    :questions:
+       - :number: 1
+         :text: |
+           Since this is your first meeting with this prospective client, what should be the most
+           important objective of the meeting?Since this is your first meeting with this prospective
+           client, what should be themost important objective of the meeting?
+         :answers: | 
+           { "1": { "text" : "Determining whether or not the client has money for this working" }, "2" : { "text" : "Making sure the client knows what particular products and services your firm offers"}, "3" : { "text" : "Finding out who and how decisions are made by the client’s Division at his/her Agency" }, "4" : { "text" : "Establishing a rapport with the client to facilitate future contact", "correct" : "true" }, "5" : { "text" : "Gaining a thorough understanding of the client’s requirements" }  }
+         :explanation: |
+            All of these possible answers have merit, but the best answer is 4, “Establishing a rapport…” What you’re really after in this first meeting is the second meeting.  The ideal outcome of the first meeting is a mutual sense that you and your prospective client can establish a productive, downstream working relationship.  Remember, this business is not a quick sale and a walk-away.  You’re trying a to establish a long-term, mutually beneficial relationship.  Your potential client is also sizing you up during the meeting:  “Can I work with this person?  Are they really making an effort to understand my requirement? …Etc.” The other possible answers are also very important, but this kind of information will likely evolve from futurecontact with your prospective client.  If you don’t establish a reasonable rapport with the client in the first meeting (“first base” if you will), it’s unlikely you’ll ever make it to “second base.”
+
+  - :internal_name: "strategic_hire"
+    :label: "Strategic Hire"
+    :x: 330
+    :y: 60
+    :r: 40
+    :nexts: 
+      - "__3__"
+    :color: "blue"
+    :page_layout: "standard"
+    :featured_text: "lorem ipsum sudo facto"
+    :featured_url: "http://google.com"
+    :questions:
+       - :number: 1
+         :text: |
+           Since this is your first meeting with this prospective client, what should be the most
+           important objective of the meeting?Since this is your first meeting with this prospective
+           client, what should be themost important objective of the meeting?
+         :answers: | 
+           { "1": { "text" : "Determining whether or not the client has money for this working" }, "2" : { "text" : "Making sure the client knows what particular products and services your firm offers"}, "3" : { "text" : "Finding out who and how decisions are made by the client’s Division at his/her Agency" }, "4" : { "text" : "Establishing a rapport with the client to facilitate future contact", "correct" : "true" }, "5" : { "text" : "Gaining a thorough understanding of the client’s requirements" }  }
+         :explanation: |
+            All of these possible answers have merit, but the best answer is 4, “Establishing a rapport…” What you’re really after in this first meeting is the second meeting.  The ideal outcome of the first meeting is a mutual sense that you and your prospective client can establish a productive, downstream working relationship.  Remember, this business is not a quick sale and a walk-away.  You’re trying a to establish a long-term, mutually beneficial relationship.  Your potential client is also sizing you up during the meeting:  “Can I work with this person?  Are they really making an effort to understand my requirement? …Etc.” The other possible answers are also very important, but this kind of information will likely evolve from futurecontact with your prospective client.  If you don’t establish a reasonable rapport with the client in the first meeting (“first base” if you will), it’s unlikely you’ll ever make it to “second base.”
+
+
+  - :internal_name: "__3__"
+    :label: "Mel Brooks"
+    :x: 530
+    :y: 60
+    :r: 40
+    :nexts:
+      - "__4__"
+    :color: "blue"
+    :page_layout: "video"
+    :featured_text: "lorem ipsum sudo facto"
+    :featured_url: "http://google.com"
+    :featured_video_url: 
+      <iframe src="http://player.vimeo.com/video/67854501" width="500" height="281" frameborder="0" webkitAllowFullScreen mozallowfullscreen allowFullScreen></iframe> <p><a href="http://vimeo.com/67854501">MelBrooksMarketing</a> from <a href="http://vimeo.com/user18691976">Rich Nyman</a> on <a href="http://vimeo.com">Vimeo</a>.</p>
+      <input type="hidden" name="stage" value="__3__" />
+    :questions:
+       - :number: 1
+         :text: |
+           Since this is your first meeting with this prospective client, what should be the most
+           important objective of the meeting?Since this is your first meeting with this prospective
+           client, what should be themost important objective of the meeting?
+         :answers: | 
+           { "1": { "text" : "Determining whether or not the client has money for this working" }, "2" : { "text" : "Making sure the client knows what particular products and services your firm offers"}, "3" : { "text" : "Finding out who and how decisions are made by the client’s Division at his/her Agency" }, "4" : { "text" : "Establishing a rapport with the client to facilitate future contact", "correct" : "true" }, "5" : { "text" : "Gaining a thorough understanding of the client’s requirements" }  }
+         :explanation: |
+            All of these possible answers have merit, but the best answer is 4, “Establishing a rapport…” What you’re really after in this first meeting is the second meeting.  The ideal outcome of the first meeting is a mutual sense that you and your prospective client can establish a productive, downstream working relationship.  Remember, this business is not a quick sale and a walk-away.  You’re trying a to establish a long-term, mutually beneficial relationship.  Your potential client is also sizing you up during the meeting:  “Can I work with this person?  Are they really making an effort to understand my requirement? …Etc.” The other possible answers are also very important, but this kind of information will likely evolve from futurecontact with your prospective client.  If you don’t establish a reasonable rapport with the client in the first meeting (“first base” if you will), it’s unlikely you’ll ever make it to “second base.”
+
+
+  - :internal_name: "__4__"
+    :label: "TBD"
+    :x: 730
+    :y: 120
+    :r: 40
+    :nexts:
+      - "__5__"
+    :color: "green"
+    :page_layout: "standard"
+    :featured_text: "lorem ipsum sudo facto"
+    :featured_url: "http://google.com"
+
+  - :internal_name: "__5__"
+    :label: "TBD"
+    :x: 730
+    :y: 270
+    :r: 40
+    :nexts:
+      - "__6__"
+    :color: "magenta"
+    :page_layout: "standard"
+    :featured_text: "lorem ipsum sudo facto"
+    :featured_url: "http://google.com"
+    :questions:
+       - :number: 1
+         :text: |
+           Since this is your first meeting with this prospective client, what should be the most
+           important objective of the meeting?Since this is your first meeting with this prospective
+           client, what should be themost important objective of the meeting?
+         :answers: | 
+           { "1": { "text" : "Determining whether or not the client has money for this working" }, "2" : { "text" : "Making sure the client knows what particular products and services your firm offers"}, "3" : { "text" : "Finding out who and how decisions are made by the client’s Division at his/her Agency" }, "4" : { "text" : "Establishing a rapport with the client to facilitate future contact", "correct" : "true" }, "5" : { "text" : "Gaining a thorough understanding of the client’s requirements" }  }
+         :explanation: |
+            All of these possible answers have merit, but the best answer is 4, “Establishing a rapport…” What you’re really after in this first meeting is the second meeting.  The ideal outcome of the first meeting is a mutual sense that you and your prospective client can establish a productive, downstream working relationship.  Remember, this business is not a quick sale and a walk-away.  You’re trying a to establish a long-term, mutually beneficial relationship.  Your potential client is also sizing you up during the meeting:  “Can I work with this person?  Are they really making an effort to understand my requirement? …Etc.” The other possible answers are also very important, but this kind of information will likely evolve from futurecontact with your prospective client.  If you don’t establish a reasonable rapport with the client in the first meeting (“first base” if you will), it’s unlikely you’ll ever make it to “second base.”
+
+
+  - :internal_name: "__6__"
+    :label: "TBD"
+    :x: 530
+    :y: 330
+    :r: 40
+    :nexts:
+      - "__7__"
+      - "__11__"
+    :color: "red"
+    :page_layout: "standard"
+    :featured_text: "lorem ipsum sudo facto"
+    :featured_url: "http://google.com"
+    :questions:
+       - :number: 1
+         :text: |
+           Since this is your first meeting with this prospective client, what should be the most
+           important objective of the meeting?Since this is your first meeting with this prospective
+           client, what should be themost important objective of the meeting?
+         :answers: | 
+           { "1": { "text" : "Determining whether or not the client has money for this working" }, "2" : { "text" : "Making sure the client knows what particular products and services your firm offers"}, "3" : { "text" : "Finding out who and how decisions are made by the client’s Division at his/her Agency" }, "4" : { "text" : "Establishing a rapport with the client to facilitate future contact", "correct" : "true" }, "5" : { "text" : "Gaining a thorough understanding of the client’s requirements" }  }
+         :explanation: |
+            All of these possible answers have merit, but the best answer is 4, “Establishing a rapport…” What you’re really after in this first meeting is the second meeting.  The ideal outcome of the first meeting is a mutual sense that you and your prospective client can establish a productive, downstream working relationship.  Remember, this business is not a quick sale and a walk-away.  You’re trying a to establish a long-term, mutually beneficial relationship.  Your potential client is also sizing you up during the meeting:  “Can I work with this person?  Are they really making an effort to understand my requirement? …Etc.” The other possible answers are also very important, but this kind of information will likely evolve from futurecontact with your prospective client.  If you don’t establish a reasonable rapport with the client in the first meeting (“first base” if you will), it’s unlikely you’ll ever make it to “second base.”
+
+
+  - :internal_name: "__7__"
+    :label: "TBD"
+    :x: 330
+    :y: 330
+    :r: 40
+    :nexts:
+      - "__8__"
+    :color: "yellow"
+    :page_layout: "standard"
+    :featured_text: "lorem ipsum sudo facto"
+    :featured_url: "http://google.com"
+    :questions:
+       - :number: 1
+         :text: |
+           Since this is your first meeting with this prospective client, what should be the most
+           important objective of the meeting?Since this is your first meeting with this prospective
+           client, what should be themost important objective of the meeting?
+         :answers: | 
+           { "1": { "text" : "Determining whether or not the client has money for this working" }, "2" : { "text" : "Making sure the client knows what particular products and services your firm offers"}, "3" : { "text" : "Finding out who and how decisions are made by the client’s Division at his/her Agency" }, "4" : { "text" : "Establishing a rapport with the client to facilitate future contact", "correct" : "true" }, "5" : { "text" : "Gaining a thorough understanding of the client’s requirements" }  }
+         :explanation: |
+            All of these possible answers have merit, but the best answer is 4, “Establishing a rapport…” What you’re really after in this first meeting is the second meeting.  The ideal outcome of the first meeting is a mutual sense that you and your prospective client can establish a productive, downstream working relationship.  Remember, this business is not a quick sale and a walk-away.  You’re trying a to establish a long-term, mutually beneficial relationship.  Your potential client is also sizing you up during the meeting:  “Can I work with this person?  Are they really making an effort to understand my requirement? …Etc.” The other possible answers are also very important, but this kind of information will likely evolve from futurecontact with your prospective client.  If you don’t establish a reasonable rapport with the client in the first meeting (“first base” if you will), it’s unlikely you’ll ever make it to “second base.”
+
+
+  - :internal_name: "__8__"
+    :label: "TBD"
+    :x: 130
+    :y: 390
+    :r: 40
+    :nexts:
+      - "__9__"
+    :color: "pink"
+    :page_layout: "standard"
+    :featured_text: "lorem ipsum sudo facto"
+    :featured_url: "http://google.com"
+    :questions:
+       - :number: 1
+         :text: |
+           Since this is your first meeting with this prospective client, what should be the most
+           important objective of the meeting?Since this is your first meeting with this prospective
+           client, what should be themost important objective of the meeting?
+         :answers: | 
+           { "1": { "text" : "Determining whether or not the client has money for this working" }, "2" : { "text" : "Making sure the client knows what particular products and services your firm offers"}, "3" : { "text" : "Finding out who and how decisions are made by the client’s Division at his/her Agency" }, "4" : { "text" : "Establishing a rapport with the client to facilitate future contact", "correct" : "true" }, "5" : { "text" : "Gaining a thorough understanding of the client’s requirements" }  }
+         :explanation: |
+            All of these possible answers have merit, but the best answer is 4, “Establishing a rapport…” What you’re really after in this first meeting is the second meeting.  The ideal outcome of the first meeting is a mutual sense that you and your prospective client can establish a productive, downstream working relationship.  Remember, this business is not a quick sale and a walk-away.  You’re trying a to establish a long-term, mutually beneficial relationship.  Your potential client is also sizing you up during the meeting:  “Can I work with this person?  Are they really making an effort to understand my requirement? …Etc.” The other possible answers are also very important, but this kind of information will likely evolve from futurecontact with your prospective client.  If you don’t establish a reasonable rapport with the client in the first meeting (“first base” if you will), it’s unlikely you’ll ever make it to “second base.”
+
+
+  - :internal_name: "__9__"
+    :label: "TBD"
+    :x: 130
+    :y: 540
+    :r: 40
+    :nexts:
+      - "__10__"
+    :color: "green"
+    :page_layout: "standard"
+    :featured_text: "lorem ipsum sudo facto"
+    :featured_url: "http://google.com"
+    :questions:
+       - :number: 1
+         :text: |
+           Since this is your first meeting with this prospective client, what should be the most
+           important objective of the meeting?Since this is your first meeting with this prospective
+           client, what should be themost important objective of the meeting?
+         :answers: | 
+           { "1": { "text" : "Determining whether or not the client has money for this working" }, "2" : { "text" : "Making sure the client knows what particular products and services your firm offers"}, "3" : { "text" : "Finding out who and how decisions are made by the client’s Division at his/her Agency" }, "4" : { "text" : "Establishing a rapport with the client to facilitate future contact", "correct" : "true" }, "5" : { "text" : "Gaining a thorough understanding of the client’s requirements" }  }
+         :explanation: |
+            All of these possible answers have merit, but the best answer is 4, “Establishing a rapport…” What you’re really after in this first meeting is the second meeting.  The ideal outcome of the first meeting is a mutual sense that you and your prospective client can establish a productive, downstream working relationship.  Remember, this business is not a quick sale and a walk-away.  You’re trying a to establish a long-term, mutually beneficial relationship.  Your potential client is also sizing you up during the meeting:  “Can I work with this person?  Are they really making an effort to understand my requirement? …Etc.” The other possible answers are also very important, but this kind of information will likely evolve from futurecontact with your prospective client.  If you don’t establish a reasonable rapport with the client in the first meeting (“first base” if you will), it’s unlikely you’ll ever make it to “second base.”
+
+
+  - :internal_name: "__10__"
+    :label: "TBD"
+    :x: 330
+    :y: 600
+    :r: 40
+    :nexts:
+      - "__11__"
+    :color: "blue"
+    :page_layout: "standard"
+    :featured_text: "lorem ipsum sudo facto"
+    :featured_url: "http://google.com"
+    :questions:
+       - :number: 1
+         :text: |
+           Since this is your first meeting with this prospective client, what should be the most
+           important objective of the meeting?Since this is your first meeting with this prospective
+           client, what should be themost important objective of the meeting?
+         :answers: | 
+           { "1": { "text" : "Determining whether or not the client has money for this working" }, "2" : { "text" : "Making sure the client knows what particular products and services your firm offers"}, "3" : { "text" : "Finding out who and how decisions are made by the client’s Division at his/her Agency" }, "4" : { "text" : "Establishing a rapport with the client to facilitate future contact", "correct" : "true" }, "5" : { "text" : "Gaining a thorough understanding of the client’s requirements" }  }
+         :explanation: |
+            All of these possible answers have merit, but the best answer is 4, “Establishing a rapport…” What you’re really after in this first meeting is the second meeting.  The ideal outcome of the first meeting is a mutual sense that you and your prospective client can establish a productive, downstream working relationship.  Remember, this business is not a quick sale and a walk-away.  You’re trying a to establish a long-term, mutually beneficial relationship.  Your potential client is also sizing you up during the meeting:  “Can I work with this person?  Are they really making an effort to understand my requirement? …Etc.” The other possible answers are also very important, but this kind of information will likely evolve from futurecontact with your prospective client.  If you don’t establish a reasonable rapport with the client in the first meeting (“first base” if you will), it’s unlikely you’ll ever make it to “second base.”
+
+
+  - :internal_name: "__11__"
+    :label: "TBD"
+    :x: 530
+    :y: 600
+    :r: 40
+    :nexts:
+      - "__12__"
+    :color: "red"
+    :page_layout: "standard"
+    :featured_text: "lorem ipsum sudo facto"
+    :featured_url: "http://google.com"
+    :questions:
+       - :number: 1
+         :text: |
+           Since this is your first meeting with this prospective client, what should be the most
+           important objective of the meeting?Since this is your first meeting with this prospective
+           client, what should be themost important objective of the meeting?
+         :answers: | 
+           { "1": { "text" : "Determining whether or not the client has money for this working" }, "2" : { "text" : "Making sure the client knows what particular products and services your firm offers"}, "3" : { "text" : "Finding out who and how decisions are made by the client’s Division at his/her Agency" }, "4" : { "text" : "Establishing a rapport with the client to facilitate future contact", "correct" : "true" }, "5" : { "text" : "Gaining a thorough understanding of the client’s requirements" }  }
+         :explanation: |
+            All of these possible answers have merit, but the best answer is 4, “Establishing a rapport…” What you’re really after in this first meeting is the second meeting.  The ideal outcome of the first meeting is a mutual sense that you and your prospective client can establish a productive, downstream working relationship.  Remember, this business is not a quick sale and a walk-away.  You’re trying a to establish a long-term, mutually beneficial relationship.  Your potential client is also sizing you up during the meeting:  “Can I work with this person?  Are they really making an effort to understand my requirement? …Etc.” The other possible answers are also very important, but this kind of information will likely evolve from futurecontact with your prospective client.  If you don’t establish a reasonable rapport with the client in the first meeting (“first base” if you will), it’s unlikely you’ll ever make it to “second base.”
+
+
+  - :internal_name: "__12__"
+    :label: "TBD"
+    :x: 730
+    :y: 660
+    :r: 40
+    :nexts:
+      - "__13__"
+    :color: "magenta"
+    :page_layout: "standard"
+    :featured_text: "lorem ipsum sudo facto"
+    :featured_url: "http://google.com"
+    :questions:
+       - :number: 1
+         :text: |
+           Since this is your first meeting with this prospective client, what should be the most
+           important objective of the meeting?Since this is your first meeting with this prospective
+           client, what should be themost important objective of the meeting?
+         :answers: | 
+           { "1": { "text" : "Determining whether or not the client has money for this working" }, "2" : { "text" : "Making sure the client knows what particular products and services your firm offers"}, "3" : { "text" : "Finding out who and how decisions are made by the client’s Division at his/her Agency" }, "4" : { "text" : "Establishing a rapport with the client to facilitate future contact", "correct" : "true" }, "5" : { "text" : "Gaining a thorough understanding of the client’s requirements" }  }
+         :explanation: |
+            All of these possible answers have merit, but the best answer is 4, “Establishing a rapport…” What you’re really after in this first meeting is the second meeting.  The ideal outcome of the first meeting is a mutual sense that you and your prospective client can establish a productive, downstream working relationship.  Remember, this business is not a quick sale and a walk-away.  You’re trying a to establish a long-term, mutually beneficial relationship.  Your potential client is also sizing you up during the meeting:  “Can I work with this person?  Are they really making an effort to understand my requirement? …Etc.” The other possible answers are also very important, but this kind of information will likely evolve from futurecontact with your prospective client.  If you don’t establish a reasonable rapport with the client in the first meeting (“first base” if you will), it’s unlikely you’ll ever make it to “second base.”
+
+
+  - :internal_name: "__13__"
+    :label: "TBD"
+    :x: 730
+    :y: 810
+    :r: 40
+    :nexts:
+      - "__14__"
+    :color: "green"
+    :page_layout: "standard"
+    :featured_text: "lorem ipsum sudo facto"
+    :featured_url: "http://google.com"
+    :questions:
+       - :number: 1
+         :text: |
+           Since this is your first meeting with this prospective client, what should be the most
+           important objective of the meeting?Since this is your first meeting with this prospective
+           client, what should be themost important objective of the meeting?
+         :answers: | 
+           { "1": { "text" : "Determining whether or not the client has money for this working" }, "2" : { "text" : "Making sure the client knows what particular products and services your firm offers"}, "3" : { "text" : "Finding out who and how decisions are made by the client’s Division at his/her Agency" }, "4" : { "text" : "Establishing a rapport with the client to facilitate future contact", "correct" : "true" }, "5" : { "text" : "Gaining a thorough understanding of the client’s requirements" }  }
+         :explanation: |
+            All of these possible answers have merit, but the best answer is 4, “Establishing a rapport…” What you’re really after in this first meeting is the second meeting.  The ideal outcome of the first meeting is a mutual sense that you and your prospective client can establish a productive, downstream working relationship.  Remember, this business is not a quick sale and a walk-away.  You’re trying a to establish a long-term, mutually beneficial relationship.  Your potential client is also sizing you up during the meeting:  “Can I work with this person?  Are they really making an effort to understand my requirement? …Etc.” The other possible answers are also very important, but this kind of information will likely evolve from futurecontact with your prospective client.  If you don’t establish a reasonable rapport with the client in the first meeting (“first base” if you will), it’s unlikely you’ll ever make it to “second base.”
+
+
+  - :internal_name: "__14__"
+    :label: "TBD"
+    :x: 530
+    :y: 870 
+    :r: 40
+    :nexts:
+    :color: "red"
+    :page_layout: "standard"
+    :featured_text: "lorem ipsum sudo facto"
+    :featured_url: "http://google.com"
+    :questions:
+       - :number: 1
+         :text: |
+           Since this is your first meeting with this prospective client, what should be the most
+           important objective of the meeting?Since this is your first meeting with this prospective
+           client, what should be themost important objective of the meeting?
+         :answers: | 
+           { "1": { "text" : "Determining whether or not the client has money for this working" }, "2" : { "text" : "Making sure the client knows what particular products and services your firm offers"}, "3" : { "text" : "Finding out who and how decisions are made by the client’s Division at his/her Agency" }, "4" : { "text" : "Establishing a rapport with the client to facilitate future contact", "correct" : "true" }, "5" : { "text" : "Gaining a thorough understanding of the client’s requirements" }  }
+         :explanation: |
+            All of these possible answers have merit, but the best answer is 4, “Establishing a rapport…” What you’re really after in this first meeting is the second meeting.  The ideal outcome of the first meeting is a mutual sense that you and your prospective client can establish a productive, downstream working relationship.  Remember, this business is not a quick sale and a walk-away.  You’re trying a to establish a long-term, mutually beneficial relationship.  Your potential client is also sizing you up during the meeting:  “Can I work with this person?  Are they really making an effort to understand my requirement? …Etc.” The other possible answers are also very important, but this kind of information will likely evolve from futurecontact with your prospective client.  If you don’t establish a reasonable rapport with the client in the first meeting (“first base” if you will), it’s unlikely you’ll ever make it to “second base.”
+

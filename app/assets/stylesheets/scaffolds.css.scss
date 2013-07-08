@@ -19,13 +19,26 @@ pre {
 }
 
 a {
-  color: #fff;
+  color: blue;
   &:visited {
-    color: #fff;
+    color: silver;
   }
   &:hover {
     color: #fff;
     background-color: #000;
+  }
+}
+
+#topBanner {
+  a {
+    color: #fff;
+    &:visited {
+      color: #fff;
+    }
+    &:hover {
+      color: #fff;
+      background-color: #000;
+    }
   }
 }
 

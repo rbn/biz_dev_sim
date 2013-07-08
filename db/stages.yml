@@ -56,19 +56,24 @@
       - "__3__"
     :color: "blue"
     :page_layout: "standard"
-    :featured_text: "lorem ipsum sudo facto"
-    :featured_url: "http://google.com"
+    :featured_text: |
+      <p>You have a chance to secure a task order as a subcontractor to another firm involved in implementing the new DHS Continuous Diagnostic and Mitigation (CDM) Program.   The government requires, however, that all personnel on these task orders must have proper security clearances, eligibility for DHS Suitability, and at least one cybersecurity specialty certification recognized by the National Initiative for Cybersecurity Education (NICE).  The persons meeting these criteria must also be designated “Key Personnel” in your RFQ response.
+      </p>
+      <p>
+      To learn more about making strategic hires, please read the “Best Practice Guide to Strategic Hiring.”  Once you have read through this material, please answer the following three questions:
+      </p>
+    :featured_image_url: "swag/phone1.jpg"
+    :questions:
     :questions:
        - :number: 1
          :text: |
-           Since this is your first meeting with this prospective client, what should be the most
-           important objective of the meeting?Since this is your first meeting with this prospective
-           client, what should be themost important objective of the meeting?
+          'True or False:  If you designate someone by name as “key personnel” in your RFQ response, this person MUST be available at the time you submit your proposal.'
          :answers: | 
-           { "1": { "text" : "Determining whether or not the client has money for this working" }, "2" : { "text" : "Making sure the client knows what particular products and services your firm offers"}, "3" : { "text" : "Finding out who and how decisions are made by the client’s Division at his/her Agency" }, "4" : { "text" : "Establishing a rapport with the client to facilitate future contact", "correct" : "true" }, "5" : { "text" : "Gaining a thorough understanding of the client’s requirements" }  }
+          { "1": {"text" : "TRUE"}, "2" : {"text" : "FALSE", "correct" : "true" } }
          :explanation: |
-            All of these possible answers have merit, but the best answer is 4, “Establishing a rapport…” What you’re really after in this first meeting is the second meeting.  The ideal outcome of the first meeting is a mutual sense that you and your prospective client can establish a productive, downstream working relationship.  Remember, this business is not a quick sale and a walk-away.  You’re trying a to establish a long-term, mutually beneficial relationship.  Your potential client is also sizing you up during the meeting:  “Can I work with this person?  Are they really making an effort to understand my requirement? …Etc.” The other possible answers are also very important, but this kind of information will likely evolve from futurecontact with your prospective client.  If you don’t establish a reasonable rapport with the client in the first meeting (“first base” if you will), it’s unlikely you’ll ever make it to “second base.”
+           As a general rule, you can offer Key Personnel as contingent hires.  Keep in mind however, that failure to secure this specific person at the time of award can disqualify you from securing the Task Order.  Likewise, your proposal may include “Key Personnel” already on your payroll, but presently committed to another assignment at the time you submit your proposal.   Again, substitutes may be allowed, BUT:  “It depends…”
 
+           Clearly, you should read the underlying Terms and Conditions (T’s & C’s) for the GWAC or other contract that governs the issuance of these task orders.  There may be specific clauses on Key Personnel.  Moreover, the Prime (you’re the sub in this example) may have their own conditions on contingent hires and related matters.  If at the time of award, the person(s) you offered as Key Personnel is unavailable, the government, at their option, may allow equivalent substitutes, but there is no guarantee.   So do your homework ahead of time.  Learn from the agency contracts shop their expectations and requirements when it comes to “Key Personnel.”  
 
   - :internal_name: "__3__"
     :label: "Mel Brooks"
@@ -80,7 +85,7 @@
     :color: "blue"
     :page_layout: "video"
     :featured_text: "lorem ipsum sudo facto"
-    :featured_url: "http://google.com"
+    :featured_image_url: "swag/phone1.jpg"
     :featured_video_url: 
       <iframe src="http://player.vimeo.com/video/67854501" width="500" height="281" frameborder="0" webkitAllowFullScreen mozallowfullscreen allowFullScreen></iframe> <p><a href="http://vimeo.com/67854501">MelBrooksMarketing</a> from <a href="http://vimeo.com/user18691976">Rich Nyman</a> on <a href="http://vimeo.com">Vimeo</a>.</p>
       <input type="hidden" name="stage" value="__3__" />
@@ -106,7 +111,7 @@
     :color: "green"
     :page_layout: "standard"
     :featured_text: "lorem ipsum sudo facto"
-    :featured_url: "http://google.com"
+    :featured_image_url: "swag/phone1.jpg"
 
   - :internal_name: "__5__"
     :label: "TBD"
@@ -118,7 +123,7 @@
     :color: "magenta"
     :page_layout: "standard"
     :featured_text: "lorem ipsum sudo facto"
-    :featured_url: "http://google.com"
+    :featured_image_url: "swag/phone1.jpg"
     :questions:
        - :number: 1
          :text: |
@@ -142,7 +147,7 @@
     :color: "red"
     :page_layout: "standard"
     :featured_text: "lorem ipsum sudo facto"
-    :featured_url: "http://google.com"
+    :featured_image_url: "swag/phone1.jpg"
     :questions:
        - :number: 1
          :text: |
@@ -165,7 +170,7 @@
     :color: "yellow"
     :page_layout: "standard"
     :featured_text: "lorem ipsum sudo facto"
-    :featured_url: "http://google.com"
+    :featured_image_url: "swag/phone1.jpg"
     :questions:
        - :number: 1
          :text: |
@@ -188,7 +193,7 @@
     :color: "pink"
     :page_layout: "standard"
     :featured_text: "lorem ipsum sudo facto"
-    :featured_url: "http://google.com"
+    :featured_image_url: "swag/phone1.jpg"
     :questions:
        - :number: 1
          :text: |
@@ -211,7 +216,7 @@
     :color: "green"
     :page_layout: "standard"
     :featured_text: "lorem ipsum sudo facto"
-    :featured_url: "http://google.com"
+    :featured_image_url: "swag/phone1.jpg"
     :questions:
        - :number: 1
          :text: |
@@ -234,7 +239,7 @@
     :color: "blue"
     :page_layout: "standard"
     :featured_text: "lorem ipsum sudo facto"
-    :featured_url: "http://google.com"
+    :featured_image_url: "swag/phone1.jpg"
     :questions:
        - :number: 1
          :text: |
@@ -257,7 +262,7 @@
     :color: "red"
     :page_layout: "standard"
     :featured_text: "lorem ipsum sudo facto"
-    :featured_url: "http://google.com"
+    :featured_image_url: "swag/phone1.jpg"
     :questions:
        - :number: 1
          :text: |
@@ -280,7 +285,7 @@
     :color: "magenta"
     :page_layout: "standard"
     :featured_text: "lorem ipsum sudo facto"
-    :featured_url: "http://google.com"
+    :featured_image_url: "swag/phone1.jpg"
     :questions:
        - :number: 1
          :text: |
@@ -303,7 +308,7 @@
     :color: "green"
     :page_layout: "standard"
     :featured_text: "lorem ipsum sudo facto"
-    :featured_url: "http://google.com"
+    :featured_image_url: "swag/phone1.jpg"
     :questions:
        - :number: 1
          :text: |
@@ -325,7 +330,7 @@
     :color: "red"
     :page_layout: "standard"
     :featured_text: "lorem ipsum sudo facto"
-    :featured_url: "http://google.com"
+    :featured_image_url: "swag/phone1.jpg"
     :questions:
        - :number: 1
          :text: |

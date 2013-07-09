@@ -49,9 +49,9 @@
 
   - :internal_name: "strategic_hire"
     :label: "Strategic Hire"
-    :x: 390
-    :y: 600
-    :r: 400
+    :x: 330
+    :y: 60
+    :r: 40
     :nexts: 
       - "__3__"
     :color: "blue"

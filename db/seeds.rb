@@ -36,6 +36,10 @@ Stage.all.each { |s| s.destroy }
 # load yaml data
 stage_data = YAML.load_file(Rails.root.join('db', 'stages.yml'))
 
+stage_data[:stages].each do |d|
+  puts d[:y]
+end
+
 # symbol-as-keys mode ( e.g. stage.id, stage.questions.number )
 stage_data = Hashery::OpenCascade[stage_data]
 
@@ -46,11 +50,13 @@ stage_data.stages.each do |d|
   # omit the questions collection.  what's the better way to do 
   # this with ruby/yaml?
 
+  puts d[:y]
+
   stage = Stage.new
   stage.internal_name = d.internal_name
   stage.label = d.label
   stage.x = d.x
-  stage.y = d.y
+  stage.y = d[:y] # TODO: heroku not picking up 'y' value - figure out why
   stage.r = d.r
   stage.nexts = d.nexts
   stage.start = d.start

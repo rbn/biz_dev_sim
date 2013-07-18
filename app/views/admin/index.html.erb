@@ -1,1 +1,7 @@
 <h1>admin</h1>
+
+<ul>
+  <% Stage.all.each do |s| %>
+    <li><%= link_to s.label, edit_stage_path(s) %></li>
+  <% end %>
+</ul>

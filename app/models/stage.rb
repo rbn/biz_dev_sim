@@ -1,4 +1,5 @@
 class Stage < ActiveRecord::Base
+  default_scope order('id ASC')
   serialize :nexts, Array
   attr_accessible :internal_name, :label, :nexts, :start, :x, :y, :r, :color, :content, 
                   :page_layout, :featured_image_url, :featured_text,

@@ -6,33 +6,15 @@
 #   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
 #   Mayor.create(name: 'Emanuel', city: cities.first)
 
-# TODO: figure out mass-assignment issue
-
 g = Game.create( { title: 'DH Sim' } )
 
 User.create(email: "admin@admin.com", password: "password123", password_confirmation: "password123")
 
-# remove all stages
+# remove existing data
+
 Question.all.each { |q| q.destroy } # TODO: use dependent keyword in models for this
 Stage.all.each { |s| s.destroy }
 
-
-# OLD WAY
-# stages = JSON.parse( IO.read(Rails.root.join('db', 'stages.json')) )
-# 
-# stages.each do |s|
-#   stage = Stage.new
-#   stage.update_attributes(s)
-#   stage.save
-# end
-# 
-# # TODO: add "nexts" here - but return to 
-# # find a way to put it in original JSON file
-# 
-# eval( IO.read( Rails.root.join('db', 'seed_generate_content.rb') ) )
-
-
-# NEW WAY
 # load yaml data
 stage_data = YAML.load_file(Rails.root.join('db', 'stages.yml'))
 
@@ -40,7 +22,7 @@ stage_data[:stages].each do |d|
   puts d[:y]
 end
 
-# symbol-as-keys mode ( e.g. stage.id, stage.questions.number )
+# Hashery enables symbol-as-keys ( e.g. stage.id, stage.questions.number )
 stage_data = Hashery::OpenCascade[stage_data]
 
 # save

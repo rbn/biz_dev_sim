@@ -6,7 +6,7 @@
 #   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
 #   Mayor.create(name: 'Emanuel', city: cities.first)
 
-g = Game.create( { title: 'DH Sim' } )
+# g = Game.create( { title: 'DH Sim' } )
 
 User.create(email: "admin@admin.com", password: "password123", password_confirmation: "password123")
 

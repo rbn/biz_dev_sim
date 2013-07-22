@@ -26,13 +26,6 @@ ActiveRecord::Schema.define(:version => 20130720182033) do
     t.datetime "updated_at", :null => false
   end
 
-  create_table "games", :force => true do |t|
-    t.string   "title"
-    t.string   "path"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
-  end
-
   create_table "pieces", :force => true do |t|
     t.string   "title"
     t.string   "caption"

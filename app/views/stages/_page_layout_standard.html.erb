@@ -5,10 +5,109 @@
 <%= raw @stage.featured_text %>
 
 <% @stage.questions.each do |q| %>
-  <%= render partial: 'questions/q_and_a', locals: {question: q} %>
+  <%= render partial: 'questions/q_and_a', locals: {question: q, visible: true } %>
 <% end %>
 
+<input id="take_quiz" type="button" value="Take the quiz" />
+<input type="button" id="back_to_board" value="Back to the board" class="snazz" style="display:none" />
+
 <%= hidden_field :stage, :id %>
+
+<script>
+  // questions wizard
+  $(function() {
+    $('#take_quiz').on('click', function() {
+      takeQuiz( $('div.question').toArray() );
+    });
+  });
+
+  // coll: array of form elemnts
+  // [index]: index within coll to load into modal (default is 0)
+  // [scorecard]: array of pass/fails
+  // [questionsAsked: count of questionsAsked
+  function takeQuiz(coll, index, scorecard, questionsAsked) {
+    var index = index || 0,
+        scorecard = scorecard || [],
+        questionsAsked = questionsAsked || 0;
+
+    // crude way of checking if we are complete
+    if ( index >= coll.length ) {
+      completeQuiz(scorecard, questionsAsked);
+      return;
+    }
+
+    // subscribe only on the first time through
+    if ( ! index ) {
+      $.subscribe('answered', function(e, passed) {
+        scorecard[scorecard.length] = passed;
+        setTimeout(function() {
+          $next.slideDown();
+        }, 2000);
+      });
+    }
+
+    // create custom "next" button to close our modal
+    $next = 
+      $('<input type="button" value="next" class="snazz" />')
+        .hide()
+        .on('click', function() {
+          $div.dialog('close');
+        });
+
+
+    // ask the question (via modal)
+    var $div = $( coll[index] )
+                .append( $next )
+                .dialog({
+                  minWidth: 700,
+                  minHeight:400,
+                  close: function() {
+                    takeQuiz(coll, index + 1, scorecard, questionsAsked);
+                    $div.dialog('destroy');
+                  }
+                });
+
+    // track the number of questions asked
+    questionsAsked += 1;
+  }
+
+  function completeQuiz(scorecard, questionsAsked) {
+    // check score
+    var passed = false, countRight = 0;
+
+    $.each(scorecard, function() {
+      countRight += this ? 1 : 0;
+    });
+
+    passed = questionsAsked == countRight;
+
+    var msg;
+    msg = 'You answered ' + countRight + ' of ' + questionsAsked + ' right.<br />';
+    msg += passed ?
+            'you passed!' : 
+            'you did not pass.';
+
+    $ok = $('<input type="button" value="OK" />').on('click', function() {
+      $modal.dialog('close').dialog('destroy');
+    });
+
+    $modal = 
+      $('<div>')
+        .append(msg).append('<br />')
+        .append($ok);
+
+    $modal 
+      .dialog({
+              close: function() {
+                setTimeout(function() {
+                  $('#back_to_board').fadeIn('slow');
+                  $('#take_quiz').prop('disabled', true);
+                }, 400);
+              }
+            });
+
+  }
+</script>
 
 <script>
 // move this to bds - have it be a callable function (right? ...)
@@ -16,20 +115,19 @@ $(function() {
 
   // stage button - back to board
   var stage_id = $('input#stage_id').val();
-  $('input#back_to_board').on('click', function() {
-    // handle this through bds
-   var arr = JSON.parse(localStorage.completed);
-   arr.push( stage_id ); 
-   localStorage.completed = JSON.stringify(arr);
+  $('input#back_to_board').on('click', recordStage);
 
-    bds.page.$stage.fadeOut(1200, function() {
-      bds.page.$board.fadeIn(3000, function() {
-        bds.page.$stage.html('');
-        bds.circles.get(stage_id).complete(null, true);
-        $.publish('bdsStageComplete');
-      });
-    });
-  });
+  function recordStage() {
+
+  bds.currentPlayer().completeStage(stage_id);
+
+   bds.page.transition('stage', 'board', function() {
+       bds.page.stage.html('');
+       bds.circleTracker.get(stage_id).complete(null, true);
+       $.publish('bdsStageComplete');
+       bds.scoreTable.draw(); // TODO: should this be managed by the client of bds of bds itself?
+     });
+  }
 
   $('form#stage')
     .on('ajax:beforeSend', function(e, xhr, settings) {
@@ -49,6 +147,7 @@ $(function() {
 
         var $msg = $('<p>' + result.message + '</p>');
 
+
         $result
           .html('')
           .append($msg);
@@ -57,13 +156,14 @@ $(function() {
           $explanation
             .prepend('<p>' + result.explanation + '</p>')
             .slideDown('slow');
-        }
+
+        // notify
+        $.publish('answered', [result.correct]);
+      }
 
     setTimeout(function() {
       $('div.back_to_board').slideDown('slow');
     }, 3000);
-
-
 
       // $form.find('textarea,input[type="text"],input[type="file"]').val('');
       // $form.find('div.validation-error').empty();

@@ -20,10 +20,10 @@ $(function() {
    arr.push( stage_id ); 
    localStorage.completed = JSON.stringify(arr);
 
-    bds.page.$stage.fadeOut(1200, function() {
-      bds.page.$board.fadeIn(3000, function() {
-        bds.page.$stage.html('');
-        bds.circles.get(stage_id).complete(null, true);
+    bds.page.stage.fadeOut(1200, function() {
+      bds.page.board.fadeIn(3000, function() {
+        bds.page.stage.html('');
+        bds.circleTracker.get(stage_id).complete(null, true);
         $.publish('bdsStageComplete');
       });
     });

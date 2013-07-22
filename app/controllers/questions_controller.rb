@@ -14,6 +14,7 @@ class QuestionsController < ApplicationController
         result["explanation"] =  question.explanation
       else
         result["message"] = "That is not correct."
+        result["correct"] = false;
       end
     end
 

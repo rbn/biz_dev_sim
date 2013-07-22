@@ -61,13 +61,13 @@ div#left {
   z-index:-1;
 }
 
-div#left p {
+div#left div {
   color:white;
   font-size:18px;
   width:80%;
   margin:auto;
   padding:8px;
-  background-color:#e3c4fd;
+  background-color:#2a43e8;
   margin-bottom:20px;
   border:1px dotted black;
 }
@@ -141,11 +141,20 @@ div.explanation {
   padding:20px;
   width:600px;
   border:1px dashed black;
-  background-color:#0099ff;
+  background-color:#33efed;
 }
 
 img.featured {
   float:right;
   clear:right;
   padding:20px;
+}
+
+input.snazz {
+  background-color:#b3bfed;
+  padding:6px;
+  border-right:3px solid black;
+  border-bottom:3px solid black;
+  border-left:3px solid #b3bfed;
+  border-top:3px solid #b3bfed;
 }

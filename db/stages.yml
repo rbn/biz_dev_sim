@@ -53,7 +53,7 @@
     :y: 60
     :r: 40
     :nexts: 
-      - "__3__"
+      - "white_paper"
     :color: "blue"
     :page_layout: "standard"
     :featured_text: |
@@ -62,7 +62,7 @@
       <p>
       To learn more about making strategic hires, please read the “Best Practice Guide to Strategic Hiring.”  Once you have read through this material, please answer the following three questions:
       </p>
-    :featured_image_url: "swag/phone1.jpg"
+    :featured_image_url: "swag/hire.jpg"
     :questions:
        - :number: 1
          :text: |
@@ -70,37 +70,41 @@
          :answers: | 
           { "1": {"text" : "TRUE"}, "2" : {"text" : "FALSE", "correct" : "true" } }
          :explanation: |
-           As a general rule, you can offer Key Personnel as contingent hires.  Keep in mind however, that failure to secure this specific person at the time of award can disqualify you from securing the Task Order.  Likewise, your proposal may include “Key Personnel” already on your payroll, but presently committed to another assignment at the time you submit your proposal.   Again, substitutes may be allowed, BUT:  “It depends…”
+           As a general rule, you can offer Key Personnel as contingent hires.  Keep in mind however, that failure to secure this specific person at the time of award can disqualify you from securing the Task Order.  Likewise, your proposal may include “Key Personnel” already on your payroll, but presently committed to another assignment <em>at the time you submit your proposal</em>.   Again, substitutes may be allowed, BUT:  “It depends…”
 
            Clearly, you should read the underlying Terms and Conditions (T’s & C’s) for the GWAC or other contract that governs the issuance of these task orders.  There may be specific clauses on Key Personnel.  Moreover, the Prime (you’re the sub in this example) may have their own conditions on contingent hires and related matters.  If at the time of award, the person(s) you offered as Key Personnel is unavailable, the government, at their option, may allow equivalent substitutes, but there is no guarantee.   So do your homework ahead of time.  Learn from the agency contracts shop their expectations and requirements when it comes to “Key Personnel.”  
 
-  - :internal_name: "__3__"
-    :label: "Mel Brooks"
+  - :internal_name: "white_paper"
+    :label: "White Paper Training Opportunity"
     :x: 530
     :y: 60
     :r: 40
     :nexts:
-      - "__4__"
+      - "white_paper_requested"
     :color: "blue"
-    :page_layout: "video"
-    :featured_text: "lorem ipsum sudo facto"
-    :featured_image_url: "swag/phone1.jpg"
-    :featured_video_url: |
-      <iframe src="http://player.vimeo.com/video/67854501" width="500" height="281" frameborder="0" webkitAllowFullScreen mozallowfullscreen allowFullScreen></iframe> <p><a href="http://vimeo.com/67854501">MelBrooksMarketing</a> from <a href="http://vimeo.com/user18691976">Rich Nyman</a> on <a href="http://vimeo.com">Vimeo</a>.</p>
-      <input type="hidden" name="stage" value="__3__" />
+    :page_layout: "standard"
+    :featured_text: |
+      <p>You have landed on a space that affords you an opportunity to take additional training in how to prepare a white paper for prospective clients.  You can decide to forgo this training, but if you land on the “White Paper Requested” space without prior training, you will need to move back to this training space, take the training and lose a turn while training.  This could be costly.  You decide.</p><p>If you decide to voluntarily take the training, go to the Intellectual Capital Library and read through the “Best Practice Guide to Preparing White Papers.”  Then answer the questions that follow.  You will receive 1 point for each correct answer on your first attempt.  Note that will not lose points for incorrect answers, but you cannot move forward until, after repeated attempts, you have answered all questions correctly.</p><p>When you have finished the material, answer the four questions that follow:</p> 
+    :featured_image_url: "swag/whitepaper.jpg"
     :questions:
        - :number: 1
          :text: |
-           Since this is your first meeting with this prospective client, what should be the most
-           important objective of the meeting?Since this is your first meeting with this prospective
-           client, what should be themost important objective of the meeting?
+           When your prospective client requests a white during your first meeting, you should:
          :answers: | 
-           { "1": { "text" : "Determining whether or not the client has money for this working" }, "2" : { "text" : "Making sure the client knows what particular products and services your firm offers"}, "3" : { "text" : "Finding out who and how decisions are made by the client’s Division at his/her Agency" }, "4" : { "text" : "Establishing a rapport with the client to facilitate future contact", "correct" : "true" }, "5" : { "text" : "Gaining a thorough understanding of the client’s requirements" }  }
+           { "1" : { "text" : "Advise the prospective client that you would be pleased to prepare one, but you think it best to draft an initial outline of what should be covered and run this by him/her in a subsequent meeting or call in the next couple days.", "correct" : "true" }, "2" : { "text" : "Put your best effort into this with what you know at the time.  After all, you want to demonstrate to your prospective client how responsive you can be." }, "3" : { "text" : "Politely decline, suggesting that your time would be better spent in a subsequent client meeting getting a more thorough understanding of the problem that needs to be addressed. You’re quite willing to meet again tomorrow to get the ball rolling." }, "4" : { "text" : "You sense your prospective client doesn’t really understand the depth of capabilities you can bring to the table in addressing his problems.  So you suggest instead that you bring over your team to brief the prospective client on the full scope of your capabilities." } }
          :explanation: |
-            All of these possible answers have merit, but the best answer is 4, “Establishing a rapport…” What you’re really after in this first meeting is the second meeting.  The ideal outcome of the first meeting is a mutual sense that you and your prospective client can establish a productive, downstream working relationship.  Remember, this business is not a quick sale and a walk-away.  You’re trying a to establish a long-term, mutually beneficial relationship.  Your potential client is also sizing you up during the meeting:  “Can I work with this person?  Are they really making an effort to understand my requirement? …Etc.” The other possible answers are also very important, but this kind of information will likely evolve from futurecontact with your prospective client.  If you don’t establish a reasonable rapport with the client in the first meeting (“first base” if you will), it’s unlikely you’ll ever make it to “second base.”
+           <p>You want to use a white paper as a mechanism to advance the opportunity along the business development process.  If the client asks and you deliver a white paper in the very early stages of your efforts to mature an opportunity, it’s likely to miss the mark with a poor grasp of the underlying issues and a solution ill suited for the problem, among other factors.  By the same token, you want to demonstrate responsiveness, so stage the development of the white paper in way that engages the client in the evolution of the white paper. </p><p> You want to use a white paper as a mechanism to advance the opportunity along the business development process.  If the client asks and you deliver a white paper in the very early stages of your efforts to mature an opportunity, it’s likely to miss the mark with a poor grasp of the underlying issues and a solution ill suited for the problem, among other factors.  By the same token, you want to demonstrate responsiveness, so stage the development of the white paper in way that engages the client in the evolution of the white paper.</p>
 
-  - :internal_name: "__4__"
-    :label: "TBD"
+       - :number: 2
+         :text: |
+           As a general best practice, you should write a white paper that resembles closely a scope of work format.  This is the best way to insure the scope of work in the RFP is something that you can deliver successfully and is what the client really needs.
+         :answers: | 
+           { "1": {"text" : "TRUE"}, "2" : {"text" : "FALSE", "correct" : "true" } }
+         :explanation: |
+           <p>Use extra caution in writing white papers that mimic a scope of work format. If the client decides to adopt your white paper as if it were the agency’s SOW, you could be disqualified from bidding for the work when the RFP is released.  The Federal Acquisition Regulations expressly prohibits this tactic for competitive procurements.  There are exceptions however, particularly when the contract vehicle specifies directed task orders that only your firm can deliver.</p><p>BONUS:  If you took the training on a voluntary basis (i.e., you were not required to return to this space because you landed on a “White Paper Requested” space without prior training in preparing white papers), you will earn an additional 5 points</p>
+
+  - :internal_name: "white_paper_requested"
+    :label: "White Paper Requested"
     :x: 730
     :y: 120
     :r: 40
@@ -108,18 +112,25 @@
       - "__5__"
     :color: "green"
     :page_layout: "standard"
-    :featured_text: "lorem ipsum sudo facto"
-    :featured_image_url: "swag/phone1.jpg"
+    :featured_text: |
+      <p>At the end of your initial meeting, your prospective client asks for a white paper outlining your approach to addressing the problem discussed.   Have you taken the Training in Preparing White Papers before landing on this space?  If you have, you earn 5 points without the need to read through the best practice material or answer questions.</p><p>If you have not taken the training first, you will be returned to the training space and then follow the instructions to access and read the “Best Practice Guide to Writing White Papers” and answer a set of questions.</p>
+    :featured_image_url: "swag/whitepaper2.jpg"
     :questions:
        - :number: 1
          :text: |
-           Since this is your first meeting with this prospective client, what should be the most
-           important objective of the meeting?Since this is your first meeting with this prospective
-           client, what should be themost important objective of the meeting?
+           When your prospective client requests a white during your first meeting, you should:
          :answers: | 
-           { "1": { "text" : "Determining whether or not the client has money for this working" }, "2" : { "text" : "Making sure the client knows what particular products and services your firm offers"}, "3" : { "text" : "Finding out who and how decisions are made by the client’s Division at his/her Agency" }, "4" : { "text" : "Establishing a rapport with the client to facilitate future contact", "correct" : "true" }, "5" : { "text" : "Gaining a thorough understanding of the client’s requirements" }  }
+           { "1" : { "text" : "Advise the prospective client that you would be pleased to prepare one, but you think it best to draft an initial outline of what should be covered and run this by him/her in a subsequent meeting or call in the next couple days.", "correct" : "true" }, "2" : { "text" : "Put your best effort into this with what you know at the time.  After all, you want to demonstrate to your prospective client how responsive you can be." }, "3" : { "text" : "Politely decline, suggesting that your time would be better spent in a subsequent client meeting getting a more thorough understanding of the problem that needs to be addressed. You’re quite willing to meet again tomorrow to get the ball rolling." }, "4" : { "text" : "You sense your prospective client doesn’t really understand the depth of capabilities you can bring to the table in addressing his problems.  So you suggest instead that you bring over your team to brief the prospective client on the full scope of your capabilities." } }
          :explanation: |
-            All of these possible answers have merit, but the best answer is 4, “Establishing a rapport…” What you’re really after in this first meeting is the second meeting.  The ideal outcome of the first meeting is a mutual sense that you and your prospective client can establish a productive, downstream working relationship.  Remember, this business is not a quick sale and a walk-away.  You’re trying a to establish a long-term, mutually beneficial relationship.  Your potential client is also sizing you up during the meeting:  “Can I work with this person?  Are they really making an effort to understand my requirement? …Etc.” The other possible answers are also very important, but this kind of information will likely evolve from futurecontact with your prospective client.  If you don’t establish a reasonable rapport with the client in the first meeting (“first base” if you will), it’s unlikely you’ll ever make it to “second base.”
+           <p>You want to use a white paper as a mechanism to advance the opportunity along the business development process.  If the client asks and you deliver a white paper in the very early stages of your efforts to mature an opportunity, it’s likely to miss the mark with a poor grasp of the underlying issues and a solution ill suited for the problem, among other factors.  By the same token, you want to demonstrate responsiveness, so stage the development of the white paper in way that engages the client in the evolution of the white paper. </p><p> You want to use a white paper as a mechanism to advance the opportunity along the business development process.  If the client asks and you deliver a white paper in the very early stages of your efforts to mature an opportunity, it’s likely to miss the mark with a poor grasp of the underlying issues and a solution ill suited for the problem, among other factors.  By the same token, you want to demonstrate responsiveness, so stage the development of the white paper in way that engages the client in the evolution of the white paper.</p>
+
+       - :number: 2
+         :text: |
+           As a general best practice, you should write a white paper that resembles closely a scope of work format.  This is the best way to insure the scope of work in the RFP is something that you can deliver successfully and is what the client really needs.
+         :answers: | 
+           { "1": {"text" : "TRUE"}, "2" : {"text" : "FALSE", "correct" : "true" } }
+         :explanation: |
+           <p>Use extra caution in writing white papers that mimic a scope of work format. If the client decides to adopt your white paper as if it were the agency’s SOW, you could be disqualified from bidding for the work when the RFP is released.  The Federal Acquisition Regulations expressly prohibits this tactic for competitive procurements.  There are exceptions however, particularly when the contract vehicle specifies directed task orders that only your firm can deliver.</p><p>BONUS:  If you took the training on a voluntary basis (i.e., you were not required to return to this space because you landed on a “White Paper Requested” space without prior training in preparing white papers), you will earn an additional 5 points</p>
 
   - :internal_name: "__5__"
     :label: "TBD"

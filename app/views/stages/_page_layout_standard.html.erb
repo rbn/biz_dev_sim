@@ -81,23 +81,29 @@
 
     passed = questionsAsked == countRight;
 
-    var msg;
-    msg = 'You answered ' + countRight + ' of ' + questionsAsked + ' right.<br />';
+    var msg = '';
+    msg += 'You answered ' + countRight + ' of ' + questionsAsked + ' right.<br />';
     msg += passed ?
             'you passed!' : 
             'you did not pass.';
 
-    $ok = $('<input type="button" value="OK" />').on('click', function() {
+    $ok = $('<input type="button" value="OK" style="width:200px;padding:6px;background-color:#23ff32;" />').on('click', function() {
       $modal.dialog('close').dialog('destroy');
     });
 
     $modal = 
       $('<div>')
-        .append(msg).append('<br />')
+        .css('width', '100%')
+        .css('padding', '100px')
+        .css('font-size', '28px')
+        .css('line-height', '32px')
+        .append(msg).append('<br /><br />')
         .append($ok);
 
     $modal 
       .dialog({
+              minWidth: 700,
+              minHeight:400,
               close: function() {
                 setTimeout(function() {
                   $('#back_to_board').fadeIn('slow');

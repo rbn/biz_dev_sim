@@ -4,7 +4,8 @@ class Stage < ActiveRecord::Base
   attr_accessible :internal_name, :label, :nexts, :start, :x, :y, :r, :color, :content, 
                   :page_layout, :featured_image_url, :featured_text,
                   :featured_video_url
-  has_many :questions
+  has_many :questions, dependent: :destroy
+  accepts_nested_attributes_for :questions
 
   def form
     "form_#{page_layout}"

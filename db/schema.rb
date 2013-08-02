@@ -11,7 +11,15 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130720182033) do
+ActiveRecord::Schema.define(:version => 20130729020552) do
+
+  create_table "answers", :force => true do |t|
+    t.text     "text"
+    t.boolean  "value",       :default => false
+    t.integer  "question_id"
+    t.datetime "created_at",                     :null => false
+    t.datetime "updated_at",                     :null => false
+  end
 
   create_table "flares", :force => true do |t|
     t.string   "name"
@@ -37,7 +45,6 @@ ActiveRecord::Schema.define(:version => 20130720182033) do
 
   create_table "questions", :force => true do |t|
     t.string   "text"
-    t.text     "answers"
     t.text     "explanation"
     t.string   "html_style",  :default => "radio"
     t.integer  "stage_id"

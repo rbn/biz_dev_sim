@@ -1,9 +1,5 @@
 class Question < ActiveRecord::Base
-  attr_accessible :text, :answers, :explanation, :html_style
+  attr_accessible :text, :answers, :explanation, :html_style, :answers, :answers_attributes
   belongs_to :stage
-
-  def answer_set
-    @answer_set = AnswerSet.new(answers) unless @answer_set
-    @answer_set
-  end
+  has_many :answers
 end

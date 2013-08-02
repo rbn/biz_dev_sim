@@ -8,54 +8,39 @@
 
 # g = Game.create( { title: 'DH Sim' } )
 
+require 'active_record/fixtures'
+
 User.create(email: "admin@admin.com", password: "password123", password_confirmation: "password123")
 
 # remove existing data
 
-Question.all.each { |q| q.destroy } # TODO: use dependent keyword in models for this
 Stage.all.each { |s| s.destroy }
 
-# load yaml data
-stage_data = YAML.load_file(Rails.root.join('db', 'stages.yml'))
 
-stage_data[:stages].each do |d|
-  puts d[:y]
-end
+# load yaml data
+data = YAML.load_file(Rails.root.join('db', 'stages.yml'))
 
 # Hashery enables symbol-as-keys ( e.g. stage.id, stage.questions.number )
-stage_data = Hashery::OpenCascade[stage_data]
+data = Hashery::OpenCascade[data]
 
 # save
-stage_data.stages.each do |d|
+data.stages.each do |s|
+  puts s.nexts
+  stage = Stage.create(internal_name: s.internal_name, label: s.label,
+                       start: s.start,
+                       x: s.x,
+                       y: s.y,
+                       r: s.r,
+                       nexts: s.nexts,
+                       color: s.color,
+                       page_layout: s.page_layout,
+                       featured_text: s.featured_text)
 
-  # TODO: not using an interator here for now since we want to
-  # omit the questions collection.  what's the better way to do 
-  # this with ruby/yaml?
-
-  puts d[:y]
-
-  stage = Stage.new
-  stage.internal_name = d.internal_name
-  stage.label = d.label
-  stage.x = d.x
-  stage.y = d[:y] # TODO: heroku not picking up 'y' value - figure out why
-  stage.r = d.r
-  stage.nexts = d.nexts
-  stage.start = d.start
-  stage.color = d.color
-  stage.page_layout = d.page_layout
-  stage.featured_text = d.featured_text
-  stage.featured_image_url = d.featured_image_url
-  stage.featured_video_url = d.featured_video_url
-  
-  d.questions.each do |q|
-    question = Question.new
-    question.text = q.text
-    question.answers = q.answers
-    question.explanation = q.explanation
-    stage.questions.push(question)
+  s.questions.each do |q|
+    question = stage.questions.create(text: q.text, explanation: q.explanation)
+    q.answers.each do |a|
+      question.answers.create(text: a.text, value: a.value)
+    end
   end
-
-  stage.save
 end
 

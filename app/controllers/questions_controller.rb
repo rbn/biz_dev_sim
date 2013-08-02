@@ -1,5 +1,8 @@
 class QuestionsController < ApplicationController
   def check
+
+    raise 'hell'
+
     id = params[:question][:question_id]
     given_answer_id = params[:question][:answer_set]
     question = Question.find(id)

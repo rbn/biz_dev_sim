@@ -3,7 +3,7 @@ class Stage < ActiveRecord::Base
   serialize :nexts, Array
   attr_accessible :internal_name, :label, :nexts, :start, :x, :y, :r, :color, :content, 
                   :page_layout, :featured_image_url, :featured_text,
-                  :featured_video_url
+                  :featured_video_url, :questions, :questions_attributes
   has_many :questions, dependent: :destroy
   accepts_nested_attributes_for :questions
 

@@ -3,7 +3,7 @@ class Answer < ActiveRecord::Base
   belongs_to :question
 
   def correct?
-    @value == true
+    !!value
   end
 end
 

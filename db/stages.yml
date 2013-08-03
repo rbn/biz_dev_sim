@@ -38,13 +38,22 @@
     :featured_image_url: "swag/phone1.jpg"
     :questions:
        - :text: |
-           Since this is your first meeting with this prospective client, what should be the most
-           important objective of the meeting?Since this is your first meeting with this prospective
-           client, what should be themost important objective of the meeting?
+           Since this is your first meeting with this prospective client, what should be the most important objective of the meeting?
          :answers:
            - :text: |
-              This is a sample answer!!!
-           - :value: false
+               Determining whether or not the client has money for this engagement
+             :value: false
+           - :text: |
+               Making sure the client knows what particular products and services your firm offers
+             :value: false
+           - :text: |
+               Finding out who and how decisions are made by the client's Division at his/her Agency
+           - :text: |
+               Establishing a rapport with the client to facilitate future contact
+             :value: true
+           - :text: |
+               Gaining a thorough understanding of the client's requirements
+             :value: false
          :explanation: |
             All of these possible answers have merit, but the best answer is 4, “Establishing a rapport…” What you’re really after in this first meeting is the second meeting.  The ideal outcome of the first meeting is a mutual sense that you and your prospective client can establish a productive, downstream working relationship.  Remember, this business is not a quick sale and a walk-away.  You’re trying a to establish a long-term, mutually beneficial relationship.  Your potential client is also sizing you up during the meeting:  “Can I work with this person?  Are they really making an effort to understand my requirement? …Etc.” The other possible answers are also very important, but this kind of information will likely evolve from future contact with your prospective client.  If you don’t establish a reasonable rapport with the client in the first meeting (“first base” if you will), it’s unlikely you’ll ever make it to “second base.”
 
@@ -67,7 +76,7 @@
     :questions:
        - :number: 1
          :text: |
-           'True or False:  If you designate someone by name as “key personnel” in your RFQ response, this person MUST be available at the time you submit your proposal.'
+           True or False:  If you designate someone by name as “key personnel” in your RFQ response, this person MUST be available at the time you submit your proposal.
          :answers:
            - :text: "TRUE"
              :value: false

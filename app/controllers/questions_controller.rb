@@ -1,16 +1,15 @@
 class QuestionsController < ApplicationController
   def check
-
-    raise 'hell'
-
     id = params[:question][:question_id]
-    given_answer_id = params[:question][:answer_set]
-    question = Question.find(id)
-    given_answer = question.answer_set.answers[given_answer_id]
+    given_answer_id = params[:question][:answers]
     result = { message: "please make a selection", explanation: "" } # default
 
     # TODO: move this to some sort of viewmodel/helper
-    if ( given_answer )
+    if ( given_answer_id )
+
+      question = Question.find(id)
+      given_answer = question.answers.find(given_answer_id)
+
       if ( given_answer.correct? )
         result["correct"] = true;
         result["message"] = "That is correct!"

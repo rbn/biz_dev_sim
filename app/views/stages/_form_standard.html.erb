@@ -48,59 +48,12 @@
   </div>
 
   <%= f.fields_for :questions do |builder| %>
-    <p>
-      <%= builder.label :text, "Question" %><br />
-      <%= builder.text_area :text, rows: 3 %>
-    </p>
-    <p> 
-      <%= builder.label :answers, "Answers" %><br />
-      <%= builder.text_area :answers, rows: 20, cols: 120, id: "answers" %>
-    </p>
-    <p>
-      <%= builder.label :explanation, "Explanation" %><br />
-      <%= builder.text_area :explanation, rows: 7 %>
-    </p>
+    <%= render 'question_fields', f: builder %>
   <% end %>
-
-
-
 
   <div class="actions">
     <%= f.submit %>
   </div>
-
-<script>
-  $(function() {
-    // var json = <%= raw @stage.questions.to_json %>;
-    // console.log(JSON.stringify(json));
-    // console.log(json[0]["answers"]);
-    // var obj = json[0]["answers"];
-    // var parsed = JSON.parse(obj);
-    // alert(parsed["1"]["text"]);
-
-    // var j2 = <%= raw @stage.questions.first.answers.to_json %>;
-    // console.log(j2);
-    // var obj = JSON.parse(j2);
-    // console.log(obj["1"]);
-
-    // var answers = $('#answers').data('answers');
-    // answers = JSON.parse(answers);
-    // $('#answers').html(function() {
-    //   var html = '';
-    //   $.each(answers, function() {
-    //     html += this.text + '<br />';
-    //   });
-    //   return html;
-    // });
-
-    var answers = $('#answers').html();
-    answers = JSON.parse(answers);
-    $('#answers').html(JSON.stringify(answers, null, 2));
-
-
-
-  });
-</script>
 
 <% end %>
 

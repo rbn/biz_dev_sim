@@ -7,6 +7,7 @@
 <%= f.fields_for :answers do |builder| %>
   <%= render 'answer_fields', f: builder %>
 <% end %>
+<%= link_to 'add answer', '#', { class: 'add_fields', data: { association: 'answers', content: get_form_fields(f, :answers) } } %>
 <p>
   <%= f.label :explanation, "Explanation" %><br />
   <%= f.text_area :explanation, rows: 7 %>

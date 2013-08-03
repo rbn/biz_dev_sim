@@ -20,14 +20,27 @@
 
 $(function() {
 
-  $('.remove_answer').on('click', function(event) { 
+  $('.remove_fields').on('click', function(event) { 
     event.preventDefault();
     var $link = $(this),
         $hidden = $(this).prev("input[type=hidden]");
 
     $hidden.val("1");
     $link.closest('.fields').hide();
-  alert($hidden.val());
   });
+
+ $('.add_fields').on('click', function(event) {
+   event.preventDefault();
+   var $link = $(this),
+       association = $link.data('association'),
+       content = $link.data('content'),
+       new_id = new Date().getTime(),
+       regex = new RegExp("new_" + association, "g");
+
+   $('<div style="display:none">')
+     .append(content.replace(regex, new_id))
+     .insertBefore($link)
+     .slideDown('slow');
+ });
 
 });

@@ -50,6 +50,7 @@
   <%= f.fields_for :questions do |builder| %>
     <%= render 'question_fields', f: builder %>
   <% end %>
+  <%= link_to 'add question', '#', { class: 'add_fields', data: { association: 'questions', content: get_form_fields(f, :questions) } } %>
 
   <div class="actions">
     <%= f.submit %>

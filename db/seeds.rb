@@ -16,7 +16,6 @@ User.create(email: "admin@admin.com", password: "password123", password_confirma
 
 Stage.all.each { |s| s.destroy }
 
-
 # load yaml data
 data = YAML.load_file(Rails.root.join('db', 'stages.yml'))
 
@@ -28,7 +27,7 @@ data.stages.each do |s|
   stage = Stage.create(internal_name: s.internal_name, label: s.label,
                        start: s.start,
                        x: s.x,
-                       y: s.y,
+                       y: s[:y], # heroku not picking up s.y
                        r: s.r,
                        nexts: s.nexts,
                        color: s.color,

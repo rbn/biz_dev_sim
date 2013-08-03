@@ -5,7 +5,7 @@ class Stage < ActiveRecord::Base
                   :page_layout, :featured_image_url, :featured_text,
                   :featured_video_url, :questions, :questions_attributes
   has_many :questions, dependent: :destroy
-  accepts_nested_attributes_for :questions, reject_if: lambda { |a| a[:content].blank? }, allow_destroy: true
+  accepts_nested_attributes_for :questions, reject_if: lambda { |a| a[:text].blank? }, allow_destroy: true
 
   def form
     "form_#{page_layout}"

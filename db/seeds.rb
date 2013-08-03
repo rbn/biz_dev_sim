@@ -25,7 +25,6 @@ data = Hashery::OpenCascade[data]
 
 # save
 data.stages.each do |s|
-  puts s.nexts
   stage = Stage.create(internal_name: s.internal_name, label: s.label,
                        start: s.start,
                        x: s.x,
@@ -34,7 +33,8 @@ data.stages.each do |s|
                        nexts: s.nexts,
                        color: s.color,
                        page_layout: s.page_layout,
-                       featured_text: s.featured_text)
+                       featured_text: s.featured_text,
+                       featured_image_url: s.featured_image_url)
 
   s.questions.each do |q|
     question = stage.questions.create(text: q.text, explanation: q.explanation)

@@ -17,3 +17,17 @@
 //= require jquery.simplemodal-1.4.4
 //= require jquery-bds
 //= require_tree .
+
+$(function() {
+
+  $('.remove_answer').on('click', function(event) { 
+    event.preventDefault();
+    var $link = $(this),
+        $hidden = $(this).prev("input[type=hidden]");
+
+    $hidden.val("1");
+    $link.closest('.fields').hide();
+  alert($hidden.val());
+  });
+
+});

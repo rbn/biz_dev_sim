@@ -56,7 +56,7 @@ class StagesController < ApplicationController
 
     respond_to do |format|
       if @stage.update_attributes(params[:stage])
-        format.html { redirect_to @stage, notice: 'Stage was successfully updated.' }
+        format.html { redirect_to edit_stage_path(@stage), notice: 'Stage was successfully updated.' }
         format.json { head :no_content }
       else
         format.html { render action: "edit" }

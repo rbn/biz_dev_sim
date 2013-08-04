@@ -1,14 +1,16 @@
-<p>
-  <%= f.label :text, "Question" %><br />
+<p class="question">
+  <%= f.label :text, "Question", class: "question" %><br />
   <%= f.text_area :text, rows: 3, cols: 80 %>
   <%= f.check_box :_destroy %>
   <%= f.label :_destroy, "remove question" %>
 </p>
-<%= f.fields_for :answers do |builder| %>
-  <%= render 'answer_fields', f: builder %>
-<% end %>
-<%= link_to 'add answer', '#', { class: 'add_fields', data: { association: 'answers', content: get_form_fields(f, :answers) } } %>
-<p>
-  <%= f.label :explanation, "Explanation" %><br />
-  <%= f.text_area :explanation, rows: 7 %>
-</p>
+<div class="childAdds" >
+  <%= f.fields_for :answers do |builder| %>
+    <%= render 'answer_fields', f: builder %>
+  <% end %>
+  <%= link_to 'add answer', '#', { class: 'add_fields', data: { association: 'answers', content: get_form_fields(f, :answers) } } %>
+  <p>
+    <%= f.label :explanation, "Explanation" %><br />
+    <%= f.text_area :explanation, rows: 7 %>
+  </p>
+</div>

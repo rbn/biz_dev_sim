@@ -158,3 +158,25 @@ input.snazz {
   border-left:3px solid #b3bfed;
   border-top:3px solid #b3bfed;
 }
+
+/* admin form */
+div.stage_admin_form {
+  border: 1px solid silver;
+  padding:20px;
+  width:900px;
+}
+
+p.question {
+  padding:8px;
+  background-color:#bbecde;
+  border: 1px solid silver;
+}
+
+label.question {
+  font-size:18px;
+}
+
+div.childAdds {
+  margin-left:50px;
+}
+/* end admin form */

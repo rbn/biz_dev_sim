@@ -1,3 +1,4 @@
+<div class="stage_admin_form" >
 <%= form_for(@stage) do |f| %>
   <% if @stage.errors.any? %>
     <div id="error_explanation">
@@ -40,21 +41,17 @@
   </div>
   <div class="field">
     <%= f.label :nexts %><br />
-    <ul>
-    <% @stage.nexts.each do |n| %>
-      <li style="margin-left:30px;"><%= n %><br /></li>
-    <% end %>
-    </ul>
+    <%= f.text_field :nexts %>
   </div>
 
   <%= f.fields_for :questions do |builder| %>
     <%= render 'question_fields', f: builder %>
   <% end %>
-  <%= link_to 'add question', '#', { class: 'add_fields', data: { association: 'questions', content: get_form_fields(f, :questions) } } %>
+  <%= link_to 'add question', '#', { class: 'add_fields', data: { association: 'questions', content: get_form_fields(f, :questions), hideChildAdds: true} } %>
 
   <div class="actions">
     <%= f.submit %>
   </div>
 
 <% end %>
-
+</div>

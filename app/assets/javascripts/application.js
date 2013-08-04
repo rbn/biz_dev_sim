@@ -34,13 +34,18 @@ $(function() {
    var $link = $(this),
        association = $link.data('association'),
        content = $link.data('content'),
+       hideChildAdds = $link.data('hidechildadds'), // don't show 'add <xyz>' for children
        new_id = new Date().getTime(),
        regex = new RegExp("new_" + association, "g");
 
-   $('<div style="display:none">')
-     .append(content.replace(regex, new_id))
-     .insertBefore($link)
-     .slideDown('slow');
+     var $div = $('<div style="display:none">');
+     $div.append(content.replace(regex, new_id))
+         .insertBefore($link)
+         .slideDown('slow');
+
+   if ( hideChildAdds ) {
+    $div.find('.childAdds').hide(); 
+   }
  });
 
 });

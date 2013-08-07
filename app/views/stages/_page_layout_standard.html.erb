@@ -30,6 +30,11 @@
         scorecard = scorecard || [],
         questionsAsked = questionsAsked || 0;
 
+    if ( getsFreePass() ) {
+      skipQuiz();
+      return;
+    }
+
     // crude way of checking if we are complete
     if ( index >= coll.length ) {
       completeQuiz(scorecard, questionsAsked);
@@ -97,7 +102,43 @@
         .css('padding', '100px')
         .css('font-size', '28px')
         .css('line-height', '32px')
-        .append(msg).append('<br /><br />')
+        .append(msg)
+        .append('<br /><br />')
+        .append($ok);
+
+    $modal 
+      .dialog({
+              minWidth: 700,
+              minHeight:400,
+              close: function() {
+                setTimeout(function() {
+                  $('#back_to_board').fadeIn('slow');
+                  $('#take_quiz').prop('disabled', true);
+                }, 400);
+              }
+            });
+
+  }
+
+  function getsFreePass() {
+    return 'White Paper Requested' === '<%= @stage.label %>';
+  }
+
+  function skipQuiz(scorecard, questionsAsked) {
+    var msg = 'Since you voluntarily completed the white paper training event, you earn 50 additional points here because you are now well prepared to  write a white paper.'
+
+    $ok = $('<input type="button" value="OK" style="width:200px;padding:6px;background-color:#23ff32;" />').on('click', function() {
+      $modal.dialog('close').dialog('destroy');
+    });
+
+    $modal = 
+      $('<div>')
+        .css('width', '100%')
+        .css('padding', '100px')
+        .css('font-size', '28px')
+        .css('line-height', '32px')
+        .append(msg)
+        .append('<br /><br />')
         .append($ok);
 
     $modal 

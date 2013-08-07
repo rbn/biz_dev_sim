@@ -49,9 +49,9 @@ div#stage {
 }
 
 div#left {
-  margin-left: 30px;
+  margin-left: 20px;
   margin-top:50px;
-  width:300px;
+  width:100px;
   min-height:900px;
   padding:20px;
   font-color:white;
@@ -59,12 +59,13 @@ div#left {
   /* background-color:rgba(20,123,123,0.8); */
   position:absolute;
   z-index:-1;
+  align:left;
 }
 
 div#left div {
   color:white;
   font-size:18px;
-  width:80%;
+  width:225px;
   margin:auto;
   padding:8px;
   background-color:#2a43e8;
